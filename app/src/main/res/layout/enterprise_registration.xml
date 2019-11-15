@@ -104,7 +104,18 @@ tools:context=".ui.login.EnterpriseRegistrationActivity">
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/phone" />
 
-<Button
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/restaurant"
+        tools:layout_editor_absoluteX="102dp"
+        tools:layout_editor_absoluteY="536dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/address" />
+
+    <Button
     android:id="@+id/registerButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -117,7 +128,7 @@ tools:context=".ui.login.EnterpriseRegistrationActivity">
     android:text="@string/action_register"
     android:textColor="#3F51B5"
     app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/address"
+    app:layout_constraintTop_toBottomOf="@+id/switch1"
     tools:text="Register"
     android:onClick="register"
     />
@@ -148,15 +159,15 @@ tools:context=".ui.login.EnterpriseRegistrationActivity">
     android:layout_marginRight="21dp"
     android:layout_marginBottom="16dp"
     android:text="@string/question_return"
-    android:textSize="30sp"
+    android:textSize="20sp"
     app:layout_constraintBottom_toTopOf="@+id/button"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="148dp"
+        android:layout_height="42dp"
         android:layout_marginEnd="112dp"
         android:layout_marginRight="112dp"
         android:layout_marginBottom="16dp"
@@ -164,7 +175,8 @@ tools:context=".ui.login.EnterpriseRegistrationActivity">
         android:text="@string/action_return"
         android:textColor="#3F51B5"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="goBack"/>
 
     <TextView
     android:id="@+id/textView2"
@@ -200,4 +212,6 @@ tools:context=".ui.login.EnterpriseRegistrationActivity">
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

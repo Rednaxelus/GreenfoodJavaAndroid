@@ -49,14 +49,31 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:background="@drawable/buttonshape"
-        android:enabled="false"
+        android:enabled="true"
         android:text="@string/action_register"
         android:textColor="#3F51B5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
+        tools:text="Register" />
+
+    <Button
+        android:id="@+id/registerEnterprise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/buttonshape"
+        android:enabled="true"
+        android:onClick="goToEnterpriseRegistration"
+        android:text="@string/action_enterprise"
+        android:textColor="#3F51B5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerButton"
         tools:text="Register" />
 
     <ProgressBar
@@ -101,7 +118,7 @@
         android:text="@string/action_login"
         android:textColor="#3F51B5"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:id="@+id/textView2"

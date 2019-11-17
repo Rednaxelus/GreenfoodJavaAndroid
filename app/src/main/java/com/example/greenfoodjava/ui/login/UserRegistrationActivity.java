@@ -2,12 +2,9 @@ package com.example.greenfoodjava.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
 import android.widget.TextView;
-
 import com.example.greenfoodjava.R;
 
 public class UserRegistrationActivity extends AppCompatActivity {
@@ -28,7 +25,22 @@ public class UserRegistrationActivity extends AppCompatActivity {
     }
 
     private boolean allFieldsHaveCorrectFormat() {
-        return emailHasCorrectFormat() & nameIsComplete() & surnameIsComplete();
+        return emailHasCorrectFormat() & nameIsComplete() & surnameIsComplete()
+                & passwordHasCorrectFormat();
+    }
+
+    private boolean emailHasCorrectFormat() {
+        TextView emailField = findViewById(R.id.email);
+        String email = emailField.getText().toString();
+        if(!hasCorrectFormat(email)){
+            emailField.setError("Invalid email");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean hasCorrectFormat(String email) {
+        return email.matches("(\\w|-)+@\\w+\\.(com|es)");
     }
 
     private boolean nameIsComplete() {
@@ -51,17 +63,13 @@ public class UserRegistrationActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean emailHasCorrectFormat() {
-        TextView emailField = findViewById(R.id.email);
-        String email = emailField.getText().toString();
-        if(!hasCorrectFormat(email)){
-            emailField.setError("Invalid email");
+    private boolean passwordHasCorrectFormat() {
+        TextView passwordField = findViewById(R.id.password);
+        String password = passwordField.getText().toString();
+        if (! password.matches("([A-Za-z]|\\d|.){8,}")){
+            passwordField.setError("Invalid password");
             return false;
         }
-        return true;
-    }
-
-    private boolean hasCorrectFormat(String email) {
-        return email.matches("(\\w|-|_)+@\\w+\\.(com|es)");
+        return false;
     }
 }

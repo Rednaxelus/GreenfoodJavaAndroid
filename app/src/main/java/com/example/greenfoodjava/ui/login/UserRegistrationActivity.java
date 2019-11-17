@@ -29,6 +29,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
         if (userExist(v)){
             TextView editText = findViewById(R.id.username);
             editText.setText("Email already exist");
+            editText.setTextColor(Color.parseColor("#D04C4C"));
         }else {
 
         }

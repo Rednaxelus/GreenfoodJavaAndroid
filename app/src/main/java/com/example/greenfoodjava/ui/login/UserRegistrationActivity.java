@@ -4,15 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.example.greenfoodjava.R;
 import com.example.greenfoodjava.database.UserTable;
 
 public class UserRegistrationActivity extends AppCompatActivity {
 
+    private UserTable dbHelper;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHelper = new UserTable(this);
         setContentView(R.layout.user_registration);
     }
 
@@ -31,19 +35,21 @@ public class UserRegistrationActivity extends AppCompatActivity {
         String password = getField(R.id.password);
         String name = getField(R.id.name);
         String surname = getField(R.id.surname);
-        UserTable userTable = new UserTable(null);
-        userTable.addData(email, password, name, surname);
+        dbHelper.addData(email, password, name, surname);
     }
 
     private boolean userExist() {
         String email = getField(R.id.email);
-        UserTable userTable = new UserTable(null);
-        return userTable.checkIfUserExist(email);
+        if (dbHelper.checkIfUserExist(email)){
+            showErrorFor(R.id.email, "Email is already registered");
+            return false;
+        }
+        return true;
     }
 
     private boolean allFieldsHaveCorrectFormat() {
-        return emailHasCorrectFormat() & nameIsComplete() & surnameIsComplete()
-                & passwordHasCorrectFormat();
+        return emailHasCorrectFormat() && nameIsComplete() && surnameIsComplete()
+                && passwordHasCorrectFormat();
     }
 
     private String getField(int id){
@@ -93,7 +99,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
             showErrorFor(R.id.password, "Invalid password");
             return false;
         }
-        return false;
+        return true;
     }
 
     private boolean passwordIsValid(String password) {

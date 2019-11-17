@@ -29,47 +29,57 @@ public class UserRegistrationActivity extends AppCompatActivity {
                 & passwordHasCorrectFormat();
     }
 
+    private String getField(int id){
+        TextView field = findViewById(id);
+        return field.getText().toString();
+    }
+
+    private void showErrorFor(int id, String message){
+        TextView field = findViewById(id);
+        field.setError(message);
+    }
+
     private boolean emailHasCorrectFormat() {
-        TextView emailField = findViewById(R.id.email);
-        String email = emailField.getText().toString();
-        if(!hasCorrectFormat(email)){
-            emailField.setError("Invalid email");
+        String email = getField(R.id.email);
+        if(!emailIsValid(email)){
+            showErrorFor(R.id.email, "Invalid email");
             return false;
         }
         return true;
     }
 
-    private boolean hasCorrectFormat(String email) {
+    private boolean emailIsValid(String email) {
         return email.matches("(\\w|-)+@\\w+\\.(com|es)");
     }
 
     private boolean nameIsComplete() {
-        TextView nameField = findViewById(R.id.name);
-        String name = nameField.getText().toString();
+        String name = getField(R.id.name);
         if (name.isEmpty()){
-            nameField.setError("Name is empty");
+            showErrorFor(R.id.name, "Name is empty");
             return false;
         }
         return true;
     }
 
     private boolean surnameIsComplete() {
-        TextView surnameField = findViewById(R.id.surname);
-        String surname = surnameField.getText().toString();
+        String surname = getField(R.id.surname);
         if (surname.isEmpty()){
-            surnameField.setError("Surname is empty");
+            showErrorFor(R.id.surname, "Surname is empty");
             return false;
         }
         return true;
     }
 
     private boolean passwordHasCorrectFormat() {
-        TextView passwordField = findViewById(R.id.password);
-        String password = passwordField.getText().toString();
-        if (! password.matches("([A-Za-z]|\\d|.){8,}")){
-            passwordField.setError("Invalid password");
+        String password = getField(R.id.password);
+        if (!passwordIsValid(password)){
+            showErrorFor(R.id.password, "Invalid password");
             return false;
         }
         return false;
+    }
+
+    private boolean passwordIsValid(String password) {
+        return password.matches("([A-Za-z]|\\d|.){8,}");
     }
 }

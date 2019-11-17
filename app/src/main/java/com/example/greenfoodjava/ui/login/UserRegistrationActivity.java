@@ -28,7 +28,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
     }
 
     private boolean allFieldsHaveCorrectFormat() {
-        return emailHasCorrectFormat() & nameIsComplete();
+        return emailHasCorrectFormat() & nameIsComplete() & surnameIsComplete();
     }
 
     private boolean nameIsComplete() {
@@ -36,6 +36,16 @@ public class UserRegistrationActivity extends AppCompatActivity {
         String name = nameField.getText().toString();
         if (name.isEmpty()){
             nameField.setError("Name is empty");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean surnameIsComplete() {
+        TextView surnameField = findViewById(R.id.surname);
+        String surname = surnameField.getText().toString();
+        if (surname.isEmpty()){
+            surnameField.setError("Surname is empty");
             return false;
         }
         return true;

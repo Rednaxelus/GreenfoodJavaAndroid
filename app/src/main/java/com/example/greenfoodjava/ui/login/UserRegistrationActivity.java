@@ -25,21 +25,18 @@ public class UserRegistrationActivity extends AppCompatActivity {
     }
 
     public void loginProcess(View v){
-        if (userExist(v)){
-            TextView editText = findViewById(R.id.username);
-            editText.setText("Email already exist");
-            editText.setTextColor(Color.parseColor("#D04C4C"));
-        }else {
+        if (emailHasCorrectFormat()){
 
         }
-
     }
 
-    private boolean userExist(View v) {
-        EditText usernameEditText = findViewById(R.id.username);
-        String username = usernameEditText.getText().toString();
-        EditText passwordEditText = findViewById(R.id.password);
-        String password = passwordEditText.getText().toString();
+    private boolean emailHasCorrectFormat() {
+        TextView emailField = findViewById(R.id.email);
+        String email = emailField.getText().toString();
+        if(! email.matches("(\\w|-|_)+@\\w+\\.(com|es)")){
+            emailField.setError("Invalid email");
+            return false;
+        }
         return true;
     }
 }

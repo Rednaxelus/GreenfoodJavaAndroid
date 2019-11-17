@@ -41,7 +41,7 @@ public class UserTable extends SQLiteOpenHelper {
      * @param lastName lastName
      * @return true//false
      */
-    boolean addData(String userName, String password, String name, String lastName) {
+    public boolean addData(String userName, String password, String name, String lastName) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();

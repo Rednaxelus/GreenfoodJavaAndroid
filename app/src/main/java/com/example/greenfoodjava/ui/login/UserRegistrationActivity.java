@@ -22,8 +22,17 @@ public class UserRegistrationActivity extends AppCompatActivity {
 
     public void loginProcess(View v){
         if (allFieldsHaveCorrectFormat() && !userExist()){
-            
+            registerUserInUserTable();
         }
+    }
+
+    private void registerUserInUserTable() {
+        String email = getField(R.id.email);
+        String password = getField(R.id.password);
+        String name = getField(R.id.name);
+        String surname = getField(R.id.surname);
+        UserTable userTable = new UserTable(null);
+        userTable.addData(email, password, name, surname);
     }
 
     private boolean userExist() {

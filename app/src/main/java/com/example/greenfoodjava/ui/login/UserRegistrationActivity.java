@@ -1,13 +1,11 @@
 package com.example.greenfoodjava.ui.login;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.greenfoodjava.R;
@@ -42,10 +40,14 @@ public class UserRegistrationActivity extends AppCompatActivity {
     private boolean emailHasCorrectFormat() {
         TextView emailField = findViewById(R.id.email);
         String email = emailField.getText().toString();
-        if(! email.matches("(\\w|-|_)+@\\w+\\.(com|es)")){
+        if(!hasCorrectFormat(email)){
             emailField.setError("Invalid email");
             return false;
         }
         return true;
+    }
+
+    private boolean hasCorrectFormat(String email) {
+        return email.matches("(\\w|-|_)+@\\w+\\.(com|es)");
     }
 }

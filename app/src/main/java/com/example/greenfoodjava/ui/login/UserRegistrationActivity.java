@@ -25,9 +25,18 @@ public class UserRegistrationActivity extends AppCompatActivity {
     }
 
     public void loginProcess(View v){
-        if (emailHasCorrectFormat()){
-
+        if (emailHasCorrectFormat() & nameIsComplete()){
         }
+    }
+
+    private boolean nameIsComplete() {
+        TextView nameField = findViewById(R.id.name);
+        String name = nameField.getText().toString();
+        if (name.isEmpty()){
+            nameField.setError("Name is empty");
+            return false;
+        }
+        return true;
     }
 
     private boolean emailHasCorrectFormat() {

@@ -52,6 +52,7 @@
         android:layout_marginRight="40dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
+        android:onClick="loginProcess"
         android:text="@string/action_register"
         android:textColor="#3F51B5"
         app:layout_constraintEnd_toEndOf="parent"

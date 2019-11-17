@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import com.example.greenfoodjava.R;
+import com.example.greenfoodjava.database.UserTable;
 
 public class UserRegistrationActivity extends AppCompatActivity {
 
@@ -20,8 +21,15 @@ public class UserRegistrationActivity extends AppCompatActivity {
     }
 
     public void loginProcess(View v){
-        if (allFieldsHaveCorrectFormat()){
+        if (allFieldsHaveCorrectFormat() && !userExist()){
+            
         }
+    }
+
+    private boolean userExist() {
+        String email = getField(R.id.email);
+        UserTable userTable = new UserTable(null);
+        return userTable.checkIfUserExist(email);
     }
 
     private boolean allFieldsHaveCorrectFormat() {

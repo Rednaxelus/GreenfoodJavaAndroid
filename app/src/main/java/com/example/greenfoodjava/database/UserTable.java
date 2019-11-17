@@ -14,7 +14,7 @@ public class UserTable extends SQLiteOpenHelper {
     private static final String NAME = "name";
     private static final String LAST_NAME = "lastName";
 
-    UserTable(Context context) {
+    public UserTable(Context context) {
         super(context, TABLE_NAME, null, 1);
     }
 
@@ -52,5 +52,9 @@ public class UserTable extends SQLiteOpenHelper {
 
         long result = sqlDB.insert(TABLE_NAME, null, contentValues);
         return result == -1;
+    }
+
+    public boolean checkIfUserExist(String email) {
+        return false;
     }
 }

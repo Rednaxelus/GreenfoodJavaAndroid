@@ -23,8 +23,12 @@ public class UserRegistrationActivity extends AppCompatActivity {
     }
 
     public void loginProcess(View v){
-        if (emailHasCorrectFormat() & nameIsComplete()){
+        if (allFieldsHaveCorrectFormat()){
         }
+    }
+
+    private boolean allFieldsHaveCorrectFormat() {
+        return emailHasCorrectFormat() & nameIsComplete();
     }
 
     private boolean nameIsComplete() {

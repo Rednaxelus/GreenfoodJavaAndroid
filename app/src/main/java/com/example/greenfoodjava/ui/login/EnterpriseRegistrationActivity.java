@@ -45,7 +45,7 @@ public class EnterpriseRegistrationActivity extends Activity {
     }
 
     public void goBack(View view) {
-        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, UserRegistrationActivity.class));
     }
 
 }

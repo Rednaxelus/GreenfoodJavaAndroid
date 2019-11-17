@@ -1,7 +1,6 @@
 package com.example.greenfoodjava.ui.login;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -18,7 +17,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.user_registration);
     }
 
     public void goToEnterpriseRegistration(View v){

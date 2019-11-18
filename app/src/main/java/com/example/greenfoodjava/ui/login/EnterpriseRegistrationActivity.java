@@ -9,18 +9,21 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import com.example.greenfoodjava.R;
+import com.example.greenfoodjava.database.EnterpriseTable;
 
 import java.util.regex.Pattern;
 
 public class EnterpriseRegistrationActivity extends Activity {
     private boolean isSwitchChecked;
     private boolean fieldError = false;
+    private EnterpriseTable dbHelper;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.enterprise_registration);
         initSwitchListener();
+        dbHelper = new EnterpriseTable(this);
     }
 
     private void initSwitchListener() {
@@ -101,8 +104,11 @@ public class EnterpriseRegistrationActivity extends Activity {
 
     private void checkEmailField() {
         EditText emailText = findViewById(R.id.name);
-        String email = emailText.getText().toString();
-        if (!Pattern.matches("(\\w|-)+@\\w+.(com|es)", email)) {
+        if (emailText.getText().toString().isEmpty()) {
+            emailText.setError("Name is empty");
+            fieldError = true;
+        }
+        /*if (!Pattern.matches("(\\w|-)+@\\w+.(com|es)", email)) {
             emailText.setError("Email doesn't exists");
             fieldError = true;
         } else if (email.length() <= 3) {
@@ -114,7 +120,7 @@ public class EnterpriseRegistrationActivity extends Activity {
         } else if (emailExists(email)) {
             emailText.setError("Email already exists");
             fieldError = true;
-        }
+        }*/
 
     }
 
@@ -144,11 +150,18 @@ public class EnterpriseRegistrationActivity extends Activity {
         text = findViewById(R.id.address);
         String address = text.getText().toString();
 
-        if (isSwitchChecked) {
-            System.out.println("Aqui se crea el restaurante bro");
+        if (!dbHelper.checkIfNifExist(nif)) {
+            if (isSwitchChecked) {
+                dbHelper.addData(name,nif,pass,description,phone,address,"Restaurant");
+            } else {
+                dbHelper.addData(name,nif,pass,description,phone,address,"Enterprise");
+            }
         } else {
-            System.out.println("Aqui se crea la empresa bro");
+            text = findViewById(R.id.nif);
+            text.setError("Nif already registered in database");
         }
+
+
     }
 
 

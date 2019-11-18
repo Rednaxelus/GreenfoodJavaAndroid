@@ -6,6 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 
 public class UserTable extends SQLiteOpenHelper {
 
@@ -51,7 +55,7 @@ public class UserTable extends SQLiteOpenHelper {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(EMAIL, email);
-        contentValues.put(PASSWORD, password);
+        contentValues.put(PASSWORD, getMD5(password));
         contentValues.put(NAME, name);
         contentValues.put(LAST_NAME, lastName);
 
@@ -67,5 +71,17 @@ public class UserTable extends SQLiteOpenHelper {
         boolean res = data.getCount() > 0;
         data.close();
         return res;
+    }
+
+    private String getMD5(String password) {
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        byte[] messageDigest = md.digest(password.getBytes());
+        BigInteger number = new BigInteger(1, messageDigest);
+        return number.toString(32);
     }
 }

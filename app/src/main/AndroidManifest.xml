@@ -14,6 +14,14 @@
             android:label="@string/title_activity_enterprise_register">
         </activity>
         <activity
+            android:name="ui.EnterpriseHomeActivity"
+            android:label="EnterpriseHome">
+        </activity>
+        <activity
+            android:name="ui.UserHomeActivity"
+            android:label="UserHome">
+        </activity>
+        <activity
             android:name="ui.LoginActivity"
             android:label="Login">
         </activity>

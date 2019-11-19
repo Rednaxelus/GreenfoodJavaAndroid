@@ -29,7 +29,7 @@ public class LoginActivity extends Activity {
 
     public void loginProcess(View v){
         if (allFieldsHaveCorrectFormat()){
-            if (userExist());
+            if (userExist()) ;
             if (enterpriseExist());
         }
     }

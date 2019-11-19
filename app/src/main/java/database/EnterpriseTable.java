@@ -27,7 +27,7 @@ public class EnterpriseTable extends SQLiteOpenHelper {
     public EnterpriseTable(Context context) {
 
         super(context, TABLE_NAME, null, 1);
-        addData("ha@h.com", "Rest","13518001G","jjj","kjhfsjsdfkj",
+        addData("ha@h.com", "Rest","13518001G",getMD5("jjj"),"kjhfsjsdfkj",
                 "888","C/DD","Restaurant");
     }
 
@@ -88,9 +88,9 @@ public class EnterpriseTable extends SQLiteOpenHelper {
         return number.toString(32);
     }
 
-    public boolean checkIfNifExist(String nif) {
+    public boolean checkIfEnterpriseExist(String email) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + NIF + " = '" + nif + "'";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + " = '" + email + "'";
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
         boolean res = data.getCount() > 0;
@@ -98,9 +98,10 @@ public class EnterpriseTable extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean checkIfEnterpriseExist(String email) {
+    public boolean checkIfUserExist(String email, String password) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + " = '" + email + "'";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + " = '" + email + "' AND "
+                + PASSWORD + " = '" + getMD5(password) + "'";
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
         boolean res = data.getCount() > 0;

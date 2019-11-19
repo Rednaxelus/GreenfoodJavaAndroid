@@ -31,16 +31,19 @@ public class LoginActivity extends Activity {
         if (allFieldsHaveCorrectFormat()){
             if (userExist()){
                 startActivity(new Intent(this, UserHomeActivity.class));
-            }
-            if (enterpriseExist()){
+            }else if (enterpriseExist()){
                 startActivity(new Intent(this, EnterpriseHomeActivity.class));
+            }else{
+                showErrorFor(R.id.email, "User doesn't exist");
+                showErrorFor(R.id.password, "User doesn't exist");
             }
         }
     }
 
     private boolean enterpriseExist() {
         String email = getField(R.id.email);
-        if (enterpriseTable.checkIfEnterpriseExist(email)){
+        String password = getField(R.id.password);
+        if (!enterpriseTable.checkIfUserExist(email, password)){
             return false;
         }
         return true;
@@ -48,14 +51,15 @@ public class LoginActivity extends Activity {
 
     private boolean userExist() {
         String email = getField(R.id.email);
-        if (userTable.checkIfUserExist(email)){
+        String password = getField(R.id.password);
+        if (!userTable.checkIfUserExist(email, password)){
             return false;
         }
         return true;
     }
 
     private boolean allFieldsHaveCorrectFormat() {
-        return emailHasCorrectFormat() & !passwordIsEmpty();
+        return emailHasCorrectFormat() & passwordIsNotEmpty();
     }
 
     private String getField(int id){
@@ -81,16 +85,16 @@ public class LoginActivity extends Activity {
         return email.matches("(\\w|-)+@\\w+\\.(com|es)");
     }
 
-    private boolean passwordIsEmpty() {
+    private boolean passwordIsNotEmpty() {
         String password = getField(R.id.password);
-        if (passwordIsEmpty(password)){
+        if (passwordIsNotEmpty(password)){
             showErrorFor(R.id.password, "Empty password");
             return false;
         }
         return true;
     }
 
-    private boolean passwordIsEmpty(String password) {
+    private boolean passwordIsNotEmpty(String password) {
         return password.isEmpty();
     }
 }

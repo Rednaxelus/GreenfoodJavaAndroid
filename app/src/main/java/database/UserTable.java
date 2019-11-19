@@ -23,7 +23,7 @@ public class UserTable extends SQLiteOpenHelper {
     public UserTable(Context context) {
         super(context, TABLE_NAME, null, 1);
 
-        addData("dd@ff.com","ddd","Jose","ddddd");
+        addData("dd@ff.com",getMD5("ddd"),"Jose","ddddd");
     }
 
 
@@ -66,6 +66,17 @@ public class UserTable extends SQLiteOpenHelper {
     public boolean checkIfUserExist(String email) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + " = '" + email + "'";
+        Cursor data = sqlDB.rawQuery(query, null);
+        data.moveToFirst();
+        boolean res = data.getCount() > 0;
+        data.close();
+        return res;
+    }
+
+    public boolean checkIfUserExist(String email,String password) {
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + " = '" + email + "' AND "
+                + PASSWORD + " = '" + getMD5(password) + "'";
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
         boolean res = data.getCount() > 0;

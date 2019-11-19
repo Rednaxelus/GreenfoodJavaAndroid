@@ -35,7 +35,7 @@ public class EnterpriseTable extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME
-                + " (ID INTEGER PRIMARY KEY, " + EMAIL + " TEXT DEFAULT ' '," + NAME + " TEXT DEFAULT ' ',"
+                + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + EMAIL + " TEXT DEFAULT ' '," + NAME + " TEXT DEFAULT ' ',"
                 + PASSWORD + " TEXT DEFAULT ' ', " + NIF + " TEXT DEFAULT ' ', "
                 + DESCRIPTION + " TEXT DEFAULT ' ', " + PHONE_NUMBER + " TEXT DEFAULT ' ', "
                 + ADDRESS + " TEXT DEFAULT ' ', " +  TYPE + " TEXT DEFAULT ' ')";
@@ -67,7 +67,7 @@ public class EnterpriseTable extends SQLiteOpenHelper {
         contentValues.put(NAME, name);
         contentValues.put(NIF, nif);
         contentValues.put(PASSWORD, getMD5(password));
-        contentValues.put(NAME, description);
+        contentValues.put(DESCRIPTION, description);
         contentValues.put(PHONE_NUMBER, phoneNumber);
         contentValues.put(ADDRESS, address);
         contentValues.put(TYPE, type);

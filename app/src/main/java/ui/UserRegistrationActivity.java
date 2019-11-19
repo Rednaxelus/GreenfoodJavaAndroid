@@ -30,6 +30,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
     public void registerProcess(View v){
         if (allFieldsHaveCorrectFormat() && !userExist()){
             registerUserInUserTable();
+            startActivity(new Intent(this, UserHomeActivity.class));
         }
     }
 

@@ -48,6 +48,7 @@ public class EnterpriseRegistrationActivity extends Activity {
         checkAddressField();
         if (!fieldError) {
             createEnterprise();
+            startActivity(new Intent(this, EnterpriseHomeActivity.class));
         }
     }
 

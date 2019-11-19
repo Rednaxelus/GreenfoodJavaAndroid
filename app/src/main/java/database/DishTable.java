@@ -9,7 +9,7 @@ import java.util.List;
 
 import data.model.Ingredient;
 
-public class PlateTable extends SQLiteOpenHelper {
+public class DishTable extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "plate";
     private static final String ID = "ID";
@@ -17,7 +17,7 @@ public class PlateTable extends SQLiteOpenHelper {
     private static final String PRICE = "price";
     private PlateIngredientTable dbPlateIngredient;
 
-    public PlateTable(Context context) {
+    public DishTable(Context context) {
         super(context, TABLE_NAME, null, 1);
         dbPlateIngredient = new PlateIngredientTable(context);
     }

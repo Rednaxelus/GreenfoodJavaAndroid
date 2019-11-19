@@ -29,13 +29,21 @@ public class LoginActivity extends Activity {
 
     public void loginProcess(View v){
         if (allFieldsHaveCorrectFormat()){
-            if (userExist()) startActivity(new Intent(this, UserHomeActivity.class));
-            if (enterpriseExist()) startActivity(new Intent(this, EnterpriseHomeActivity.class));
+            if (userExist()){
+                startActivity(new Intent(this, UserHomeActivity.class));
+            }
+            if (enterpriseExist()){
+                startActivity(new Intent(this, EnterpriseHomeActivity.class));
+            }
         }
     }
 
     private boolean enterpriseExist() {
-        return false;
+        String email = getField(R.id.email);
+        if (enterpriseTable.checkIfEnterpriseExist(email)){
+            return false;
+        }
+        return true;
     }
 
     private boolean userExist() {

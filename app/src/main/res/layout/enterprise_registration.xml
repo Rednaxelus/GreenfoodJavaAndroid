@@ -116,7 +116,7 @@ tools:context="ui.EnterpriseRegistrationActivity">
         app:layout_constraintTop_toBottomOf="@+id/address" />
 
     <Button
-    android:id="@+id/registerButton"
+    android:id="@+id/userRegisterButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="start"
@@ -160,12 +160,12 @@ tools:context="ui.EnterpriseRegistrationActivity">
     android:layout_marginBottom="16dp"
     android:text="@string/question_return"
     android:textSize="20sp"
-    app:layout_constraintBottom_toTopOf="@+id/button"
+    app:layout_constraintBottom_toTopOf="@+id/userRegisterButton"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/returnButton"
         android:layout_width="148dp"
         android:layout_height="42dp"
         android:layout_marginEnd="112dp"

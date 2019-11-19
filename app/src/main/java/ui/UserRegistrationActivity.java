@@ -23,7 +23,11 @@ public class UserRegistrationActivity extends AppCompatActivity {
         startActivity(new Intent(UserRegistrationActivity.this, EnterpriseRegistrationActivity.class));
     }
 
-    public void loginProcess(View v){
+    public void goToLogin(View v){
+        startActivity(new Intent(UserRegistrationActivity.this, LoginActivity.class));
+    }
+
+    public void registerProcess(View v){
         if (allFieldsHaveCorrectFormat() && !userExist()){
             registerUserInUserTable();
         }

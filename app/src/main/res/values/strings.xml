@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GreenfoodJava</string>
+    <string name="app_name">GreenFood</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_name">Username</string>

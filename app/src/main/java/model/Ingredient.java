@@ -8,7 +8,7 @@ public class Ingredient {
     private int amount;
     private String energeticValue;
     private double calories, proteins, carbohydrates, fiber, fat;
-    private List<Vitamine> vitamines;
+    private List<Vitamin> vitamins;
 
     public Ingredient(String name, int amount, String energeticValue, double calories,
                       double proteins, double carbohydrates, double fiber, double fat) {
@@ -20,10 +20,10 @@ public class Ingredient {
         this.carbohydrates = carbohydrates;
         this.fiber = fiber;
         this.fat = fat;
-        vitamines = new ArrayList<>();
+        vitamins = new ArrayList<>();
     }
 
-    public void addVitamine(Vitamine vitamine){
-        if (!vitamines.contains(vitamine)) vitamines.add(vitamine);
+    public void addVitamin(Vitamin vitamin){
+        if (!vitamins.contains(vitamin)) vitamins.add(vitamin);
     }
 }

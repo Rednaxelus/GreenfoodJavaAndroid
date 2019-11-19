@@ -29,8 +29,8 @@ public class LoginActivity extends Activity {
 
     public void loginProcess(View v){
         if (allFieldsHaveCorrectFormat()){
-            if (userExist()) ;
-            if (enterpriseExist());
+            if (userExist()) startActivity(new Intent(this, UserHomeActivity.class));
+            if (enterpriseExist()) startActivity(new Intent(this, EnterpriseHomeActivity.class));
         }
     }
 

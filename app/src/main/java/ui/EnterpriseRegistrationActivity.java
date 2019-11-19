@@ -160,10 +160,7 @@ public class EnterpriseRegistrationActivity extends Activity {
             text = findViewById(R.id.nif);
             text.setError("Nif already registered in database");
         }
-
-
     }
-
 
     public void goBack(View view) {
         startActivity(new Intent(this, UserRegistrationActivity.class));

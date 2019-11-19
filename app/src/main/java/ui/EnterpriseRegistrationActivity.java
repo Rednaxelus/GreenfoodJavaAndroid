@@ -1,4 +1,4 @@
-package com.example.greenfoodjava.ui.login;
+package ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import com.example.greenfoodjava.R;
-import com.example.greenfoodjava.database.EnterpriseTable;
+import database.EnterpriseTable;
 
 import java.util.regex.Pattern;
 
@@ -39,6 +39,8 @@ public class EnterpriseRegistrationActivity extends Activity {
     public void register(View view) {
         fieldError = false;
         checkEmailField();
+
+        checkNameField();
         checkPassField();
         checkNifField();
         checkDescriptionField();
@@ -46,6 +48,15 @@ public class EnterpriseRegistrationActivity extends Activity {
         checkAddressField();
         if (!fieldError) {
             createEnterprise();
+        }
+    }
+
+    private void checkNameField() {
+        EditText nameText = findViewById(R.id.name);
+        String name = nameText.getText().toString();
+        if (name.isEmpty()) {
+            nameText.setError("Name empty");
+            fieldError = true;
         }
     }
 
@@ -102,13 +113,16 @@ public class EnterpriseRegistrationActivity extends Activity {
         }
     }
 
+    private boolean emailExists() {
+        EditText emailText = findViewById(R.id.email);
+        return dbHelper.checkIfEnterpriseExist(emailText.getText().toString());
+
+    }
+
     private void checkEmailField() {
-        EditText emailText = findViewById(R.id.name);
-        if (emailText.getText().toString().isEmpty()) {
-            emailText.setError("Name is empty");
-            fieldError = true;
-        }
-        /*if (!Pattern.matches("(\\w|-)+@\\w+.(com|es)", email)) {
+        EditText emailText = findViewById(R.id.email);
+        String email = emailText.getText().toString();
+        if (!Pattern.matches("(\\w|-)+@\\w+.(com|es)", email)) {
             emailText.setError("Email doesn't exists");
             fieldError = true;
         } else if (email.length() <= 3) {
@@ -117,22 +131,18 @@ public class EnterpriseRegistrationActivity extends Activity {
         } else if (email.length() > 50) {
             emailText.setError("Email too long");
             fieldError = true;
-        } else if (emailExists(email)) {
-            emailText.setError("Email already exists");
+        } else if (emailExists()) {
+            emailText.setError("Email already registered");
             fieldError = true;
-        }*/
-
-    }
-
-    private boolean emailExists(String email) {
-        if (email.equals("Existe")) {
-            return true;
         }
-        return false;
     }
 
     private void createEnterprise() {
-        EditText text = findViewById(R.id.name);
+
+        EditText text = findViewById(R.id.email);
+        String email = text.getText().toString();
+
+        text = findViewById(R.id.name);
         String name = text.getText().toString();
 
         text = findViewById(R.id.password);
@@ -150,20 +160,12 @@ public class EnterpriseRegistrationActivity extends Activity {
         text = findViewById(R.id.address);
         String address = text.getText().toString();
 
-        if (!dbHelper.checkIfNifExist(nif)) {
-            if (isSwitchChecked) {
-                dbHelper.addData(name,nif,pass,description,phone,address,"Restaurant");
-            } else {
-                dbHelper.addData(name,nif,pass,description,phone,address,"Enterprise");
-            }
+        if (isSwitchChecked) {
+            dbHelper.addData(email, name,nif,pass,description,phone,address,"Restaurant");
         } else {
-            text = findViewById(R.id.nif);
-            text.setError("Nif already registered in database");
+            dbHelper.addData(email, name,nif,pass,description,phone,address,"Enterprise");
         }
-
-
     }
-
 
     public void goBack(View view) {
         startActivity(new Intent(this, UserRegistrationActivity.class));

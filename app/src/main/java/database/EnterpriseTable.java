@@ -1,4 +1,4 @@
-package com.example.greenfoodjava.database;
+package database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -14,6 +14,7 @@ public class EnterpriseTable extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "enterprise";
     private static final String ID = "ID";
+    private static final String EMAIL = "email";
     private static final String NAME = "name";
     private static final String NIF = "nif";
     private static final String PASSWORD = "password";
@@ -26,7 +27,7 @@ public class EnterpriseTable extends SQLiteOpenHelper {
     public EnterpriseTable(Context context) {
 
         super(context, TABLE_NAME, null, 1);
-        addData("Rest","13518001G","jjj","kjhfsjsdfkj",
+        addData("ha@h.com", "Rest","13518001G",getMD5("jjj"),"kjhfsjsdfkj",
                 "888","C/DD","Restaurant");
     }
 
@@ -34,7 +35,7 @@ public class EnterpriseTable extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME
-                + " (ID INTEGER PRIMARY KEY, " + NAME + " TEXT DEFAULT ' ',"
+                + " (ID INTEGER PRIMARY KEY, " + EMAIL + " TEXT DEFAULT ' '," + NAME + " TEXT DEFAULT ' ',"
                 + PASSWORD + " TEXT DEFAULT ' ', " + NIF + " TEXT DEFAULT ' ', "
                 + DESCRIPTION + " TEXT DEFAULT ' ', " + PHONE_NUMBER + " TEXT DEFAULT ' ', "
                 + ADDRESS + " TEXT DEFAULT ' ', " +  TYPE + " TEXT DEFAULT ' ')";
@@ -57,11 +58,12 @@ public class EnterpriseTable extends SQLiteOpenHelper {
      * @param address address
      * @return true//false
      */
-    public boolean addData(String name, String nif, String password, String description,
+    public boolean addData(String email, String name, String nif, String password, String description,
                     String phoneNumber,String address, String type) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
+        contentValues.put(EMAIL, email);
         contentValues.put(NAME, name);
         contentValues.put(NIF, nif);
         contentValues.put(PASSWORD, getMD5(password));
@@ -86,9 +88,20 @@ public class EnterpriseTable extends SQLiteOpenHelper {
         return number.toString(32);
     }
 
-    public boolean checkIfNifExist(String nif) {
+    public boolean checkIfEnterpriseExist(String email) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + NIF + " = '" + nif + "'";
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + " = '" + email + "'";
+        Cursor data = sqlDB.rawQuery(query, null);
+        data.moveToFirst();
+        boolean res = data.getCount() > 0;
+        data.close();
+        return res;
+    }
+
+    public boolean checkIfUserExist(String email, String password) {
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + " = '" + email + "' AND "
+                + PASSWORD + " = '" + getMD5(password) + "'";
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
         boolean res = data.getCount() > 0;

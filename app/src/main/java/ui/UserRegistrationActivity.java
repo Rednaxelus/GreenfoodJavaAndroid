@@ -1,13 +1,12 @@
-package com.example.greenfoodjava.ui.login;
+package ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import com.example.greenfoodjava.R;
-import com.example.greenfoodjava.database.UserTable;
+import database.UserTable;
 
 public class UserRegistrationActivity extends AppCompatActivity {
 
@@ -24,7 +23,11 @@ public class UserRegistrationActivity extends AppCompatActivity {
         startActivity(new Intent(UserRegistrationActivity.this, EnterpriseRegistrationActivity.class));
     }
 
-    public void loginProcess(View v){
+    public void goToLogin(View v){
+        startActivity(new Intent(UserRegistrationActivity.this, LoginActivity.class));
+    }
+
+    public void registerProcess(View v){
         if (allFieldsHaveCorrectFormat() && !userExist()){
             registerUserInUserTable();
         }
@@ -48,8 +51,8 @@ public class UserRegistrationActivity extends AppCompatActivity {
     }
 
     private boolean allFieldsHaveCorrectFormat() {
-        return emailHasCorrectFormat() && nameIsComplete() && surnameIsComplete()
-                && passwordHasCorrectFormat();
+        return emailHasCorrectFormat() & nameIsComplete() & surnameIsComplete()
+                & passwordHasCorrectFormat();
     }
 
     private String getField(int id){

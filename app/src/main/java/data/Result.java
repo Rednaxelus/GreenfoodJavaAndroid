@@ -1,4 +1,4 @@
-package com.example.greenfoodjava.data;
+package data;
 
 /**
  * A generic class that holds a result success w/ data or an error exception.

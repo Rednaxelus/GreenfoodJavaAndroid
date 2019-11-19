@@ -1,4 +1,4 @@
-package com.example.greenfoodjava.ui.login;
+package ui;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import com.example.greenfoodjava.R;
-import com.example.greenfoodjava.database.EnterpriseTable;
+import database.EnterpriseTable;
 
 import java.util.regex.Pattern;
 

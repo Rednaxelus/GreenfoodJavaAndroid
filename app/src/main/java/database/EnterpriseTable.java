@@ -1,4 +1,4 @@
-package com.example.greenfoodjava.database;
+package database;
 
 import android.content.ContentValues;
 import android.content.Context;

@@ -1,6 +1,6 @@
-package com.example.greenfoodjava.data;
+package data;
 
-import com.example.greenfoodjava.data.model.LoggedInUser;
+import data.model.LoggedInUser;
 
 import java.io.IOException;
 

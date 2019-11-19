@@ -1,6 +1,6 @@
-package com.example.greenfoodjava.data;
+package data;
 
-import com.example.greenfoodjava.data.model.LoggedInUser;
+import data.model.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and

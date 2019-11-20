@@ -11,15 +11,15 @@ import data.model.Ingredient;
 
 public class DishTable extends SQLiteOpenHelper {
 
-    private static final String TABLE_NAME = "plate";
+    private static final String TABLE_NAME = "DISH";
     private static final String ID = "ID";
     private static final String NAME = "name";
     private static final String PRICE = "price";
-    private PlateIngredientTable dbPlateIngredient;
+    private DishIngredientTable dbPlateIngredient;
 
     public DishTable(Context context) {
         super(context, TABLE_NAME, null, 1);
-        dbPlateIngredient = new PlateIngredientTable(context);
+        dbPlateIngredient = new DishIngredientTable(context);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class DishTable extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addPlate(String name, double price, List<Ingredient> ingredients) {
+    public boolean addDish(String name, double price, List<Ingredient> ingredients) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();

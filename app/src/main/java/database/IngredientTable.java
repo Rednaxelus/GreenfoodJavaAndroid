@@ -22,17 +22,14 @@ public class IngredientTable extends SQLiteOpenHelper {
     private static final String FIBER = "fiber";
     private static final String FAT = "fat";
     IngredientVitaminesTable dbIngredientVitamine;
+    IngredientAllergyTable dbIngredientAllergy;
 
     public IngredientTable(Context context) {
 
         super(context, TABLE_NAME, null, 1);
 
         dbIngredientVitamine = new IngredientVitaminesTable(context);
-        List<String> t = new ArrayList<>();
-        t.add("A");
-        t.add("B1");
-        addIngredient("Tomate", 5,9.9,9.8,7.7,
-                5.5,8.8,3.3,t);
+        dbIngredientAllergy = new IngredientAllergyTable(context);
     }
 
     @Override
@@ -55,7 +52,7 @@ public class IngredientTable extends SQLiteOpenHelper {
 
     public boolean addIngredient(String name, int amount, double energeticValue, double calories,
                                  double proteins, double carbohydrates, double fiber, double fat,
-                                 List<String> vitamines) {
+                                 List<String> vitamines, List<String> allergies) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -71,7 +68,8 @@ public class IngredientTable extends SQLiteOpenHelper {
         long result = sqlDB.insert(TABLE_NAME, null, contentValues);
         if (result == -1)
             return false;
-        return dbIngredientVitamine.addTuple((int) result,vitamines);
+        return dbIngredientVitamine.addTuple((int) result,vitamines) &&
+                dbIngredientAllergy.addTuple((int) result,allergies);
     }
 
     public int count() {

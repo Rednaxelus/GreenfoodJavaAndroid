@@ -25,15 +25,10 @@ public class EnterpriseTable extends SQLiteOpenHelper {
 
 
     public EnterpriseTable(Context context) {
-
         super(context, TABLE_NAME, null, 2);
         boolean a = addData("test6@h.com", "Rest","13518001G","jjj","kjhfsjsdfkj",
                 "888","C/DD","Restaurant");
-
-
-
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {

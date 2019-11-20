@@ -26,9 +26,12 @@ public class EnterpriseTable extends SQLiteOpenHelper {
 
     public EnterpriseTable(Context context) {
 
-        super(context, TABLE_NAME, null, 1);
-        addData("ha@h.com", "Rest","13518001G",getMD5("jjj"),"kjhfsjsdfkj",
+        super(context, TABLE_NAME, null, 2);
+        boolean a = addData("test6@h.com", "Rest","13518001G","jjj","kjhfsjsdfkj",
                 "888","C/DD","Restaurant");
+
+
+
     }
 
 
@@ -65,14 +68,15 @@ public class EnterpriseTable extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(EMAIL, email);
         contentValues.put(NAME, name);
-        contentValues.put(NIF, nif);
         contentValues.put(PASSWORD, getMD5(password));
+        contentValues.put(NIF, nif);
         contentValues.put(DESCRIPTION, description);
         contentValues.put(PHONE_NUMBER, phoneNumber);
         contentValues.put(ADDRESS, address);
         contentValues.put(TYPE, type);
 
         long result = sqlDB.insert(TABLE_NAME, null, contentValues);
+
         return result == -1;
     }
 
@@ -105,6 +109,17 @@ public class EnterpriseTable extends SQLiteOpenHelper {
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
         boolean res = data.getCount() > 0;
+        data.close();
+        return res;
+    }
+
+    public int count() {
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME ;
+        Cursor data = sqlDB.rawQuery(query, null);
+        data.moveToFirst();
+        System.out.println(data.getCount());
+        int res = data.getCount();
         data.close();
         return res;
     }

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.List;
 
-import data.model.Ingredient;
+import model.Ingredient;
 
 public class DishTable extends SQLiteOpenHelper {
 

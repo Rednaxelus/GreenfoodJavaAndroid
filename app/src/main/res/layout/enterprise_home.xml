@@ -58,6 +58,7 @@
         android:layout_marginRight="112dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
+        android:onClick="gotToCreateDishActivity"
         android:text="Create dish"
         android:textColor="#3F51B5"
         app:layout_constraintEnd_toEndOf="parent"

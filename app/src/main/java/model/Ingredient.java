@@ -9,6 +9,7 @@ public class Ingredient {
     private String energeticValue;
     private double calories, proteins, carbohydrates, fiber, fat;
     private List<Vitamin> vitamins;
+    private List<Allergy> allergies;
 
     public Ingredient(String name, int amount, int ID, String energeticValue, double calories,
                       double proteins, double carbohydrates, double fiber, double fat) {
@@ -22,10 +23,19 @@ public class Ingredient {
         this.fiber = fiber;
         this.fat = fat;
         vitamins = new ArrayList<>();
+        allergies = new ArrayList<>();
     }
 
     public void addVitamin(Vitamin vitamin){
         if (!vitamins.contains(vitamin)) vitamins.add(vitamin);
+    }
+
+    public void addAllergy(Allergy allergy){
+        if (!allergies.contains(allergy)) allergies.add(allergy);
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getId() {

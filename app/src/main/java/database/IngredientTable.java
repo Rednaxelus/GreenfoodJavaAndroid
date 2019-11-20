@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Ingredient;
+
 public class IngredientTable extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "ingredient";
@@ -80,5 +82,11 @@ public class IngredientTable extends SQLiteOpenHelper {
         int res = data.getCount();
         data.close();
         return res;
+    }
+
+    public List<Ingredient> getIngredients() {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(new Ingredient("Pipas", 3, 23, "34", 23, 23, 12, 3, 3));
+        return ingredients;
     }
 }

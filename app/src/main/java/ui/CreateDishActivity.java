@@ -45,4 +45,8 @@ public class CreateDishActivity extends Activity {
     public void goBack(View view) {
         startActivity(new Intent(this, EnterpriseHomeActivity.class));
     }
+
+    public void createDish(View view) {
+
+    }
 }

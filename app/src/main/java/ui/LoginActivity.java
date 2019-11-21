@@ -1,7 +1,9 @@
 package ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -14,6 +16,9 @@ import database.UserTable;
 public class LoginActivity extends Activity {
     private UserTable userTable;
     private EnterpriseTable enterpriseTable;
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    SharedPreferences sharedpreferences;
+    private int userId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,6 +26,8 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login);
         userTable = new UserTable(this);
         enterpriseTable = new EnterpriseTable(this);
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        this.userId = -1;
     }
 
     public void goBack(View view) {
@@ -30,8 +37,10 @@ public class LoginActivity extends Activity {
     public void loginProcess(View v){
         if (allFieldsHaveCorrectFormat()){
             if (userExist()){
+                setCredentials();
                 startActivity(new Intent(this, UserHomeActivity.class));
             }else if (enterpriseExist()){
+                setCredentials();
                 startActivity(new Intent(this, EnterpriseHomeActivity.class));
             }else{
                 showErrorFor(R.id.email, "User doesn't exist");
@@ -40,22 +49,27 @@ public class LoginActivity extends Activity {
         }
     }
 
+    private void setCredentials() {
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+
+        editor.putString("email", getField(R.id.email));
+        editor.putInt("id", this.userId);
+        editor.commit();
+    }
+
     private boolean enterpriseExist() {
         String email = getField(R.id.email);
         String password = getField(R.id.password);
-        if (!enterpriseTable.checkIfUserExist(email, password)){
-            return false;
-        }
-        return true;
+        this.userId = enterpriseTable.checkIfUserExist(email, password);
+        return this.userId != -1;
     }
 
     private boolean userExist() {
         String email = getField(R.id.email);
         String password = getField(R.id.password);
-        if (!userTable.checkIfUserExist(email, password)){
-            return false;
-        }
-        return true;
+        this.userId = userTable.checkIfUserExist(email, password);
+        return this.userId != -1;
+
     }
 
     private boolean allFieldsHaveCorrectFormat() {

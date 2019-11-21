@@ -26,12 +26,12 @@ public class Ingredient {
         allergies = new ArrayList<>();
     }
 
-    public void addVitamin(Vitamin vitamin){
-        if (!vitamins.contains(vitamin)) vitamins.add(vitamin);
+    public void addVitamin(List<Vitamin> vitamin){
+        vitamins=vitamin;
     }
 
-    public void addAllergy(Allergy allergy){
-        if (!allergies.contains(allergy)) allergies.add(allergy);
+    public void addAllergy(List<Allergy> allergy){
+        allergies = allergy;
     }
 
     public String getName() {

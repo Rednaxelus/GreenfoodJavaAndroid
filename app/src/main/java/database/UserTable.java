@@ -22,8 +22,9 @@ public class UserTable extends SQLiteOpenHelper {
 
     public UserTable(Context context) {
         super(context, TABLE_NAME, null, 1);
-
-        addData("dd@ff.com",getMD5("ddd"),"Jose","ddddd");
+        System.out.println(count());
+        if (count() == 0)
+            addData("test7@h.com", "jjj","jose","pimm");
     }
 
 
@@ -73,15 +74,18 @@ public class UserTable extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean checkIfUserExist(String email,String password) {
+    public int checkIfUserExist(String email,String password) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + " = '" + email + "' AND "
                 + PASSWORD + " = '" + getMD5(password) + "'";
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
-        boolean res = data.getCount() > 0;
+        int id;
+        if (data.getCount() == 0) id = -1;
+        else id = data.getInt(0);
+
         data.close();
-        return res;
+        return id;
     }
 
     private String getMD5(String password) {
@@ -94,5 +98,16 @@ public class UserTable extends SQLiteOpenHelper {
         byte[] messageDigest = md.digest(password.getBytes());
         BigInteger number = new BigInteger(1, messageDigest);
         return number.toString(32);
+    }
+
+    public int count() {
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME ;
+        Cursor data = sqlDB.rawQuery(query, null);
+        data.moveToFirst();
+        System.out.println(data.getCount());
+        int res = data.getCount();
+        data.close();
+        return res;
     }
 }

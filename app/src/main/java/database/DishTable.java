@@ -16,10 +16,12 @@ public class DishTable extends SQLiteOpenHelper {
     private static final String NAME = "name";
     private static final String PRICE = "price";
     private DishIngredientTable dbPlateIngredient;
+    private EnterpriseDish dbEnterpriseDish;
 
     public DishTable(Context context) {
         super(context, TABLE_NAME, null, 1);
         dbPlateIngredient = new DishIngredientTable(context);
+        dbEnterpriseDish = new EnterpriseDish(context);
     }
 
     @Override
@@ -36,7 +38,7 @@ public class DishTable extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addDish(String name, double price, List<Ingredient> ingredients) {
+    public boolean addDish(String name, double price, List<Ingredient> ingredients, int idEnterprise) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -50,6 +52,6 @@ public class DishTable extends SQLiteOpenHelper {
             if (!dbPlateIngredient.addTuple((int) result, ingredient.getId()))
                 return false;
         }
-        return true;
+        return dbEnterpriseDish.addTuple(idEnterprise,(int) result);
     }
 }

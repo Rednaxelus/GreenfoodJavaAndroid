@@ -28,10 +28,30 @@ public class IngredientTable extends SQLiteOpenHelper {
 
     public IngredientTable(Context context) {
 
-        super(context, TABLE_NAME, null, 1);
+        super(context, TABLE_NAME, null, 3);
 
         dbIngredientVitamine = new IngredientVitaminesTable(context);
         dbIngredientAllergy = new IngredientAllergyTable(context);
+        if (count() == 0)
+            initDB();
+    }
+
+    private void initDB() {
+        List<String> vitamines = new ArrayList<>();
+        vitamines.add("A");
+        vitamines.add("B1");
+        vitamines.add("B2");
+        List<String> allergy = new ArrayList<>();
+        allergy.add("PEANUTS");
+        allergy.add("GLUTEN");
+        addIngredient("Pipas", 3, 23, 34,
+                23, 23, 12, 3,  vitamines, allergy);
+
+        addIngredient("Carne", 3, 23, 34,
+                23, 23, 12, 3,  vitamines, allergy);
+
+        addIngredient("Pescado", 3, 23, 34,
+                23, 23, 12, 3,  vitamines, allergy);
     }
 
     @Override
@@ -40,7 +60,7 @@ public class IngredientTable extends SQLiteOpenHelper {
                 + " (ID INTEGER  PRIMARY KEY AUTOINCREMENT, " + NAME + " TEXT DEFAULT ' ',"
                 + AMOUNT + " INT," + ENERGETIC_VALUE + " DOUBLE,"
                 + CALORIES + " DOUBLE, " + PROTEINS + " DOUBLE, "
-                + CARBOHYDRATES + " DOUBLE, " + FIBER + " TDOUBLE, "
+                + CARBOHYDRATES + " DOUBLE, " + FIBER + " DOUBLE, "
                 + FAT + " DOUBLE)";
         db.execSQL(createTable);
 
@@ -70,6 +90,7 @@ public class IngredientTable extends SQLiteOpenHelper {
         long result = sqlDB.insert(TABLE_NAME, null, contentValues);
         if (result == -1)
             return false;
+        System.out.println(allergies.toArray()[0]);
         return dbIngredientVitamine.addTuple((int) result,vitamines) &&
                 dbIngredientAllergy.addTuple((int) result,allergies);
     }
@@ -86,11 +107,34 @@ public class IngredientTable extends SQLiteOpenHelper {
 
     public List<Ingredient> getIngredients() {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient("Pipas", 3, 23, "34", 23, 23, 12, 3, 3));
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME;
+        Cursor data = sqlDB.rawQuery(query, null);
+        while (data.moveToNext()) {
+            Ingredient in = new Ingredient(data.getString(1), data.getInt(2),
+                    data.getInt(0), data.getDouble(3)+"",
+                    data.getInt(4), data.getInt(5), data.getInt(6),
+                    data.getInt(7), data.getInt(8));
+            in.addVitamin(dbIngredientVitamine.getVitaminesOfIngredient(data.getInt(0)));
+            in.addAllergy(dbIngredientAllergy.getAllergiesOfIngredient(data.getInt(0)));
+            ingredients.add(in);
+        }
+        data.close();
         return ingredients;
     }
 
     public Ingredient getIngredient(String ingredientName) {
-        return new Ingredient(ingredientName, 3, 23, "34", 23, 23, 12, 3, 3);
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + NAME + " = '" + ingredientName + "'";
+        Cursor data = sqlDB.rawQuery(query, null);
+        data.moveToFirst();
+        Ingredient in = null;
+        if (data.getCount() > 0)
+            in = new Ingredient(ingredientName, data.getInt(2),
+                    data.getInt(0), data.getDouble(3)+"",
+                    data.getInt(4), data.getInt(5), data.getInt(6),
+                    data.getInt(7), data.getInt(8));
+        data.close();
+        return in;
     }
 }

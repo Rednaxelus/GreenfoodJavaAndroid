@@ -2,11 +2,15 @@ package database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Ingredient;
+import model.Vitamin;
 
 public class IngredientVitaminesTable extends SQLiteOpenHelper {
 
@@ -51,5 +55,17 @@ public class IngredientVitaminesTable extends SQLiteOpenHelper {
             }
         }
         return true;
+    }
+
+    public List<Vitamin> getVitaminesOfIngredient(int idIngredient) {
+        List<Vitamin> vitamines = new ArrayList<>();
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_INGREDIENT + " = " + idIngredient;
+        Cursor data = sqlDB.rawQuery(query, null);
+        while (data.moveToNext()) {
+            vitamines.add(Vitamin.valueOf(data.getString(2)));
+        }
+        data.close();
+        return vitamines;
     }
 }

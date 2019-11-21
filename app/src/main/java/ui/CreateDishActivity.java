@@ -1,6 +1,7 @@
 package ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,11 +19,13 @@ import java.util.List;
 import database.DishTable;
 import database.IngredientTable;
 import model.Ingredient;
+import android.content.SharedPreferences;
 
 public class CreateDishActivity extends Activity {
     private IngredientTable ingredientTable;
     private DishTable dishTable;
     private List<Ingredient> dishIngredients;
+    SharedPreferences sharedpreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,8 @@ public class CreateDishActivity extends Activity {
         dishTable = new DishTable(this);
         dishIngredients = new ArrayList<>();
         setScrollViewElements();
+        sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        System.out.println(sharedpreferences.getInt("id",-1));
     }
 
     private void setIngredientErrorInvisible(){
@@ -87,7 +92,8 @@ public class CreateDishActivity extends Activity {
     private void createEntryInDB() {
         String name = getField(R.id.dishName);
         double price = Double.parseDouble(getField(R.id.price));
-        dishTable.addDish(name, price, dishIngredients);
+        if (dishTable.addDish(name, price, dishIngredients,sharedpreferences.getInt("id",-1)))
+            System.out.println("SE HA CREADO LOLOLO");
     }
 
     private boolean allFieldsAreCompleted() {

@@ -26,8 +26,11 @@ public class EnterpriseTable extends SQLiteOpenHelper {
 
     public EnterpriseTable(Context context) {
         super(context, TABLE_NAME, null, 2);
-        boolean a = addData("test6@h.com", "Rest","13518001G","jjj","kjhfsjsdfkj",
-                "888","C/DD","Restaurant");
+        System.out.println(count());
+        if (count() == 0)
+            addData("test6@h.com", "Rest","13518001G","jjj","kjhfsjsdfkj",
+                    "888","C/DD","Restaurant");
+
     }
 
     @Override
@@ -97,15 +100,18 @@ public class EnterpriseTable extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean checkIfUserExist(String email, String password) {
+    public int checkIfUserExist(String email, String password) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + " = '" + email + "' AND "
                 + PASSWORD + " = '" + getMD5(password) + "'";
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
-        boolean res = data.getCount() > 0;
+        int id;
+        if (data.getCount() == 0)id = -1;
+        else id = data.getInt(0);
+
         data.close();
-        return res;
+        return id;
     }
 
     public int count() {

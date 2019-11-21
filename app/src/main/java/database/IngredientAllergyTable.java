@@ -2,11 +2,15 @@ package database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Allergy;
+import model.Vitamin;
 
 public class IngredientAllergyTable extends SQLiteOpenHelper {
 
@@ -17,7 +21,7 @@ public class IngredientAllergyTable extends SQLiteOpenHelper {
 
     public IngredientAllergyTable(Context context) {
 
-        super(context, TABLE_NAME, null, 1);
+        super(context, TABLE_NAME, null, 2);
         List<String> t = new ArrayList<>();
         t.add("A");
         t.add("B1");
@@ -43,6 +47,7 @@ public class IngredientAllergyTable extends SQLiteOpenHelper {
     public boolean addTuple(int idIngredient, List<String> allergies) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         for (String allergy : allergies) {
+            System.out.println(allergy);
             ContentValues contentValues = new ContentValues();
             contentValues.put(ID_INGREDIENT, idIngredient);
             contentValues.put(ALLERGY, allergy);
@@ -51,6 +56,18 @@ public class IngredientAllergyTable extends SQLiteOpenHelper {
             }
         }
         return true;
+    }
+
+    public List<Allergy> getAllergiesOfIngredient(int idIngredient) {
+        List<Allergy> allergies = new ArrayList<>();
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_INGREDIENT + " = " + idIngredient;
+        Cursor data = sqlDB.rawQuery(query, null);
+        while (data.moveToNext()) {
+            allergies.add(Allergy.valueOf(data.getString(2)));
+        }
+        data.close();
+        return allergies;
     }
 }
 

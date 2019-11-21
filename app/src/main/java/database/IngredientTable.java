@@ -89,4 +89,8 @@ public class IngredientTable extends SQLiteOpenHelper {
         ingredients.add(new Ingredient("Pipas", 3, 23, "34", 23, 23, 12, 3, 3));
         return ingredients;
     }
+
+    public Ingredient getIngredient(String ingredientName) {
+        return new Ingredient(ingredientName, 3, 23, "34", 23, 23, 12, 3, 3);
+    }
 }

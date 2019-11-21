@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.greenfoodjava.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import database.IngredientTable;
@@ -18,26 +20,51 @@ import model.Ingredient;
 
 public class CreateDishActivity extends Activity {
     private IngredientTable ingredientTable;
-    private List<Ingredient> ingredients;
+    private List<Ingredient> dishIngredients;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_dish);
         ingredientTable = new IngredientTable(this);
-        ingredients = ingredientTable.getIngredients();
-
+        dishIngredients = new ArrayList<>();
         setScrollViewElements();
     }
 
+    private void setIngredientErrorInvisible(){
+        TextView textView = findViewById(R.id.errorMess);
+        textView.setVisibility(TextView.INVISIBLE);
+    }
+
+    private void setIngredientErrorVisible(){
+        TextView textView = findViewById(R.id.errorMess);
+        textView.setVisibility(TextView.VISIBLE);
+    }
+
     private void setScrollViewElements() {
+        List<Ingredient> ingredients = ingredientTable.getIngredients();
         ScrollView scrollView = findViewById(R.id.scroll);
         final LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
         scrollView.addView(ll);
 
-        for (Ingredient ingredient: ingredients){
+        for (Ingredient ingredient : ingredients){
             CheckBox cb = new CheckBox(getApplicationContext());
+            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked){
+                        dishIngredients.add(ingredientTable.getIngredient(buttonView.getText().toString()));
+                    }else{
+                        for (Ingredient dishIngredient : dishIngredients){
+                            if (dishIngredient.getName().equals(buttonView.getText().toString())){
+                                dishIngredients.remove(dishIngredient);
+                                break;
+                            }
+                        }
+                    }
+                }
+            });
             cb.setText(ingredient.getName());
             ll.addView(cb);
         }
@@ -49,12 +76,22 @@ public class CreateDishActivity extends Activity {
 
     public void createDish(View view) {
         if(allFieldsAreCompleted()){
+            
             startActivity(new Intent(this, EnterpriseHomeActivity.class));
         }
     }
 
     private boolean allFieldsAreCompleted() {
-        return isDishNameCompleted() & isPriceCompleted();
+        return isDishNameCompleted() & isPriceCompleted() & areIngredientsSelected();
+    }
+
+    private boolean areIngredientsSelected() {
+        if (dishIngredients.size() == 0){
+            setIngredientErrorVisible();
+            return false;
+        }
+        setIngredientErrorInvisible();
+        return true;
     }
 
     private boolean isPriceCompleted() {

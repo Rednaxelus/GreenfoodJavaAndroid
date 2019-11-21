@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.example.greenfoodjava.R;
 import database.UserTable;
@@ -28,9 +29,14 @@ public class UserRegistrationActivity extends AppCompatActivity {
     }
 
     public void registerProcess(View v){
-        if (allFieldsHaveCorrectFormat() && !userExist()){
-            registerUserInUserTable();
-            startActivity(new Intent(this, UserHomeActivity.class));
+        if (allFieldsHaveCorrectFormat()){
+            if (!userExist()) {
+                registerUserInUserTable();
+                goToLogin(v);
+            } else {
+                EditText text = findViewById(R.id.email);
+                text.setError("DB error");
+            }
         }
     }
 
@@ -46,9 +52,9 @@ public class UserRegistrationActivity extends AppCompatActivity {
         String email = getField(R.id.email);
         if (dbHelper.checkIfUserExist(email)){
             showErrorFor(R.id.email, "Email is already registered");
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     private boolean allFieldsHaveCorrectFormat() {

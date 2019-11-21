@@ -25,17 +25,18 @@ public class EnterpriseTable extends SQLiteOpenHelper {
 
 
     public EnterpriseTable(Context context) {
+        super(context, TABLE_NAME, null, 2);
+        System.out.println(count());
+        if (count() == 0)
+            addData("test6@h.com", "Rest","13518001G","jjj","kjhfsjsdfkj",
+                    "888","C/DD","Restaurant");
 
-        super(context, TABLE_NAME, null, 1);
-        addData("ha@h.com", "Rest","13518001G",getMD5("jjj"),"kjhfsjsdfkj",
-                "888","C/DD","Restaurant");
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME
-                + " (ID INTEGER PRIMARY KEY, " + EMAIL + " TEXT DEFAULT ' '," + NAME + " TEXT DEFAULT ' ',"
+                + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + EMAIL + " TEXT DEFAULT ' '," + NAME + " TEXT DEFAULT ' ',"
                 + PASSWORD + " TEXT DEFAULT ' ', " + NIF + " TEXT DEFAULT ' ', "
                 + DESCRIPTION + " TEXT DEFAULT ' ', " + PHONE_NUMBER + " TEXT DEFAULT ' ', "
                 + ADDRESS + " TEXT DEFAULT ' ', " +  TYPE + " TEXT DEFAULT ' ')";
@@ -65,14 +66,15 @@ public class EnterpriseTable extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
         contentValues.put(EMAIL, email);
         contentValues.put(NAME, name);
-        contentValues.put(NIF, nif);
         contentValues.put(PASSWORD, getMD5(password));
-        contentValues.put(NAME, description);
+        contentValues.put(NIF, nif);
+        contentValues.put(DESCRIPTION, description);
         contentValues.put(PHONE_NUMBER, phoneNumber);
         contentValues.put(ADDRESS, address);
         contentValues.put(TYPE, type);
 
         long result = sqlDB.insert(TABLE_NAME, null, contentValues);
+
         return result == -1;
     }
 
@@ -98,13 +100,27 @@ public class EnterpriseTable extends SQLiteOpenHelper {
         return res;
     }
 
-    public boolean checkIfUserExist(String email, String password) {
+    public int checkIfUserExist(String email, String password) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + " = '" + email + "' AND "
                 + PASSWORD + " = '" + getMD5(password) + "'";
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
-        boolean res = data.getCount() > 0;
+        int id;
+        if (data.getCount() == 0)id = -1;
+        else id = data.getInt(0);
+
+        data.close();
+        return id;
+    }
+
+    public int count() {
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME ;
+        Cursor data = sqlDB.rawQuery(query, null);
+        data.moveToFirst();
+        System.out.println(data.getCount());
+        int res = data.getCount();
         data.close();
         return res;
     }

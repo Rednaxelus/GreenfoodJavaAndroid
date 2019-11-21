@@ -1,7 +1,9 @@
 package ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -38,5 +40,9 @@ public class CreateDishActivity extends Activity {
             cb.setText(ingredient.getName());
             ll.addView(cb);
         }
+    }
+
+    public void goBack(View view) {
+        startActivity(new Intent(this, EnterpriseHomeActivity.class));
     }
 }

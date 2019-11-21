@@ -15,11 +15,13 @@ import com.example.greenfoodjava.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import database.DishTable;
 import database.IngredientTable;
 import model.Ingredient;
 
 public class CreateDishActivity extends Activity {
     private IngredientTable ingredientTable;
+    private DishTable dishTable;
     private List<Ingredient> dishIngredients;
 
     @Override
@@ -27,6 +29,7 @@ public class CreateDishActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_dish);
         ingredientTable = new IngredientTable(this);
+        dishTable = new DishTable(this);
         dishIngredients = new ArrayList<>();
         setScrollViewElements();
     }
@@ -76,9 +79,15 @@ public class CreateDishActivity extends Activity {
 
     public void createDish(View view) {
         if(allFieldsAreCompleted()){
-            
+            createEntryInDB();
             startActivity(new Intent(this, EnterpriseHomeActivity.class));
         }
+    }
+
+    private void createEntryInDB() {
+        String name = getField(R.id.dishName);
+        double price = Double.parseDouble(getField(R.id.price));
+        dishTable.addDish(name, price, dishIngredients);
     }
 
     private boolean allFieldsAreCompleted() {

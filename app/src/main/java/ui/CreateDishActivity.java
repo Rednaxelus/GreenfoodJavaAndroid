@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.example.greenfoodjava.R;
 
@@ -47,6 +48,50 @@ public class CreateDishActivity extends Activity {
     }
 
     public void createDish(View view) {
+        if(allFieldsAreCompleted()){
+            startActivity(new Intent(this, EnterpriseHomeActivity.class));
+        }
+    }
 
+    private boolean allFieldsAreCompleted() {
+        return isDishNameCompleted() & isPriceCompleted();
+    }
+
+    private boolean isPriceCompleted() {
+        String price = getField(R.id.price);
+        if (price.isEmpty()){
+            showErrorFor(R.id.price, "Price is needed");
+            return false;
+        }
+        return isNumber(price);
+    }
+
+    private boolean isNumber(String price) {
+        try{
+            Double.parseDouble(price);
+        }catch (Exception e){
+            showErrorFor(R.id.price, "Price must be a number");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isDishNameCompleted() {
+        String name = getField(R.id.dishName);
+        if (name.isEmpty()){
+            showErrorFor(R.id.dishName, "Name is needed");
+            return false;
+        }
+        return true;
+    }
+
+    private String getField(int id){
+        TextView field = findViewById(id);
+        return field.getText().toString();
+    }
+
+    private void showErrorFor(int id, String message){
+        TextView field = findViewById(id);
+        field.setError(message);
     }
 }

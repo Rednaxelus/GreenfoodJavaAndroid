@@ -32,34 +32,35 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="21dp"
         android:layout_marginRight="21dp"
-        android:layout_marginBottom="16dp"
         android:text="@string/question_return"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/returnButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.391"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createButton" />
 
     <Button
         android:id="@+id/returnButton"
         android:layout_width="148dp"
         android:layout_height="42dp"
-        android:layout_marginEnd="112dp"
-        android:layout_marginRight="112dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginRight="116dp"
         android:background="@drawable/buttonshape"
         android:onClick="goBack"
         android:text="@string/action_return"
         android:textColor="#3F51B5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/createButton"
         android:layout_width="148dp"
         android:layout_height="42dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="200dp"
         android:layout_marginEnd="116dp"
         android:layout_marginRight="116dp"
         android:background="@drawable/buttonshape"
@@ -67,7 +68,7 @@
         android:text="Create dish"
         android:textColor="#3F51B5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scroll" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView2"

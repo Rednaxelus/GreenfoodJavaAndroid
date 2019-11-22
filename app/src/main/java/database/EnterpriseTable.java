@@ -129,7 +129,7 @@ public class EnterpriseTable extends SQLiteOpenHelper {
     public Cursor searchByRestaurantName(String search){
         System.out.println(search);
         SQLiteDatabase sqlDB = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + search+"%" + "' AND " + TYPE + " = '" + "Restaurant'";
+        String query = "SELECT "+ TABLE_NAME + ".*,"+TABLE_NAME+".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + search+"%" + "' AND " + TYPE + " = '" + "Restaurant'";
         Cursor data = sqlDB.rawQuery(query, null);
         return data;
     }

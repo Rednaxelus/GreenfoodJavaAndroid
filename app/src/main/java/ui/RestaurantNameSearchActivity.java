@@ -46,11 +46,11 @@ public class RestaurantNameSearchActivity extends Activity {
         if(query.equals("")){
             TextView error = findViewById(R.id.errorLabel);
             error.setVisibility(View.VISIBLE);
-            listView.setAdapter(new ListAdapter(this,R.layout.restaurant_name_template, null, 0));
+            listView.setAdapter(new RestNameListAdapter(this,R.layout.restaurant_name_template, null, 0));
         }else {
             Cursor restaurants = enterpriseTable.searchByRestaurantName(query);
             TextView label = findViewById(R.id.restaurant_name_label);
-            ListAdapter adapter = new ListAdapter(this,R.layout.restaurant_name_template, restaurants, 0);
+            RestNameListAdapter adapter = new RestNameListAdapter(this,R.layout.restaurant_name_template, restaurants, 0);
             listView.setAdapter(adapter);
         }
     }

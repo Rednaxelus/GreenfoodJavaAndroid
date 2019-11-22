@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.example.greenfoodjava.R;
 
-public class ListAdapter extends ResourceCursorAdapter {
-    public ListAdapter(Context context,int layout, Cursor c, int flags) {
+public class RestNameListAdapter extends ResourceCursorAdapter {
+    public RestNameListAdapter(Context context, int layout, Cursor c, int flags) {
         super(context,layout, c,0);
     }
 

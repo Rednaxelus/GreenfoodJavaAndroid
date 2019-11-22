@@ -131,22 +131,24 @@ tools:context="ui.EnterpriseRegistrationActivity">
         app:layout_constraintTop_toBottomOf="@+id/address" />
 
     <Button
-    android:id="@+id/userRegisterButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="start"
-    android:layout_marginTop="12dp"
-    android:layout_marginEnd="108dp"
-    android:layout_marginRight="108dp"
-    android:background="@drawable/buttonshape"
-    android:enabled="true"
-    android:text="@string/action_register"
-    android:textColor="#3F51B5"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/switch1"
-    tools:text="Register"
-    android:onClick="register"
-    />
+        android:id="@+id/userRegisterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="116dp"
+        android:layout_marginLeft="116dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginRight="116dp"
+        android:background="@drawable/buttonshape"
+        android:enabled="true"
+        android:onClick="register"
+        android:text="@string/action_register"
+        android:textColor="#3F51B5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch1"
+        tools:text="Register" />
 
     <ProgressBar
     android:id="@+id/loading"
@@ -183,15 +185,18 @@ tools:context="ui.EnterpriseRegistrationActivity">
         android:id="@+id/returnButton"
         android:layout_width="148dp"
         android:layout_height="42dp"
-        android:layout_marginEnd="112dp"
-        android:layout_marginRight="112dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/buttonshape"
+        android:onClick="goBack"
         android:text="@string/action_return"
         android:textColor="#3F51B5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="goBack"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
     android:id="@+id/textView2"

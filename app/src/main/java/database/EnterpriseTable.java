@@ -49,6 +49,7 @@ public class EnterpriseTable extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+
     /**
      * New entry in user table.
      * @param name name
@@ -124,4 +125,15 @@ public class EnterpriseTable extends SQLiteOpenHelper {
         data.close();
         return res;
     }
+
+    public Cursor searchByRestaurantName(String search){
+        System.out.println(search);
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + search+"%" + "' AND " + TYPE + " = '" + "Restaurant'";
+        Cursor data = sqlDB.rawQuery(query, null);
+        return data;
+    }
+
+
+
 }

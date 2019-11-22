@@ -14,6 +14,10 @@
             android:label="CreateDish">
         </activity>
         <activity
+            android:name="ui.CreateProductActivity"
+            android:label="CreateProduct">
+        </activity>
+        <activity
             android:name="ui.EnterpriseRegistrationActivity"
             android:label="@string/title_activity_enterprise_register">
         </activity>

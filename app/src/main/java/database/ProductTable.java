@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Ingredient;
+
 public class ProductTable extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "product";
@@ -41,7 +43,7 @@ public class ProductTable extends SQLiteOpenHelper {
     }
 
     public boolean addProduct(String name, String description, double price, int stock,
-                              List<String> ingredients) {
+                              List<Ingredient> ingredients) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -53,7 +55,7 @@ public class ProductTable extends SQLiteOpenHelper {
 
         if (result == -1)
             return false;
-        for (String ingredient : ingredients) {
+        for (Ingredient ingredient : ingredients) {
 
         }
         return true;

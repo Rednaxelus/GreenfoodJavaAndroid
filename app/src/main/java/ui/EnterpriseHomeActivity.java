@@ -18,6 +18,10 @@ public class EnterpriseHomeActivity extends Activity {
         startActivity(new Intent(this, CreateDishActivity.class));
     }
 
+    public void gotToSeeDishesActivity(View view) {
+        startActivity(new Intent(this, SeeDishesActivity.class));
+    }
+
     public void gotToCreateProductActivity(View view) {
         startActivity(new Intent(this, CreateProductActivity.class));
     }

@@ -53,12 +53,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-<<<<<<< HEAD
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
-        android:layout_marginBottom="119dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
         android:onClick="goToSeeDishesActivity"
@@ -66,8 +65,10 @@
         android:textColor="#3F51B5"
         app:layout_constraintBottom_toTopOf="@+id/enterpriseCreateProduct"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.134"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterpriseCreateDish"
+        app:layout_constraintVertical_bias="0.48"
         tools:text="See dishes" />
 
     <Button
@@ -81,11 +82,6 @@
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:layout_marginBottom="119dp"
-=======
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="112dp"
-        android:layout_marginRight="112dp"
->>>>>>> F1
         android:background="@drawable/buttonshape"
         android:enabled="true"
         android:onClick="gotToCreateDishActivity"
@@ -96,9 +92,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="Create dish" />
 
-<<<<<<< HEAD
     <Button
         android:id="@+id/enterpriseCreateProduct"
         android:layout_width="wrap_content"
@@ -106,10 +102,9 @@
         android:layout_gravity="start"
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
-        android:layout_marginTop="119dp"
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
-        android:layout_marginBottom="293dp"
+        android:layout_marginBottom="316dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
         android:onClick="gotToCreateProductActivity"
@@ -117,10 +112,9 @@
         android:textColor="#3F51B5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterpriseCreateDish"
         tools:text="Create product" />
-=======
->>>>>>> F1
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

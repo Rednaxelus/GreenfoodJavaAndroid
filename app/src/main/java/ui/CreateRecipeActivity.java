@@ -203,7 +203,7 @@ public class CreateRecipeActivity extends Activity {
     }
 
     public void goBack(View view) {
-        startActivity(new Intent(this, EnterpriseHomeActivity.class));
+        startActivity(new Intent(this, UserHomeActivity.class));
     }
 
     private String getField(int id){

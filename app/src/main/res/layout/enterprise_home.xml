@@ -53,36 +53,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginRight="112dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
         android:onClick="gotToCreateDishActivity"
         android:text="Create dish"
         android:textColor="#3F51B5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/createRecipeButton"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:text="Create dish" />
-
-    <Button
-        android:id="@+id/createRecipeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/buttonshape"
-        android:enabled="true"
-        android:onClick="gotToCreateRecipeActivity"
-        android:text="Create recipe"
-        android:textColor="#3F51B5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:text="Create recipe" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

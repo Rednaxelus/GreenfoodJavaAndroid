@@ -25,6 +25,7 @@ public class CreateProductActivity extends Activity {
     private IngredientTable ingredientTable;
     private ProductTable productTable;
     private List<Ingredient> productIngredients;
+    SharedPreferences sharedpreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class CreateProductActivity extends Activity {
         productTable = new ProductTable(this);
         productIngredients = new ArrayList<>();
         setScrollViewElements();
+        sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
     }
 
     private void setIngredientErrorInvisible(){
@@ -91,7 +93,7 @@ public class CreateProductActivity extends Activity {
         String description = getField(R.id.productDescription);
         double price = Double.parseDouble(getField(R.id.productPrice));
         int stock = Integer.parseInt(getField(R.id.productStock));
-        if (productTable.addProduct(name, description, price, stock, productIngredients))
+        if (productTable.addProduct(name, description, price, stock, productIngredients, sharedpreferences.getInt("id",-1)))
             System.out.println("SE HA CREADO LOLOLO");
     }
 

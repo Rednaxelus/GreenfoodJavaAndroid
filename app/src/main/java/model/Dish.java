@@ -14,4 +14,12 @@ public class Dish {
         this.price = price;
         this.ingredients = ingredients;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
 }

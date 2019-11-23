@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import model.Dish;
 import model.Ingredient;
 
 public class DishTable extends SQLiteOpenHelper {
@@ -55,5 +57,11 @@ public class DishTable extends SQLiteOpenHelper {
                 return false;
         }
         return true;
+    }
+
+    public List<Dish> getDishes(int enterpriseId) {
+        List<Dish> dishes = new ArrayList<>();
+        dishes.add(new Dish(1, "Macarrones con tomate", 12, null));
+        return dishes;
     }
 }

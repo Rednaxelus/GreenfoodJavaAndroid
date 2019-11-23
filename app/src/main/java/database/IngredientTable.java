@@ -137,4 +137,19 @@ public class IngredientTable extends SQLiteOpenHelper {
         data.close();
         return in;
     }
+
+    public Ingredient getIngredientByID(int ingredientId) {
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + " = '" + ingredientId + "'";
+        Cursor data = sqlDB.rawQuery(query, null);
+        data.moveToFirst();
+        Ingredient in = null;
+        if (data.getCount() > 0)
+            in = new Ingredient(data.getString(1), data.getInt(2),
+                    data.getInt(0), data.getDouble(3)+"",
+                    data.getInt(4), data.getInt(5), data.getInt(6),
+                    data.getInt(7), data.getInt(8));
+        data.close();
+        return in;
+    }
 }

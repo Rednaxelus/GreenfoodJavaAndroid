@@ -1,7 +1,9 @@
 package ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +31,7 @@ public class CreateRecipeActivity extends Activity {
     private List<Ingredient> recipeIngredients;
     private static final int PICK_PHOTO = 0;
     private String imgPath = "";
+    SharedPreferences sharedpreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class CreateRecipeActivity extends Activity {
         recipeTable = new RecipeTable(this);
         recipeIngredients = new ArrayList<>();
         setScrollViewElements();
+        sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
     }
 
 
@@ -78,7 +82,12 @@ public class CreateRecipeActivity extends Activity {
     }
 
     private void createEntryInDB() {
-        System.out.println("YA TU SABE PRIMO");
+        String name = getField(R.id.dishName);
+        double price = Double.parseDouble(getField(R.id.price));
+        if (recipeTable.addRecipe(sharedpreferences.getInt("id",-1),
+                getField(R.id.dishName),getField(R.id.description),Integer.parseInt(getField(R.id.durationText)),
+                getField(R.id.steps),getField(R.id.pickImage),recipeIngredients))
+            System.out.println("SE HA CREADO LOLOLO");
     }
 
     private boolean allFieldsAreCompleted() {

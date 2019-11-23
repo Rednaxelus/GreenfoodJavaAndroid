@@ -23,4 +23,6 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="restaurant">Are you a restaurant?</string>
+    <string name="search">Search</string>
+    <string name="type_the_name">Type the name...</string>
 </resources>

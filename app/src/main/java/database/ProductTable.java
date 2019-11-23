@@ -8,10 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Ingredient;
+
 public class ProductTable extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "product";
     private static final String ID = "ID";
+    private static final String ID_ENTERPRISE = "id_enterprise";
     private static final String NAME = "name";
     private static final String DESCRIPTION = "description";
     private static final String PRICE = "price";
@@ -20,14 +23,14 @@ public class ProductTable extends SQLiteOpenHelper {
 
     public ProductTable(Context context) {
 
-        super(context, TABLE_NAME, null, 1);
+        super(context, TABLE_NAME, null, 2);
         dbProductIngredientTable = new ProductIngredientTable(context);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME
-                + " (ID INTEGER PRIMARY KEY, " + NAME + " TEXT DEFAULT ' ',"
+                + " (ID INTEGER PRIMARY KEY, " + ID_ENTERPRISE + " INTEGER, " + NAME + " TEXT DEFAULT ' ',"
                 + DESCRIPTION + " TEXT DEFAULT ' ', " + PRICE + " DOUBLE, "
                     + STOCK + " INT)";
         db.execSQL(createTable);
@@ -41,11 +44,12 @@ public class ProductTable extends SQLiteOpenHelper {
     }
 
     public boolean addProduct(String name, String description, double price, int stock,
-                              List<String> ingredients) {
+                              List<Ingredient> ingredients, int idEnterprise) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(NAME, name);
+        contentValues.put(ID_ENTERPRISE, idEnterprise);
         contentValues.put(DESCRIPTION, description);
         contentValues.put(PRICE, price);
         contentValues.put(STOCK, stock);
@@ -53,8 +57,9 @@ public class ProductTable extends SQLiteOpenHelper {
 
         if (result == -1)
             return false;
-        for (String ingredient : ingredients) {
-
+        for (Ingredient ingredient : ingredients) {
+            if (!dbProductIngredientTable.addTuple((int) result, ingredient.getId()))
+                return false;
         }
         return true;
     }

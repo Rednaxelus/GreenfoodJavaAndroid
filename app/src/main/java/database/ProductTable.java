@@ -32,7 +32,8 @@ public class ProductTable extends SQLiteOpenHelper {
         String createTable = "CREATE TABLE " + TABLE_NAME
                 + " (ID INTEGER PRIMARY KEY, " + ID_ENTERPRISE + " INTEGER, " + NAME + " TEXT DEFAULT ' ',"
                 + DESCRIPTION + " TEXT DEFAULT ' ', " + PRICE + " DOUBLE, "
-                    + STOCK + " INT)";
+                    + STOCK + " INT,"
+                + " FOREIGN KEY(" + ID_ENTERPRISE + ") REFERENCES enterprise(id)) ";
         db.execSQL(createTable);
 
     }
@@ -58,6 +59,7 @@ public class ProductTable extends SQLiteOpenHelper {
         if (result == -1)
             return false;
         for (Ingredient ingredient : ingredients) {
+            System.out.println((int)result);
             if (!dbProductIngredientTable.addTuple((int) result, ingredient.getId()))
                 return false;
         }

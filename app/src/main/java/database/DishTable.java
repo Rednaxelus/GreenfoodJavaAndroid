@@ -13,22 +13,22 @@ public class DishTable extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "DISH";
     private static final String ID = "ID";
+    private static final String ID_ENTERPRISE = "id_enterprise";
     private static final String NAME = "name";
     private static final String PRICE = "price";
     private DishIngredientTable dbPlateIngredient;
-    private EnterpriseDish dbEnterpriseDish;
 
     public DishTable(Context context) {
-        super(context, TABLE_NAME, null, 1);
+        super(context, TABLE_NAME, null, 2);
         dbPlateIngredient = new DishIngredientTable(context);
-        dbEnterpriseDish = new EnterpriseDish(context);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME
-                + " (ID INTEGER  PRIMARY KEY AUTOINCREMENT, " + NAME + " TEXT DEFAULT ' ',"
-                + PRICE + " DOUBLE )";
+                + " (ID INTEGER  PRIMARY KEY AUTOINCREMENT, " + ID_ENTERPRISE + " INTEGER , "
+                + NAME + " TEXT DEFAULT ' '," + PRICE + " DOUBLE,"
+                + " FOREIGN KEY(" + ID_ENTERPRISE + ") REFERENCES enterprise(id)) ";
         db.execSQL(createTable);
     }
 
@@ -42,6 +42,8 @@ public class DishTable extends SQLiteOpenHelper {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
+
+        contentValues.put(ID_ENTERPRISE, idEnterprise);
         contentValues.put(NAME, name);
         contentValues.put(PRICE, price);
 
@@ -52,6 +54,6 @@ public class DishTable extends SQLiteOpenHelper {
             if (!dbPlateIngredient.addTuple((int) result, ingredient.getId()))
                 return false;
         }
-        return dbEnterpriseDish.addTuple(idEnterprise,(int) result);
+        return true;
     }
 }

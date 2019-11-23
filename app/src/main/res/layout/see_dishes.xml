@@ -18,36 +18,36 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="600dp"
         android:layout_marginEnd="21dp"
         android:layout_marginRight="21dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/question_return"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/returnButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.297"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/returnButton"
         android:layout_width="148dp"
         android:layout_height="42dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="116dp"
-        android:layout_marginRight="116dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginRight="108dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/buttonshape"
         android:onClick="goBack"
         android:text="@string/action_return"
         android:textColor="#3F51B5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="121dp"
         android:layout_height="54dp"
-        android:layout_marginStart="98dp"
-        android:layout_marginLeft="98dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginLeft="130dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="130dp"
         android:layout_marginRight="130dp"

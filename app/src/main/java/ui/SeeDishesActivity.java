@@ -11,7 +11,7 @@ public class SeeDishesActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.enterprise_home);
+        setContentView(R.layout.see_dishes);
     }
 
     public void goBack(View view) {

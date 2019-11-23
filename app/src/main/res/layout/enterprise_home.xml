@@ -60,7 +60,7 @@
         android:layout_marginBottom="119dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
-        android:onClick="gotToSeeDishesActivity"
+        android:onClick="goToSeeDishesActivity"
         android:text="See dishes"
         android:textColor="#3F51B5"
         app:layout_constraintBottom_toTopOf="@+id/enterpriseCreateProduct"

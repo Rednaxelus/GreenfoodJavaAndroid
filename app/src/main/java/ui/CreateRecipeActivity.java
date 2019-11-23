@@ -82,11 +82,9 @@ public class CreateRecipeActivity extends Activity {
     }
 
     private void createEntryInDB() {
-        String name = getField(R.id.dishName);
-        double price = Double.parseDouble(getField(R.id.price));
         if (recipeTable.addRecipe(sharedpreferences.getInt("id",-1),
-                getField(R.id.dishName),getField(R.id.description),Integer.parseInt(getField(R.id.durationText)),
-                getField(R.id.steps),getField(R.id.pickImage),recipeIngredients))
+                getField(R.id.recipeName),getField(R.id.description),Integer.parseInt(getField(R.id.durationText)),
+                getField(R.id.steps),imgPath,recipeIngredients))
             System.out.println("SE HA CREADO LOLOLO");
     }
 

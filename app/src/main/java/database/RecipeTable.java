@@ -13,7 +13,7 @@ public class RecipeTable extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "recipe";
     private static final String ID = "ID";
-    private static final String ID_USER = "id";
+    private static final String ID_USER = "id_user";
     private static final String NAME = "name";
     private static final String DESCRIPTION = "description";
     private static final String DURATION = "duration";
@@ -22,7 +22,7 @@ public class RecipeTable extends SQLiteOpenHelper {
     private RecipeIngredientsTable dbRecipeIngredient;
 
     public RecipeTable(Context context) {
-        super(context, TABLE_NAME, null, 1);
+        super(context, TABLE_NAME, null, 2);
         dbRecipeIngredient = new RecipeIngredientsTable(context);
     }
 

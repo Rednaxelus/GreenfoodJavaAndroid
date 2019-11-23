@@ -27,6 +27,8 @@ public class CreateDishActivity extends Activity {
     private List<Ingredient> dishIngredients;
     SharedPreferences sharedpreferences;
 
+    public static final int PICK_IMAGE = 1;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

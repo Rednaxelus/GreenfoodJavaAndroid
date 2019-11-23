@@ -17,4 +17,8 @@ public class EnterpriseHomeActivity extends Activity {
     public void gotToCreateDishActivity(View view) {
         startActivity(new Intent(this, CreateDishActivity.class));
     }
+
+    public void gotToCreateRecipeActivity(View view) {
+        startActivity(new Intent(this, CreateRecipeActivity.class));
+    }
 }

@@ -2,6 +2,7 @@ package database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 import model.Dish;
 import model.Ingredient;
+import model.Vitamin;
 
 public class DishTable extends SQLiteOpenHelper {
 
@@ -61,7 +63,17 @@ public class DishTable extends SQLiteOpenHelper {
 
     public List<Dish> getDishes(int enterpriseId) {
         List<Dish> dishes = new ArrayList<>();
-        dishes.add(new Dish(1, "Macarrones con tomate", 12, null));
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_ENTERPRISE + " = " + enterpriseId;
+        Cursor data = sqlDB.rawQuery(query, null);
+        if (data.getCount() == 0) return dishes;
+        while (data.moveToNext()) {
+            System.out.println(data.getString(3));
+            dishes.add(new Dish(data.getInt(0),data.getString(2),
+                    data.getDouble(3),dbPlateIngredient.getIngredientsOf(data.getInt(1))));
+        }
+        data.close();
+        //dishes.add(new Dish(1, "Macarrones con tomate", 12, null));
         return dishes;
     }
 }

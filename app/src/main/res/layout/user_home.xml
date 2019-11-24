@@ -85,4 +85,25 @@
             app:layout_constraintTop_toBottomOf="@+id/loginButton"
             tools:text="Create recipe" />
 
+    <Button
+        android:id="@+id/seeRecipesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="112dp"
+        android:layout_marginLeft="112dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginRight="125dp"
+        android:background="@drawable/buttonshape"
+        android:enabled="true"
+        android:onClick="gotToSeeRecipesActivity"
+        android:text="My recipes"
+        android:textColor="#3F51B5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchDishButton"
+        tools:text="My recipes" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

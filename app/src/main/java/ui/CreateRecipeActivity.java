@@ -51,7 +51,7 @@ public class CreateRecipeActivity extends Activity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),EnterpriseHomeActivity.class));
+                startActivity(new Intent(getApplicationContext(),UserHomeActivity.class));
             }
         });
     }
@@ -89,7 +89,7 @@ public class CreateRecipeActivity extends Activity {
     public void createRecipe(View view) {
         if(allFieldsAreCompleted()){
             createEntryInDB();
-            startActivity(new Intent(this, EnterpriseHomeActivity.class));
+            startActivity(new Intent(this, UserHomeActivity.class));
         }
     }
 

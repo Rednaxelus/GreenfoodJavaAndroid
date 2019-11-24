@@ -21,11 +21,14 @@ public class UserHomeActivity extends Activity {
 
     public void gotToCreateRecipeActivity(View view) {
         startActivity(new Intent(this, CreateRecipeActivity.class));
-
     }
 
     public void gotToSearchDishActivity(View view) {
         startActivity(new Intent(this, SearchDishActivity.class));
+    }
+
+    public void gotToSeeRecipesActivity(View view) {
+        startActivity(new Intent(this, SeeRecipesActivity.class));
     }
 }
 

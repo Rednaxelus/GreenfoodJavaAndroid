@@ -51,13 +51,13 @@ public class CreateProductActivity extends Activity {
     }
 
     private void setIngredientErrorInvisible(){
-        //TextView textView = findViewById(R.id.errorMess);
-        //textView.setVisibility(TextView.INVISIBLE);
+        TextView textView = findViewById(R.id.ingredientsErrorLbl);
+        textView.setVisibility(TextView.INVISIBLE);
     }
 
     private void setIngredientErrorVisible(){
-        //TextView textView = findViewById(R.id.errorMess);
-        //textView.setVisibility(TextView.VISIBLE);
+        TextView textView = findViewById(R.id.ingredientsErrorLbl);
+        textView.setVisibility(TextView.VISIBLE);
     }
 
     private void setScrollViewElements() {
@@ -87,10 +87,6 @@ public class CreateProductActivity extends Activity {
             cb.setText(ingredient.getName());
             ll.addView(cb);
         }
-    }
-
-    public void goBack(View view) {
-        startActivity(new Intent(this, EnterpriseHomeActivity.class));
     }
 
     public void createProduct(View view) {

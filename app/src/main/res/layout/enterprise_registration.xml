@@ -6,11 +6,21 @@ android:id="@+id/container2"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="#FFF9EA"
-android:paddingLeft="@dimen/activity_horizontal_margin"
-android:paddingTop="@dimen/activity_vertical_margin"
-android:paddingRight="@dimen/activity_horizontal_margin"
-android:paddingBottom="@dimen/activity_vertical_margin"
+android:paddingLeft="0dp"
+android:paddingTop="0dp"
+android:paddingRight="0dp"
+android:paddingBottom="0dp"
 tools:context="ui.EnterpriseRegistrationActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
 
     <EditText
         android:id="@+id/email"
@@ -166,74 +176,25 @@ tools:context="ui.EnterpriseRegistrationActivity">
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="0.3" />
 
-<TextView
-    android:id="@+id/textView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="32dp"
-    android:layout_marginLeft="32dp"
-    android:layout_marginEnd="21dp"
-    android:layout_marginRight="21dp"
-    android:layout_marginBottom="16dp"
-    android:text="@string/question_return"
-    android:textSize="20sp"
-    app:layout_constraintBottom_toTopOf="@+id/userRegisterButton"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/returnButton"
-        android:layout_width="148dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginRight="100dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/buttonshape"
-        android:onClick="goBack"
-        android:text="@string/action_return"
-        android:textColor="#3F51B5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userRegisterButton" />
-
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="98dp"
         android:layout_marginLeft="98dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="87dp"
         android:layout_marginEnd="130dp"
         android:layout_marginRight="130dp"
-        android:text="Greenfood"
+        android:layout_marginBottom="1dp"
+        android:text="Enterprise Registration"
         android:textColor="#009688"
-        android:textSize="36sp"
+        android:textSize="30sp"
         app:fontFamily="casual"
+        app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.382"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-    android:id="@+id/textView3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="98dp"
-    android:layout_marginLeft="98dp"
-    android:layout_marginEnd="130dp"
-    android:layout_marginRight="130dp"
-    android:text="Enterprise Registration"
-    android:textColor="#009688"
-    android:textSize="30sp"
-    app:fontFamily="casual"
-    app:layout_constraintHorizontal_bias="0.375"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

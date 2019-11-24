@@ -19,6 +19,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, UserRegistrationActivity.class));
             }
         }, 1000);
-
     }
 }

@@ -25,4 +25,5 @@
     <string name="restaurant">Are you a restaurant?</string>
     <string name="search">Search</string>
     <string name="type_the_name">Type the name...</string>
+    <string name="search_for_dishes">Search for Dishes</string>
 </resources>

@@ -23,5 +23,9 @@ public class UserHomeActivity extends Activity {
         startActivity(new Intent(this, CreateRecipeActivity.class));
 
     }
+
+    public void gotToSearchDishActivity(View view) {
+        startActivity(new Intent(this, SearchDishActivity.class));
+    }
 }
 

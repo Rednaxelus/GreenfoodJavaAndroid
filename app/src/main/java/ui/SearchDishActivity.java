@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import com.example.greenfoodjava.R;
 
-import database.EnterpriseTable;
+import database.DishTable;
 
-public class RestaurantNameSearchActivity extends Activity {
+public class SearchDishActivity extends Activity {
 
 
     public void goBack(View view) {
@@ -34,23 +34,21 @@ public class RestaurantNameSearchActivity extends Activity {
 
         TextView error = findViewById(R.id.errorLabel);
         error.setVisibility(View.INVISIBLE);
-        TextView label = findViewById(R.id.restaurant_name_label);
         SearchView searchView = findViewById(R.id.searchView);
         restaurantSearchQuery(String.valueOf(searchView.getQuery()));
     }
 
 
-    private void restaurantSearchQuery(String query){
-        EnterpriseTable enterpriseTable = new EnterpriseTable(this);
+    private void restaurantSearchQuery(String query) {
+        DishTable dishTable = new DishTable(this);
         ListView listView = findViewById(R.id.nameSearchList);
-        if(query.equals("")){
+        if (query.equals("")) {
             TextView error = findViewById(R.id.errorLabel);
             error.setVisibility(View.VISIBLE);
-            listView.setAdapter(new RestNameListAdapter(this, R.layout.restaurant_name_template, null, 0, 0));
-        }else {
-            Cursor restaurants = enterpriseTable.searchByRestaurantName(query);
-            TextView label = findViewById(R.id.restaurant_name_label);
-            RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.restaurant_name_template, restaurants, 0, 0);
+            listView.setAdapter(new RestNameListAdapter(this, R.layout.dish_name_template, null, 0, 1));
+        } else {
+            Cursor restaurants = dishTable.searchByName(query);
+            RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.dish_name_template, restaurants, 0, 1);
             listView.setAdapter(adapter);
         }
     }
@@ -59,6 +57,6 @@ public class RestaurantNameSearchActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.restaurant_name_search);
+        setContentView(R.layout.dish_search);
     }
 }

@@ -11,7 +11,6 @@ import java.util.List;
 
 import model.Dish;
 import model.Ingredient;
-import model.Vitamin;
 
 public class DishTable extends SQLiteOpenHelper {
 
@@ -25,6 +24,10 @@ public class DishTable extends SQLiteOpenHelper {
     public DishTable(Context context) {
         super(context, TABLE_NAME, null, 2);
         dbPlateIngredient = new DishIngredientTable(context);
+
+
+        addDish("String name", 22, new ArrayList<Ingredient>(), 0);
+
     }
 
     @Override
@@ -76,4 +79,15 @@ public class DishTable extends SQLiteOpenHelper {
         //dishes.add(new Dish(1, "Macarrones con tomate", 12, null));
         return dishes;
     }
+
+    public Cursor searchByName(String name) {
+        System.out.println(name);
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        //String query = "SELECT "+ TABLE_NAME + ".*,"+TABLE_NAME+".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + name+"%" + "' AND " + TYPE + " = '" + "Restaurant'";
+        String query = "SELECT " + TABLE_NAME + ".*," + TABLE_NAME + ".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + name + "%" + "'";
+        Cursor data = sqlDB.rawQuery(query, null);
+        data.moveToFirst();
+        return data;
+    }
+
 }

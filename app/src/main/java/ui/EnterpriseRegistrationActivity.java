@@ -2,6 +2,7 @@ package ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -9,6 +10,8 @@ import android.widget.EditText;
 import android.widget.Switch;
 
 import com.example.greenfoodjava.R;
+
+import androidx.appcompat.widget.Toolbar;
 import database.EnterpriseTable;
 
 import java.util.regex.Pattern;
@@ -24,6 +27,16 @@ public class EnterpriseRegistrationActivity extends Activity {
         setContentView(R.layout.enterprise_registration);
         initSwitchListener();
         dbHelper = new EnterpriseTable(this);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("GreenFood");
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),UserRegistrationActivity.class));
+            }
+        });
     }
 
     private void initSwitchListener() {

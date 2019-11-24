@@ -6,11 +6,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFF9EA"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="0dp"
+    android:paddingTop="0dp"
+    android:paddingRight="0dp"
+    android:paddingBottom="0dp"
     tools:context="ui.CreateProductActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     <EditText
         android:id="@+id/productName"
@@ -86,42 +95,6 @@
         app:layout_constraintStart_toEndOf="@+id/productPrice"
         app:layout_constraintTop_toBottomOf="@+id/productDescription" />
 
-    <TextView
-        android:id="@+id/productIngredients"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="33dp"
-        android:text="@string/question_return"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/returnButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/createButton" />
-
-    <Button
-        android:id="@+id/returnButton"
-        android:layout_width="96dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginRight="29dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/buttonshape"
-        android:onClick="goBack"
-        android:text="@string/action_return"
-        android:textColor="#3F51B5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/productIngredients"
-        app:layout_constraintTop_toBottomOf="@+id/createButton" />
-
     <Button
         android:id="@+id/createButton"
         android:layout_width="148dp"
@@ -131,12 +104,10 @@
         android:layout_marginTop="6dp"
         android:layout_marginEnd="101dp"
         android:layout_marginRight="101dp"
-        android:layout_marginBottom="17dp"
         android:background="@drawable/buttonshape"
         android:onClick="createProduct"
         android:text="Create product"
         android:textColor="#3F51B5"
-        app:layout_constraintBottom_toTopOf="@+id/returnButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scroll" />
@@ -157,6 +128,7 @@
         app:fontFamily="casual"
         app:layout_constraintBottom_toTopOf="@+id/productName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

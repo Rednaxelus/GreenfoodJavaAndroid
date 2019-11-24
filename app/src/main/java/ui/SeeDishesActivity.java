@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.example.greenfoodjava.R;
 import java.util.List;
 
+import androidx.appcompat.widget.Toolbar;
 import database.DishTable;
 import model.Dish;
 
@@ -26,6 +28,16 @@ public class SeeDishesActivity extends Activity {
         setContentView(R.layout.see_dishes);
         dishTable = new DishTable(this);
         showDishes();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Home");
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),UserHomeActivity.class));
+            }
+        });
     }
 
     private void showDishes() {

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,6 +21,7 @@ import com.example.greenfoodjava.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.widget.Toolbar;
 import database.IngredientTable;
 import database.RecipeTable;
 import model.Ingredient;
@@ -42,6 +44,16 @@ public class CreateRecipeActivity extends Activity {
         recipeIngredients = new ArrayList<>();
         setScrollViewElements();
         sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Home");
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),EnterpriseHomeActivity.class));
+            }
+        });
     }
 
 

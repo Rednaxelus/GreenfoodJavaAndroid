@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.greenfoodjava.R;
 
+import androidx.appcompat.widget.Toolbar;
 import database.EnterpriseTable;
 import database.UserTable;
 
@@ -28,6 +30,16 @@ public class LoginActivity extends Activity {
         enterpriseTable = new EnterpriseTable(this);
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         this.userId = -1;
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Registration");
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),UserRegistrationActivity.class));
+            }
+        });
     }
 
     public void goBack(View view) {

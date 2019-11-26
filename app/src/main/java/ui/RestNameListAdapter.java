@@ -20,8 +20,8 @@ public class RestNameListAdapter extends ResourceCursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
 
         if (mode == 0) {
-            TextView restaurantName = view.findViewById(R.id.product_name);
-            TextView restaurantPhone = view.findViewById(R.id.product_price);
+            TextView restaurantName = view.findViewById(R.id.dish_name);
+            TextView restaurantPhone = view.findViewById(R.id.dish_price);
             TextView restaurantAddress = view.findViewById(R.id.restaurant_address);
 
             String name = cursor.getString(cursor.getColumnIndex("name"));
@@ -32,8 +32,8 @@ public class RestNameListAdapter extends ResourceCursorAdapter {
             restaurantPhone.setText(String.valueOf(phone));
             restaurantAddress.setText(address);
         } else {
-            TextView productName = view.findViewById(R.id.product_name);
-            TextView productPrice = view.findViewById(R.id.product_price);
+            TextView productName = view.findViewById(R.id.dish_name);
+            TextView productPrice = view.findViewById(R.id.dish_price);
             TextView productStock = view.findViewById(R.id.product_stock);
 
             String name = cursor.getString(cursor.getColumnIndex("name"));

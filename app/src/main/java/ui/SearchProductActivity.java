@@ -46,8 +46,8 @@ public class SearchProductActivity extends Activity {
             error.setVisibility(View.VISIBLE);
             listView.setAdapter(new RestNameListAdapter(this, R.layout.product_name_template, null, 0, 1));
         } else {
-            Cursor restaurants = productTable.searchByName(query);
-            RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.product_name_template, restaurants, 0, 1);
+            Cursor cursor = productTable.searchByName(query);
+            RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.product_name_template, cursor, 0, 1);
             listView.setAdapter(adapter);
         }
     }

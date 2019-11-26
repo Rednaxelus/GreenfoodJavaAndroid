@@ -11,9 +11,10 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.greenfoodjava.R;
 
-import androidx.appcompat.widget.Toolbar;
 import database.EnterpriseTable;
 
 public class RestaurantNameSearchActivity extends Activity {
@@ -36,7 +37,7 @@ public class RestaurantNameSearchActivity extends Activity {
 
         TextView error = findViewById(R.id.errorLabel);
         error.setVisibility(View.INVISIBLE);
-        TextView label = findViewById(R.id.restaurant_name_label);
+        TextView label = findViewById(R.id.diet_label);
         SearchView searchView = findViewById(R.id.searchView);
         restaurantSearchQuery(String.valueOf(searchView.getQuery()));
     }
@@ -51,7 +52,7 @@ public class RestaurantNameSearchActivity extends Activity {
             listView.setAdapter(new RestNameListAdapter(this, R.layout.restaurant_name_template, null, 0, 0));
         }else {
             Cursor restaurants = enterpriseTable.searchByRestaurantName(query);
-            TextView label = findViewById(R.id.restaurant_name_label);
+            TextView label = findViewById(R.id.diet_label);
             RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.restaurant_name_template, restaurants, 0, 0);
             listView.setAdapter(adapter);
         }

@@ -56,6 +56,10 @@ public class SearchDishActivity extends Activity {
         }
     }
 
+    public void gotToFilterDishesActivity(View view) {
+        startActivity(new Intent(this, FilterDishesActivity.class));
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,7 +72,7 @@ public class SearchDishActivity extends Activity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),EnterpriseHomeActivity.class));
+                startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
             }
         });
     }

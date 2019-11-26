@@ -102,7 +102,7 @@
         app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <TextView
-        android:id="@+id/restaurant_name_label"
+        android:id="@+id/diet_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"

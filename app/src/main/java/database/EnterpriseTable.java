@@ -4,13 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class EnterpriseTable extends SQLiteOpenHelper {
+public class EnterpriseTable extends Table {
 
     private static final String TABLE_NAME = "enterprise";
     private static final String ID = "ID";
@@ -41,12 +40,6 @@ public class EnterpriseTable extends SQLiteOpenHelper {
                 + DESCRIPTION + " TEXT DEFAULT ' ', " + PHONE_NUMBER + " TEXT DEFAULT ' ', "
                 + ADDRESS + " TEXT DEFAULT ' ', " +  TYPE + " TEXT DEFAULT ' ')";
         db.execSQL(createTable);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
     }
 
 
@@ -113,17 +106,6 @@ public class EnterpriseTable extends SQLiteOpenHelper {
 
         data.close();
         return id;
-    }
-
-    public int count() {
-        SQLiteDatabase sqlDB = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME ;
-        Cursor data = sqlDB.rawQuery(query, null);
-        data.moveToFirst();
-        System.out.println(data.getCount());
-        int res = data.getCount();
-        data.close();
-        return res;
     }
 
     public Cursor searchByRestaurantName(String search){

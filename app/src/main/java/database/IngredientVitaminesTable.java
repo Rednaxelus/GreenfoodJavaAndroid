@@ -4,15 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Ingredient;
 import model.Vitamin;
 
-public class IngredientVitaminesTable extends SQLiteOpenHelper {
+public class IngredientVitaminesTable extends Table {
 
     private static final String TABLE_NAME = "ingredient_vitamines";
     private static final String ID = "ID";
@@ -36,12 +34,6 @@ public class IngredientVitaminesTable extends SQLiteOpenHelper {
                 "  FOREIGN KEY(" + ID_INGREDIENT + ") REFERENCES ingredient(id))";
         db.execSQL(createTable);
 
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
     }
 
     public boolean addTuple(int idIngredient, List<String> vitamines) {

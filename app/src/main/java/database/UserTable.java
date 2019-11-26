@@ -4,14 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 
-public class UserTable extends SQLiteOpenHelper {
+public class UserTable extends Table {
 
     private static final String TABLE_NAME = "users";
     private static final String ID = "ID";
@@ -37,11 +36,6 @@ public class UserTable extends SQLiteOpenHelper {
         db.execSQL(createTable);
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
-    }
 
     /**
      * New entry in user table.
@@ -100,14 +94,4 @@ public class UserTable extends SQLiteOpenHelper {
         return number.toString(32);
     }
 
-    public int count() {
-        SQLiteDatabase sqlDB = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME ;
-        Cursor data = sqlDB.rawQuery(query, null);
-        data.moveToFirst();
-        System.out.println(data.getCount());
-        int res = data.getCount();
-        data.close();
-        return res;
-    }
 }

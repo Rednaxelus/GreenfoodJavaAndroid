@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,7 @@ import java.util.List;
 import model.Dish;
 import model.Ingredient;
 
-public class DishTable extends SQLiteOpenHelper {
+public class DishTable extends Table {
 
     private static final String TABLE_NAME = "DISH";
     private static final String ID = "ID";
@@ -37,12 +36,6 @@ public class DishTable extends SQLiteOpenHelper {
                 + NAME + " TEXT DEFAULT ' '," + PRICE + " DOUBLE,"
                 + " FOREIGN KEY(" + ID_ENTERPRISE + ") REFERENCES enterprise(id)) ";
         db.execSQL(createTable);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
     }
 
     public boolean addDish(String name, double price, List<Ingredient> ingredients, int idEnterprise) {

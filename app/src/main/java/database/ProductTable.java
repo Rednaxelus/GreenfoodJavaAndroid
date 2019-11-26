@@ -4,14 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Ingredient;
 
-public class ProductTable extends SQLiteOpenHelper {
+public class ProductTable extends Table {
 
     private static final String TABLE_NAME = "product";
     private static final String ID = "ID";
@@ -40,12 +39,6 @@ public class ProductTable extends SQLiteOpenHelper {
                 + " FOREIGN KEY(" + ID_ENTERPRISE + ") REFERENCES enterprise(id)) ";
         db.execSQL(createTable);
 
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
     }
 
     public boolean addProduct(String name, String description, double price, int stock,

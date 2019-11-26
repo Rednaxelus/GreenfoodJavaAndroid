@@ -51,8 +51,8 @@ public class IngredientAllergyTable extends Table {
         return true;
     }
 
-    public List<Allergy> getAllergiesOfIngredient(int idIngredient) {
-        List<Allergy> allergies = new ArrayList<>();
+    public ArrayList<Allergy> getAllergiesOfIngredient(int idIngredient) {
+        ArrayList<Allergy> allergies = new ArrayList<>();
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_INGREDIENT + " = " + idIngredient;
         Cursor data = sqlDB.rawQuery(query, null);

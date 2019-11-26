@@ -63,4 +63,8 @@ public class DishIngredientTable extends Table {
         data.close();
         return ingredients;
     }
+
+    public IngredientTable getDbIngredient() {
+        return dbIngredient;
+    }
 }

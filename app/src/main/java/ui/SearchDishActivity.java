@@ -51,6 +51,7 @@ public class SearchDishActivity extends Activity {
             listView.setAdapter(new RestNameListAdapter(this, R.layout.dish_name_template, null, 0, 1));
         } else {
             Cursor cursor = dishTable.searchByName(query);
+            //System.out.println("Allergiesssss" + dishTable.getAllergiesOfDish(cursor.getInt(0)));
             RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.dish_name_template, cursor, 0, 1);
             listView.setAdapter(adapter);
         }

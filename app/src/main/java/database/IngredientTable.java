@@ -13,7 +13,7 @@ import model.Ingredient;
 public class IngredientTable extends Table {
 
     private static final String TABLE_NAME = "ingredient";
-    private static final String ID = "ID";
+    private static final String ID = "ID";  // the ids start with 1 and not 0?
     private static final String NAME = "name";
     private static final String AMOUNT = "amount";
     private static final String ENERGETIC_VALUE = "energetic_value";
@@ -22,8 +22,8 @@ public class IngredientTable extends Table {
     private static final String CARBOHYDRATES = "carbohydrates";
     private static final String FIBER = "fiber";
     private static final String FAT = "fat";
-    IngredientVitaminesTable dbIngredientVitamine;
-    IngredientAllergyTable dbIngredientAllergy;
+    private IngredientVitaminesTable dbIngredientVitamine;
+    private IngredientAllergyTable dbIngredientAllergy;
 
     public IngredientTable(Context context) {
 
@@ -52,6 +52,7 @@ public class IngredientTable extends Table {
         addIngredient("Pescado", 3, 23, 34,
                 23, 23, 12, 3,  vitamines, allergy);
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -135,5 +136,9 @@ public class IngredientTable extends Table {
                     data.getInt(7), data.getInt(8));
         data.close();
         return in;
+    }
+
+    public IngredientAllergyTable getDbIngredientAllergy() {
+        return dbIngredientAllergy;
     }
 }

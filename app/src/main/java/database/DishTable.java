@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Allergy;
 import model.Dish;
 import model.Ingredient;
 
@@ -24,8 +25,11 @@ public class DishTable extends Table {
         super(context, TABLE_NAME, null, 2);
         dbPlateIngredient = new DishIngredientTable(context);
 
+        ArrayList<Ingredient> temp = new ArrayList<>();
 
-        addDish("String name", 22, new ArrayList<Ingredient>(), 0);
+        temp.add(dbPlateIngredient.getDbIngredient().getIngredient("Pipas"));
+
+        addDish("Pizza Picante", 16, temp, 0);
 
     }
 
@@ -65,8 +69,8 @@ public class DishTable extends Table {
         if (data.getCount() == 0) return dishes;
         while (data.moveToNext()) {
             System.out.println(data.getString(3));
-            dishes.add(new Dish(data.getInt(0),data.getString(2),
-                    data.getDouble(3),dbPlateIngredient.getIngredientsOf(data.getInt(1))));
+            dishes.add(new Dish(data.getInt(0), data.getString(2),
+                    data.getDouble(3), dbPlateIngredient.getIngredientsOf(data.getInt(1))));
         }
         data.close();
         //dishes.add(new Dish(1, "Macarrones con tomate", 12, null));
@@ -81,6 +85,23 @@ public class DishTable extends Table {
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
         return data;
+    }
+
+    public ArrayList<Allergy> getAllergiesOfDish(int id) {
+
+        ArrayList<Allergy> allergies = new ArrayList<>();
+
+        for (Ingredient ingredient :
+                dbPlateIngredient.getIngredientsOf(id)) {
+            ArrayList<Allergy> result = dbPlateIngredient.getDbIngredient().getDbIngredientAllergy().getAllergiesOfIngredient(ingredient.getId());
+            for (Allergy allergy :
+                    result) {
+                if (!allergies.contains(allergy)) {
+                    allergies.add(allergy);
+                }
+            }
+        }
+        return allergies;
     }
 
 }

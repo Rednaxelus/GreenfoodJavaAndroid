@@ -26,4 +26,9 @@
     <string name="search">Search</string>
     <string name="type_the_name">Type the name...</string>
     <string name="search_for_dishes">Search for Dishes</string>
+    <string-array name="Diets">
+        <item>All</item>
+        <item>Vegetarian</item>
+        <item>Vegan</item>
+    </string-array>
 </resources>

@@ -14,6 +14,23 @@
     tools:visibility="visible">
 
 
+    <TextView
+        android:id="@+id/allergy_label"
+        android:layout_width="63dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Allergies"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/spinner"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:visibility="visible" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -41,61 +58,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="334dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:inputType="text"
-        android:queryHint="Type dish name..."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
-
-    </SearchView>
-
-    <ListView
-        android:id="@+id/nameSearchList"
-        android:layout_width="338dp"
-        android:layout_height="380dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.26"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/errorLabel" />
-
     <TextView
-        android:id="@+id/errorLabel"
-        android:layout_width="156dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:text="Restaurants not found"
-        android:textColor="#00F50505"
+        android:id="@+id/diet_label"
+        android:layout_width="63dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginLeft="180dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Diet:"
         android:textSize="16sp"
-        android:visibility="invisible"
+        app:layout_constraintEnd_toStartOf="@+id/spinner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:visibility="visible" />
 
-    <TextView
-        android:id="@+id/restaurant_name_label"
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="132dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginRight="27dp"
+        android:entries="@array/Diets"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:text=" Name        Price"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/nameSearchList"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:visibility="invisible" />
+        android:text="Milk"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="397dp" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Peanuts"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="436dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

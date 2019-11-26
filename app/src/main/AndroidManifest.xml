@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.greenfoodjava">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,42 +11,41 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name="ui.UserRegistrationActivity"></activity>
+        <activity
+            android:name="ui.SeeRecipesActivity"
+            android:label="SeeRecipes"></activity>
         <activity
             android:name="ui.SeeDishesActivity"
-            android:label="SeeDishes">
-        </activity>
+            android:label="SeeDishes"></activity>
         <activity
             android:name="ui.CreateDishActivity"
-            android:label="CreateDish">
-        </activity>
+            android:label="CreateDish"></activity>
         <activity
             android:name="ui.CreateProductActivity"
-            android:label="CreateProduct">
-        </activity>
+            android:label="CreateProduct"></activity>
         <activity
             android:name="ui.EnterpriseRegistrationActivity"
-            android:label="@string/title_activity_enterprise_register">
-        </activity>
+            android:label="@string/title_activity_enterprise_register"></activity>
         <activity
             android:name="ui.EnterpriseHomeActivity"
-            android:label="EnterpriseHome">
-        </activity>
+            android:label="EnterpriseHome"></activity>
         <activity
             android:name="ui.UserHomeActivity"
-            android:label="UserHome">
-        </activity>
+            android:label="UserHome"></activity>
         <activity
             android:name="ui.LoginActivity"
-            android:label="Login">
-        </activity>
+            android:label="Login"></activity>
         <activity
             android:name="ui.RestaurantNameSearchActivity"
             android:label="RestaurantNameSearch">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
         <activity
             android:name="ui.SearchDishActivity"
@@ -53,12 +53,24 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="ui.UserRegistrationActivity"
+            android:name="ui.SearchProductActivity"
+            android:label="SearchProduct">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name="ui.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,15 +2,15 @@ package database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Ingredient;
 
-public class ProductTable extends SQLiteOpenHelper {
+public class ProductTable extends Table {
 
     private static final String TABLE_NAME = "product";
     private static final String ID = "ID";
@@ -22,7 +22,6 @@ public class ProductTable extends SQLiteOpenHelper {
     private ProductIngredientTable dbProductIngredientTable;
 
     public ProductTable(Context context) {
-
         super(context, TABLE_NAME, null, 2);
         dbProductIngredientTable = new ProductIngredientTable(context);
     }
@@ -36,12 +35,6 @@ public class ProductTable extends SQLiteOpenHelper {
                 + " FOREIGN KEY(" + ID_ENTERPRISE + ") REFERENCES enterprise(id)) ";
         db.execSQL(createTable);
 
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
     }
 
     public boolean addProduct(String name, String description, double price, int stock,
@@ -64,6 +57,15 @@ public class ProductTable extends SQLiteOpenHelper {
                 return false;
         }
         return true;
+    }
+
+    public Cursor searchByName(String name) {
+        System.out.println(name);
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT " + TABLE_NAME + ".*," + TABLE_NAME + ".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + name + "%" + "'";
+        Cursor data = sqlDB.rawQuery(query, null);
+        data.moveToFirst();
+        return data;
     }
 }
 

@@ -4,15 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Allergy;
-import model.Vitamin;
 
-public class IngredientAllergyTable extends SQLiteOpenHelper {
+public class IngredientAllergyTable extends Table {
 
     private static final String TABLE_NAME = "ingredient_allergy";
     private static final String ID = "ID";
@@ -38,11 +36,6 @@ public class IngredientAllergyTable extends SQLiteOpenHelper {
 
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
-    }
 
     public boolean addTuple(int idIngredient, List<String> allergies) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();

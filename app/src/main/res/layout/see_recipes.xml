@@ -10,7 +10,7 @@
     android:paddingTop="0dp"
     android:paddingRight="0dp"
     android:paddingBottom="0dp"
-    tools:context="ui.SeeDishesActivity">
+    tools:context="ui.SeeRecipesActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -31,7 +31,7 @@
         android:layout_marginTop="84dp"
         android:layout_marginEnd="130dp"
         android:layout_marginRight="130dp"
-        android:text="Dishes"
+        android:text="Recipes"
         android:textColor="#009688"
         android:textSize="36sp"
         app:fontFamily="casual"

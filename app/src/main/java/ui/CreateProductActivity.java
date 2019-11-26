@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -17,6 +18,7 @@ import com.example.greenfoodjava.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.widget.Toolbar;
 import database.IngredientTable;
 import database.ProductTable;
 import model.Ingredient;
@@ -36,16 +38,26 @@ public class CreateProductActivity extends Activity {
         productIngredients = new ArrayList<>();
         setScrollViewElements();
         sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Home");
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),EnterpriseHomeActivity.class));
+            }
+        });
     }
 
     private void setIngredientErrorInvisible(){
-        //TextView textView = findViewById(R.id.errorMess);
-        //textView.setVisibility(TextView.INVISIBLE);
+        TextView textView = findViewById(R.id.ingredientsErrorLbl);
+        textView.setVisibility(TextView.INVISIBLE);
     }
 
     private void setIngredientErrorVisible(){
-        //TextView textView = findViewById(R.id.errorMess);
-        //textView.setVisibility(TextView.VISIBLE);
+        TextView textView = findViewById(R.id.ingredientsErrorLbl);
+        textView.setVisibility(TextView.VISIBLE);
     }
 
     private void setScrollViewElements() {
@@ -75,10 +87,6 @@ public class CreateProductActivity extends Activity {
             cb.setText(ingredient.getName());
             ll.addView(cb);
         }
-    }
-
-    public void goBack(View view) {
-        startActivity(new Intent(this, EnterpriseHomeActivity.class));
     }
 
     public void createProduct(View view) {

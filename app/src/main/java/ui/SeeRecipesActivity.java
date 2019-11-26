@@ -16,18 +16,18 @@ import com.example.greenfoodjava.R;
 import java.util.List;
 
 import androidx.appcompat.widget.Toolbar;
-import database.DishTable;
-import model.Dish;
+import database.RecipeTable;
+import model.Recipe;
 
-public class SeeDishesActivity extends Activity {
-    private DishTable dishTable;
+public class SeeRecipesActivity extends Activity {
+    private RecipeTable recipeTable;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.see_dishes);
-        dishTable = new DishTable(this);
-        showDishes();
+        setContentView(R.layout.see_recipes);
+        recipeTable = new RecipeTable(this);
+        showRecipes();
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
@@ -40,27 +40,28 @@ public class SeeDishesActivity extends Activity {
         });
     }
 
-    private void showDishes() {
+    private void showRecipes() {
         SharedPreferences sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-        List<Dish> dishes = getDishesForEnterprise(sharedpreferences.getInt("id",-1));
-        setScrollViewElements(dishes);
+        List<Recipe> recipes = getRecipiesForUser(sharedpreferences.getInt("id",-1));
+        setScrollViewElements(recipes);
     }
 
-    private List<Dish> getDishesForEnterprise(int enterpriseId) {
-        return dishTable.getDishes(enterpriseId);
+    private List<Recipe> getRecipiesForUser(int userId) {
+        System.out.println("user id = " + userId);
+        return recipeTable.getRecipes(userId);
     }
 
-    private void setScrollViewElements(List<Dish> dishes) {
+    private void setScrollViewElements(List<Recipe> recipes) {
         ScrollView scrollView = findViewById(R.id.scroll);
         final LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
         scrollView.addView(ll);
 
-        if (dishes.size() == 0){
-            ll.addView(createTextView("You haven't created a dish yet"));
+        if (recipes.size() == 0){
+            ll.addView(createTextView("You haven't created a recipe yet"));
         }else{
-            for (Dish dish : dishes)
-                ll.addView(createTextView(dish.getName() + " - " + dish.getPrice() + "€"));
+            for (Recipe recipe : recipes)
+                ll.addView(createTextView(recipe.getName() + ": " + recipe.getDescription()));
         }
     }
 
@@ -70,9 +71,4 @@ public class SeeDishesActivity extends Activity {
         line.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
         return line;
     }
-
-    public void goBack(View view) {
-        startActivity(new Intent(this, EnterpriseHomeActivity.class));
-    }
-
 }

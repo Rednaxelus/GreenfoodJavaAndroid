@@ -2,14 +2,16 @@ package database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Ingredient;
+import model.Recipe;
 
-public class RecipeTable extends SQLiteOpenHelper {
+public class RecipeTable extends Table {
 
     private static final String TABLE_NAME = "recipe";
     private static final String ID = "ID";
@@ -37,12 +39,6 @@ public class RecipeTable extends SQLiteOpenHelper {
         db.execSQL(createTable);
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
-    }
-
     public boolean addRecipe(int idUser, String name, String description, int duration,
                              String steps, String photo, List<Ingredient> ingredients) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
@@ -63,5 +59,19 @@ public class RecipeTable extends SQLiteOpenHelper {
                 return false;
         }
         return true;
+    }
+
+    public List<Recipe> getRecipes(int userId) {
+        List<Recipe> recipes = new ArrayList<>();
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_USER + " = " + userId;
+        Cursor data = sqlDB.rawQuery(query, null);
+        if (data.getCount() == 0) return recipes;
+        while (data.moveToNext()) {
+            recipes.add(new Recipe(data.getInt(1),data.getString(2),
+                    data.getString(3), data.getString(5), data.getInt(4), dbRecipeIngredient.getIngredientsOf(data.getInt(0))));
+        }
+        data.close();
+        return recipes;
     }
 }

@@ -3,6 +3,7 @@ package ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.greenfoodjava.R;
 
+import androidx.appcompat.widget.Toolbar;
 import database.EnterpriseTable;
 
 public class RestaurantNameSearchActivity extends Activity {
@@ -60,5 +62,15 @@ public class RestaurantNameSearchActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant_name_search);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Home");
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),UserHomeActivity.class));
+            }
+        });
     }
 }

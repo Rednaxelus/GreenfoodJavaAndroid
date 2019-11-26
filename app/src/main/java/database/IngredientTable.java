@@ -4,14 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Ingredient;
 
-public class IngredientTable extends SQLiteOpenHelper {
+public class IngredientTable extends Table {
 
     private static final String TABLE_NAME = "ingredient";
     private static final String ID = "ID";
@@ -66,11 +65,6 @@ public class IngredientTable extends SQLiteOpenHelper {
 
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
-    }
 
     public boolean addIngredient(String name, int amount, double energeticValue, double calories,
                                  double proteins, double carbohydrates, double fiber, double fat,
@@ -93,16 +87,6 @@ public class IngredientTable extends SQLiteOpenHelper {
         System.out.println(allergies.toArray()[0]);
         return dbIngredientVitamine.addTuple((int) result,vitamines) &&
                 dbIngredientAllergy.addTuple((int) result,allergies);
-    }
-
-    public int count() {
-        SQLiteDatabase sqlDB = this.getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME;
-        Cursor data = sqlDB.rawQuery(query, null);
-        data.moveToFirst();
-        int res = data.getCount();
-        data.close();
-        return res;
     }
 
     public List<Ingredient> getIngredients() {

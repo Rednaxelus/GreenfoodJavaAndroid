@@ -4,15 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Ingredient;
-import model.Vitamin;
 
-public class DishIngredientTable extends SQLiteOpenHelper {
+public class DishIngredientTable extends Table {
 
     private static final String TABLE_NAME = "dish_ingredient";
     private static final String ID = "ID";

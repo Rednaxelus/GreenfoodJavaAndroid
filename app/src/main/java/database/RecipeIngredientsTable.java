@@ -4,13 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import model.Ingredient;
 
-public class RecipeIngredientsTable extends SQLiteOpenHelper {
+public class RecipeIngredientsTable extends Table {
 
     private static final String TABLE_NAME = "recipe_ingredient";
     private static final String ID = "ID";
@@ -34,11 +34,6 @@ public class RecipeIngredientsTable extends SQLiteOpenHelper {
 
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
-    }
 
     public boolean addTuple(int idRecipe, int idIngredient) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();

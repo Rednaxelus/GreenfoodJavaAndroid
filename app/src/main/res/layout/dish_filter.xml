@@ -10,25 +10,9 @@
     android:paddingTop="0dp"
     android:paddingRight="0dp"
     android:paddingBottom="0dp"
-    tools:context="ui.SearchDishActivity"
+    tools:context="ui.FilterDishesActivity"
     tools:visibility="visible">
 
-
-    <Button
-        android:id="@+id/filter_button"
-        android:layout_width="99dp"
-        android:layout_height="51dp"
-        android:layout_gravity="start"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
-        android:background="@drawable/buttonshape"
-        android:enabled="true"
-        android:onClick="gotToFilterDishesActivity"
-        android:text="Filter"
-        android:textColor="#3F51B5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -37,7 +21,8 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
     <TextView
@@ -47,7 +32,7 @@
         android:layout_marginTop="37dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="Greenfood-Dish"
+        android:text="Greenfood-Dish-filters"
         android:textColor="#009688"
         android:textSize="36sp"
         app:fontFamily="casual"
@@ -72,23 +57,6 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
     </SearchView>
-
-    <Button
-        android:id="@+id/search_restaurant_name"
-        android:layout_width="99dp"
-        android:layout_height="51dp"
-        android:layout_gravity="start"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginRight="136dp"
-        android:background="@drawable/buttonshape"
-        android:enabled="true"
-        android:onClick="searchRestaurantName"
-        android:text="@string/search"
-        android:textColor="#3F51B5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
-        tools:text="Search" />
 
     <ListView
         android:id="@+id/nameSearchList"

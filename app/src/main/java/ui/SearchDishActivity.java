@@ -11,9 +11,10 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.greenfoodjava.R;
 
-import androidx.appcompat.widget.Toolbar;
 import database.DishTable;
 
 public class SearchDishActivity extends Activity {
@@ -55,6 +56,10 @@ public class SearchDishActivity extends Activity {
         }
     }
 
+    public void gotToFilterDishesActivity(View view) {
+        startActivity(new Intent(this, FilterDishesActivity.class));
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +72,7 @@ public class SearchDishActivity extends Activity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),EnterpriseHomeActivity.class));
+                startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
             }
         });
     }

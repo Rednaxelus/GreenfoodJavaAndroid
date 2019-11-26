@@ -38,11 +38,11 @@ public class SearchDishActivity extends Activity {
         TextView error = findViewById(R.id.errorLabel);
         error.setVisibility(View.INVISIBLE);
         SearchView searchView = findViewById(R.id.searchView);
-        restaurantSearchQuery(String.valueOf(searchView.getQuery()));
+        searchQuery(String.valueOf(searchView.getQuery()));
     }
 
 
-    private void restaurantSearchQuery(String query) {
+    private void searchQuery(String query) {
         DishTable dishTable = new DishTable(this);
         ListView listView = findViewById(R.id.nameSearchList);
         if (query.equals("")) {
@@ -50,8 +50,8 @@ public class SearchDishActivity extends Activity {
             error.setVisibility(View.VISIBLE);
             listView.setAdapter(new RestNameListAdapter(this, R.layout.dish_name_template, null, 0, 1));
         } else {
-            Cursor restaurants = dishTable.searchByName(query);
-            RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.dish_name_template, restaurants, 0, 1);
+            Cursor cursor = dishTable.searchByName(query);
+            RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.dish_name_template, cursor, 0, 1);
             listView.setAdapter(adapter);
         }
     }

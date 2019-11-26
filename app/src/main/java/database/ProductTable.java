@@ -22,12 +22,8 @@ public class ProductTable extends Table {
     private ProductIngredientTable dbProductIngredientTable;
 
     public ProductTable(Context context) {
-
         super(context, TABLE_NAME, null, 2);
         dbProductIngredientTable = new ProductIngredientTable(context);
-
-        addProduct("Mayonnaise Delish", "String description", 30, 2,
-                new ArrayList<Ingredient>(), 0);
     }
 
     @Override

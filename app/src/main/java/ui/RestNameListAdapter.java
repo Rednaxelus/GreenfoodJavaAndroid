@@ -20,8 +20,8 @@ public class RestNameListAdapter extends ResourceCursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
 
         if (mode == 0) {
-            TextView restaurantName = view.findViewById(R.id.restaurant_name);
-            TextView restaurantPhone = view.findViewById(R.id.restaurant_phone);
+            TextView restaurantName = view.findViewById(R.id.product_name);
+            TextView restaurantPhone = view.findViewById(R.id.product_price);
             TextView restaurantAddress = view.findViewById(R.id.restaurant_address);
 
             String name = cursor.getString(cursor.getColumnIndex("name"));
@@ -32,14 +32,17 @@ public class RestNameListAdapter extends ResourceCursorAdapter {
             restaurantPhone.setText(String.valueOf(phone));
             restaurantAddress.setText(address);
         } else {
-            TextView restaurantName = view.findViewById(R.id.restaurant_name);
-            TextView restaurantPhone = view.findViewById(R.id.restaurant_phone);
+            TextView productName = view.findViewById(R.id.product_name);
+            TextView productPrice = view.findViewById(R.id.product_price);
+            TextView productStock = view.findViewById(R.id.product_stock);
 
             String name = cursor.getString(cursor.getColumnIndex("name"));
-            double phone = cursor.getDouble(cursor.getColumnIndex("price"));
-            // Populate fields with extracted properties
-            restaurantName.setText(name);
-            restaurantPhone.setText(String.valueOf(phone));
+            double price = cursor.getDouble(cursor.getColumnIndex("price"));
+            double stock = cursor.getDouble(cursor.getColumnIndex("stock"));
+
+            productName.setText(name);
+            productPrice.setText(String.valueOf(price));
+            productStock.setText(String.valueOf(stock));
         }
 
     }

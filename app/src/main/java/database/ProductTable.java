@@ -2,6 +2,7 @@ package database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -25,6 +26,9 @@ public class ProductTable extends SQLiteOpenHelper {
 
         super(context, TABLE_NAME, null, 2);
         dbProductIngredientTable = new ProductIngredientTable(context);
+
+        addProduct("Mayonnaise Delish", "String description", 30, 2,
+                new ArrayList<Ingredient>(), 0);
     }
 
     @Override
@@ -64,6 +68,15 @@ public class ProductTable extends SQLiteOpenHelper {
                 return false;
         }
         return true;
+    }
+
+    public Cursor searchByName(String name) {
+        System.out.println(name);
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT " + TABLE_NAME + ".*," + TABLE_NAME + ".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + name + "%" + "'";
+        Cursor data = sqlDB.rawQuery(query, null);
+        data.moveToFirst();
+        return data;
     }
 }
 

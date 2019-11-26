@@ -1,9 +1,7 @@
 package ui;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -42,14 +40,8 @@ public class FilterDishesActivity extends Activity {
         });
     }
 
-    private void showDishes() {
-        SharedPreferences sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-        List<Dish> dishes = getDishesForEnterprise(sharedpreferences.getInt("id", -1));
-        setScrollViewElements(dishes);
-    }
-
-    private List<Dish> getDishesForEnterprise(int enterpriseId) {
-        return dishTable.getDishes(enterpriseId);
+    public void gotToSearchDishesActivity(View view) {
+        startActivity(new Intent(this, SearchDishActivity.class));
     }
 
     private void setScrollViewElements(List<Dish> dishes) {

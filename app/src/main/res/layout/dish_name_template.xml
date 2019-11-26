@@ -18,4 +18,12 @@
         android:layout_marginLeft="10dp"
         android:text="Price"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/dish_diet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="Diet"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 </LinearLayout>

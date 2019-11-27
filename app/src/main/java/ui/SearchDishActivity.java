@@ -2,11 +2,11 @@ package ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -19,12 +19,15 @@ import java.util.ArrayList;
 
 import database.DishTable;
 import model.Allergy;
+import model.Diet;
+import model.Dish;
 
 public class SearchDishActivity extends Activity {
 
 
     private static final int GET_FILTER_REQUEST = 0;
-    ArrayList<Allergy> allergyFilter = null;
+    private ArrayList<Allergy> allergyFilter = null;
+    private Diet dietFilter = Diet.ALL;
 
     public void goBack(View view) {
         startActivity(new Intent(this, UserHomeActivity.class));
@@ -56,15 +59,14 @@ public class SearchDishActivity extends Activity {
             error.setVisibility(View.VISIBLE);
             listView.setAdapter(new RestNameListAdapter(this, R.layout.dish_name_template, null, 0, 1));
         } else {
-            Cursor cursor;
-            if (allergyFilter == null) {
-                cursor = dishTable.searchByName(query);
-            } else {
-                cursor = dishTable.searchByNameAndFilter(query, allergyFilter);
+            ArrayList<Dish> dishes = dishTable.searchByNameAndFilter(query, allergyFilter, dietFilter);
+
+            ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+            for (Dish dish : dishes
+            ) {
+                stringArrayAdapter.add(dish.getName() + " " + dish.getPrice() + " ");
             }
-            //System.out.println("Allergiesssss" + dishTable.getAllergiesOfDish(cursor.getInt(0)));
-            RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.dish_name_template, cursor, 0, 1);
-            listView.setAdapter(adapter);
+            listView.setAdapter(stringArrayAdapter);
         }
     }
 
@@ -78,6 +80,7 @@ public class SearchDishActivity extends Activity {
         if (requestCode == GET_FILTER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 allergyFilter = (ArrayList<Allergy>) data.getSerializableExtra("Allergies");
+                dietFilter = (Diet) data.getSerializableExtra("Diet");
             }
         }
     }

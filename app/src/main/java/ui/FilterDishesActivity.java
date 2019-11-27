@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Spinner;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 
 import database.DishTable;
 import model.Allergy;
+import model.Diet;
 
 public class FilterDishesActivity extends Activity {
     private DishTable dishTable;
@@ -39,8 +41,24 @@ public class FilterDishesActivity extends Activity {
     public void gotToSearchDishesActivity(View view) {
         Intent replyIntent = new Intent(this, SearchDishActivity.class);
         replyIntent.putExtra("Allergies", getSelectedAllergiesList());
+        replyIntent.putExtra("Diet", getSelectedDiet());
         setResult(RESULT_OK, replyIntent);
         finish();
+    }
+
+    public Diet getSelectedDiet() {
+        int result = ((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition();
+        switch (result) {
+            case 0:
+                return Diet.ALL;
+            case 1:
+                return Diet.VEGETARIAN;
+            case 2:
+                return Diet.VEGAN;
+            default:
+                return Diet.ALL;
+        }
+
     }
 
     public ArrayList<Allergy> getSelectedAllergiesList() {

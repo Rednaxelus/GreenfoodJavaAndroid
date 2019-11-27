@@ -78,7 +78,7 @@ public class ProductTable extends Table {
         if (data.getCount() == 0) return products;
         while (data.moveToNext()) {
             System.out.println(data.getString(3));
-            products.add(new Product(data.getInt(0)+"", data.getString(2),
+            products.add(new Product(data.getInt(0), data.getString(2),
                     data.getString(3), data.getDouble(4), data.getInt(5),
                     dbProductIngredientTable.getIngredientsOf(data.getInt(1))));
         }

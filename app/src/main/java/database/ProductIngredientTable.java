@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Ingredient;
 
@@ -17,7 +18,6 @@ public class ProductIngredientTable extends Table {
     private IngredientTable dbIngredient;
 
     public ProductIngredientTable(Context context) {
-
         super(context, TABLE_NAME, null, 1);
         dbIngredient = new IngredientTable(context);
     }
@@ -56,6 +56,4 @@ public class ProductIngredientTable extends Table {
         data.close();
         return ingredients;
     }
-
-
 }

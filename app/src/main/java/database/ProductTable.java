@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Dish;
 import model.Ingredient;
 import model.Product;
 
@@ -84,6 +83,12 @@ public class ProductTable extends Table {
         }
         data.close();
         return products;
+    }
+
+    public void deleteFromDatabase(Product product) {
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "DELETE FROM "+ TABLE_NAME + " WHERE " + ID + " = " + product.getID();
+        sqlDB.execSQL(query);
     }
 }
 

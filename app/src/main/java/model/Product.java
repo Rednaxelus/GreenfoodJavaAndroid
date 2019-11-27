@@ -24,4 +24,8 @@ public class Product {
     public double getPrice() {
         return price;
     }
+
+    public int getID() {
+        return ID;
+    }
 }

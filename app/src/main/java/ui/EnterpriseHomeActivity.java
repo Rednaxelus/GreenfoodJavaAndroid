@@ -25,4 +25,8 @@ public class EnterpriseHomeActivity extends Activity {
     public void gotToCreateProductActivity(View view) {
         startActivity(new Intent(this, CreateProductActivity.class));
     }
+
+    public void goToSeeProductActivity(View view) {
+        startActivity(new Intent(this, SeeProductsActivity.class));
+    }
 }

@@ -11,23 +11,24 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
+import androidx.appcompat.widget.Toolbar;
 import com.example.greenfoodjava.R;
 import java.util.List;
-
-import androidx.appcompat.widget.Toolbar;
-import database.DishTable;
+import database.ProductTable;
 import model.Dish;
+import model.Product;
 
-public class SeeDishesActivity extends Activity {
-    private DishTable dishTable;
+public class SeeProductsActivity extends Activity {
+    private ProductTable productTable;
+    private SharedPreferences sharedpreferences;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.see_dishes);
-        dishTable = new DishTable(this);
-        showDishes();
+        setContentView(R.layout.see_products);
+        productTable = new ProductTable(this);
+        showProducts();
+        sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
@@ -40,27 +41,27 @@ public class SeeDishesActivity extends Activity {
         });
     }
 
-    private void showDishes() {
+    private void showProducts() {
         SharedPreferences sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-        List<Dish> dishes = getDishesForEnterprise(sharedpreferences.getInt("id",-1));
-        setScrollViewElements(dishes);
+        List<Product> products = getDishesForEnterprise(sharedpreferences.getInt("id",-1));
+        setScrollViewElements(products);
     }
 
-    private List<Dish> getDishesForEnterprise(int enterpriseId) {
-        return dishTable.getDishes(enterpriseId);
+    private List<Product> getDishesForEnterprise(int enterpriseId) {
+        return productTable.getProducts(enterpriseId);
     }
 
-    private void setScrollViewElements(List<Dish> dishes) {
+    private void setScrollViewElements(List<Product> products) {
         ScrollView scrollView = findViewById(R.id.scroll);
         final LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
         scrollView.addView(ll);
 
-        if (dishes.size() == 0){
-            ll.addView(createTextView("You haven't created a dish yet"));
+        if (products.size() == 0){
+            ll.addView(createTextView("You haven't created a product yet"));
         }else{
-            for (Dish dish : dishes)
-                ll.addView(createTextView(dish.getName() + " - " + dish.getPrice() + "€"));
+            for (Product product : products)
+                ll.addView(createTextView(product.getName() + " - " + product.getPrice() + "€"));
         }
     }
 
@@ -70,9 +71,4 @@ public class SeeDishesActivity extends Activity {
         line.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
         return line;
     }
-
-    public void goBack(View view) {
-        startActivity(new Intent(this, EnterpriseHomeActivity.class));
-    }
-
 }

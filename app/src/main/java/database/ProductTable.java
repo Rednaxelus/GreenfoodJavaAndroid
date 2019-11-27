@@ -69,7 +69,6 @@ public class ProductTable extends Table {
         return data;
     }
 
-<<<<<<< HEAD
     public List<Product> getProducts(int enterpriseId) {
         List<Product> products = new ArrayList<>();
         SQLiteDatabase sqlDB = this.getWritableDatabase();
@@ -90,7 +89,8 @@ public class ProductTable extends Table {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "DELETE FROM "+ TABLE_NAME + " WHERE " + ID + " = " + product.getID();
         sqlDB.execSQL(query);
-=======
+    }
+
     public ArrayList<Product> getProductWithName(String query) {
         Cursor data = searchByName(query);
         data.moveToFirst();
@@ -106,7 +106,6 @@ public class ProductTable extends Table {
             data.moveToNext();
         }
         return dishes;
->>>>>>> feature-F0
     }
 }
 

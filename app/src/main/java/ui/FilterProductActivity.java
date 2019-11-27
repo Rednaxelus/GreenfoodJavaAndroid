@@ -26,12 +26,7 @@ public class FilterProductActivity extends Activity {
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goBack(v);
-            }
-        });
+        toolbar.setNavigationOnClickListener(this::goBack);
     }
 
     private Diet getSelectedDiet() {

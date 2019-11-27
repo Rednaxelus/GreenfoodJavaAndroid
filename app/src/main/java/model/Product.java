@@ -1,13 +1,5 @@
 package model;
 
-<<<<<<< HEAD
-import java.util.List;
-
-public class Product {
-    private String name, description;
-    private double price;
-    private int ID, stock;
-=======
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +9,6 @@ public class Product {
     private String description;
     private double price;
     private int stock;
->>>>>>> feature-F0
     private List<Ingredient> ingredients;
 
     public Product(int ID, String name, String description, double price, int stock, List<Ingredient> ingredients) {
@@ -37,11 +28,10 @@ public class Product {
         return price;
     }
 
-<<<<<<< HEAD
     public int getID() {
         return ID;
     }
-=======
+
     public String getDescription() {
         return description;
     }
@@ -80,5 +70,4 @@ public class Product {
         return ingredients;
     }
 
->>>>>>> feature-F0
 }

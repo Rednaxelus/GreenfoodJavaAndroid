@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Ingredient;
+import model.Product;
 
 public class ProductTable extends Table {
 
@@ -66,6 +67,11 @@ public class ProductTable extends Table {
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
         return data;
+    }
+
+    public List<Product> getProducts(int enterpriseId) {
+        List<Product> products = new ArrayList<>();
+        return products;
     }
 }
 

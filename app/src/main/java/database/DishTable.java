@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Allergy;
 import model.Dish;
 import model.Ingredient;
 
@@ -100,27 +99,6 @@ public class DishTable extends Table {
             data.moveToNext();
         }
         return dishes;
-    }
-
-    public ArrayList<Allergy> getAllergiesOfDish(int id) {
-
-        ArrayList<Allergy> allergies = new ArrayList<>();
-
-        for (Ingredient ingredient :
-                dbPlateIngredient.getIngredientsOf(id)) {
-            if (ingredient == null) {
-                System.out.println("no ingredients in dish: " + id);
-                break;
-            }
-            ArrayList<Allergy> result = dbPlateIngredient.getDbIngredient().getDbIngredientAllergy().getAllergiesOfIngredient(ingredient.getId());
-            for (Allergy allergy :
-                    result) {
-                if (!allergies.contains(allergy)) {
-                    allergies.add(allergy);
-                }
-            }
-        }
-        return allergies;
     }
 
 }

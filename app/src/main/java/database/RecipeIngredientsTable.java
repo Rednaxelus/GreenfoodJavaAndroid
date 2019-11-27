@@ -14,13 +14,13 @@ public class RecipeIngredientsTable extends Table {
 
     private static final String TABLE_NAME = "recipe_ingredient";
     private static final String ID = "ID";
-    private static final String ID_RECIPE = "id_ingredient";
+    private static final String ID_RECIPE = "id_recipe";
     private static final String ID_INGREDIENT = "id_ingredient";
     private IngredientTable dbIngredient;
 
     public RecipeIngredientsTable(Context context) {
 
-        super(context, TABLE_NAME, null, 1);
+        super(context, TABLE_NAME, null, 2);
     }
 
     @Override

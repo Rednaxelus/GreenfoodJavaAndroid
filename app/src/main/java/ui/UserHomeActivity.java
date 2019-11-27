@@ -15,8 +15,8 @@ public class UserHomeActivity extends Activity {
         setContentView(R.layout.user_home);
     }
 
-    public void searchRestaurantName(View view) {
-        startActivity(new Intent(this, RestaurantNameSearchActivity.class));
+    public void searchRestaurant(View view) {
+        startActivity(new Intent(this, RestaurantSearchActivity.class));
     }
 
     public void gotToCreateRecipeActivity(View view) {

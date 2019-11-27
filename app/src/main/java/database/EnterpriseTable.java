@@ -130,7 +130,10 @@ public class EnterpriseTable extends Table {
 
         while (!data.isAfterLast()) {
 
-            ArrayList<Dish> dishes = (ArrayList) dbDishTable.getDishes(data.getInt(data.getColumnIndex(ID)));
+            ArrayList<Dish> dishes = new ArrayList<>();
+            if (dbDishTable != null) {
+                dishes = (ArrayList) dbDishTable.getDishes(data.getInt(data.getColumnIndex(ID)));
+            }
             Restaurant restaurant = new Restaurant(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getString(data.getColumnIndex(EMAIL)), data.getString(data.getColumnIndex(NIF)), data.getString(data.getColumnIndex(DESCRIPTION)), data.getString(data.getColumnIndex(PHONE_NUMBER)), data.getString(data.getColumnIndex(ADDRESS)), dishes);
 
             restaurants.add(restaurant);

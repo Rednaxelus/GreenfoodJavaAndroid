@@ -23,7 +23,7 @@ import model.Allergy;
 import model.Diet;
 import model.Restaurant;
 
-public class RestaurantNameSearchActivity extends Activity {
+public class RestaurantSearchActivity extends Activity {
 
     private static final int GET_FILTER_REQUEST = 1;
     private ArrayList<Allergy> allergyFilter = null;
@@ -33,7 +33,7 @@ public class RestaurantNameSearchActivity extends Activity {
         startActivity(new Intent(this, UserHomeActivity.class));
     }
 
-    public void searchRestaurantName(View view) {
+    public void searchRestaurant(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         //Find the currently focused view, so we can grab the correct window token from it.
         //If no view currently has focus, create a new one, just so we can grab a window token from it
@@ -104,7 +104,7 @@ public class RestaurantNameSearchActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.restaurant_name_search);
+        setContentView(R.layout.restaurant_search);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);

@@ -37,8 +37,8 @@
             android:name="ui.LoginActivity"
             android:label="Login"></activity>
         <activity
-            android:name="ui.RestaurantNameSearchActivity"
-            android:label="RestaurantNameSearch">
+            android:name="ui.RestaurantSearchActivity"
+            android:label="RestaurantSearch">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

@@ -10,7 +10,7 @@
     android:paddingTop="0dp"
     android:paddingRight="0dp"
     android:paddingBottom="0dp"
-    tools:context="ui.RestaurantNameSearchActivity"
+    tools:context="ui.RestaurantSearchActivity"
     tools:visibility="visible">
 
     <Button
@@ -23,7 +23,7 @@
         android:layout_marginRight="140dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
-        android:onClick="searchRestaurantName"
+        android:onClick="searchRestaurant"
         android:text="@string/search"
         android:textColor="#3F51B5"
         app:layout_constraintEnd_toEndOf="parent"

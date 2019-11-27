@@ -31,7 +31,6 @@ public class RecipeIngredientsTable extends Table {
                 + " FOREIGN KEY(" + ID_RECIPE + ") REFERENCES recipe(id), "
                 + " FOREIGN KEY(" + ID_INGREDIENT + ") REFERENCES ingredient(id))";
         db.execSQL(createTable);
-
     }
 
 

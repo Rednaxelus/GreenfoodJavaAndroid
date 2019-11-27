@@ -18,7 +18,7 @@ import com.example.greenfoodjava.R;
 import database.ProductTable;
 
 public class SearchProductActivity extends Activity {
-
+    private static final int GET_FILTER_REQUEST = 0;
 
     public void searchProductName(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -52,6 +52,9 @@ public class SearchProductActivity extends Activity {
         }
     }
 
+    public void gotToFilterProductActivity(View view) {
+        startActivityForResult(new Intent(this, FilterProductActivity.class), GET_FILTER_REQUEST);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

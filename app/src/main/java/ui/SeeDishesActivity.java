@@ -35,7 +35,7 @@ public class SeeDishesActivity extends Activity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),UserHomeActivity.class));
+                startActivity(new Intent(getApplicationContext(),EnterpriseHomeActivity.class));
             }
         });
     }

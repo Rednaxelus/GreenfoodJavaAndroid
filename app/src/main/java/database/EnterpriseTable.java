@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+
+import model.Dish;
+import model.Restaurant;
 
 public class EnterpriseTable extends Table {
 
@@ -21,10 +25,12 @@ public class EnterpriseTable extends Table {
     private static final String PHONE_NUMBER = "phoneNumber";
     private static final String ADDRESS = "address";
     private static final String TYPE = "type";
+    private DishTable dbDishTable;
 
 
     public EnterpriseTable(Context context) {
         super(context, TABLE_NAME, null, 2);
+        dbDishTable = DatabaseManager.getDishTable();
         System.out.println(count());
         if (count() == 0)
             addData("test6@h.com", "Rest","13518001G","jjj","kjhfsjsdfkj",
@@ -116,6 +122,22 @@ public class EnterpriseTable extends Table {
         return data;
     }
 
+    public ArrayList<Restaurant> getRestaurantsWithName(String name) {
+        Cursor data = searchByRestaurantName(name);
+        data.moveToFirst();
 
+        ArrayList<Restaurant> restaurants = new ArrayList<>();
+
+        while (!data.isAfterLast()) {
+
+            ArrayList<Dish> dishes = (ArrayList) dbDishTable.getDishes(data.getInt(data.getColumnIndex(ID)));
+            Restaurant restaurant = new Restaurant(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getString(data.getColumnIndex(EMAIL)), data.getString(data.getColumnIndex(NIF)), data.getString(data.getColumnIndex(DESCRIPTION)), data.getString(data.getColumnIndex(PHONE_NUMBER)), data.getString(data.getColumnIndex(ADDRESS)), dishes);
+
+            restaurants.add(restaurant);
+
+            data.moveToNext();
+        }
+        return restaurants;
+    }
 
 }

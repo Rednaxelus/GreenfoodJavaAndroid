@@ -2,11 +2,11 @@ package ui;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -15,10 +15,19 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.greenfoodjava.R;
 
+import java.util.ArrayList;
+import java.util.ListIterator;
+
 import database.EnterpriseTable;
+import model.Allergy;
+import model.Diet;
+import model.Restaurant;
 
 public class RestaurantNameSearchActivity extends Activity {
 
+    private static final int GET_FILTER_REQUEST = 1;
+    private ArrayList<Allergy> allergyFilter = null;
+    private Diet dietFilter = Diet.ALL;
 
     public void goBack(View view) {
         startActivity(new Intent(this, UserHomeActivity.class));
@@ -51,13 +60,46 @@ public class RestaurantNameSearchActivity extends Activity {
             error.setVisibility(View.VISIBLE);
             listView.setAdapter(new RestNameListAdapter(this, R.layout.restaurant_name_template, null, 0, 0));
         }else {
-            Cursor restaurants = enterpriseTable.searchByRestaurantName(query);
-            TextView label = findViewById(R.id.diet_label);
-            RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.restaurant_name_template, restaurants, 0, 0);
-            listView.setAdapter(adapter);
+
+            ArrayList<Restaurant> restaurants = filterRestaurants(enterpriseTable.getRestaurantsWithName(query), allergyFilter, dietFilter);
+
+            ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+            for (Restaurant restaurant : restaurants
+            ) {
+                stringArrayAdapter.add(restaurant.getName() + " " + restaurant.getPhoneNumber() + " " + restaurant.getAddress());
+            }
+            listView.setAdapter(stringArrayAdapter);
         }
     }
 
+    public void gotToFilterRestaurantsActivity(View view) {
+        startActivityForResult(new Intent(this, FilterRestaurantsActivity.class), GET_FILTER_REQUEST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_FILTER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                allergyFilter = (ArrayList<Allergy>) data.getSerializableExtra("Allergies");
+                dietFilter = (Diet) data.getSerializableExtra("Diet");
+            }
+        }
+    }
+
+    private ArrayList<Restaurant> filterRestaurants(ArrayList<Restaurant> restaurants, ArrayList<Allergy> allergies, Diet diet) {
+
+        ListIterator litr = restaurants.listIterator();
+
+        while (litr.hasNext()) {
+            Restaurant temp = (Restaurant) litr.next();
+            if (temp.hasDishesWithoutTheseAllergies(allergies) || temp.determineDietOfRestaurant().ordinal() < diet.ordinal()) {
+                litr.remove();
+            }
+        }
+
+        return restaurants;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -26,21 +26,8 @@ public class Dish {
 
     public Diet determineDietOfDish() {
 
-        Diet diet = Diet.VEGAN;
+        return DietAnalyzer.determineDiet((ArrayList) ingredients);
 
-        for (Ingredient ingredient : ingredients
-        ) {
-            if (ingredient.getName().contains("Carne") || ingredient.getName().contains("Pescado")) {
-                return Diet.ALL;
-            }
-            if (diet != Diet.VEGETARIAN) {
-                if (ingredient.getName().contains("Milk")) {
-                    diet = Diet.VEGETARIAN;
-                }
-            }
-        }
-
-        return diet;
     }
 
     public ArrayList<Allergy> getAllergiesOfDish() {
@@ -61,5 +48,9 @@ public class Dish {
             }
         }
         return allergies;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 }

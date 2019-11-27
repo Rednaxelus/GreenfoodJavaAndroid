@@ -29,7 +29,7 @@ public class DishTable extends Table {
         temp.add(dbPlateIngredient.getDbIngredient().getIngredient("Carne"));
 
         // addDish("Chili con carne", 18, temp, 0);
-
+        DatabaseManager.setDishTable(this);
     }
 
     @Override

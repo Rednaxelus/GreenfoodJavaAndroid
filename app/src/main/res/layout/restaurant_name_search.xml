@@ -13,6 +13,39 @@
     tools:context="ui.RestaurantNameSearchActivity"
     tools:visibility="visible">
 
+    <Button
+        android:id="@+id/search_restaurant"
+        android:layout_width="99dp"
+        android:layout_height="51dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginRight="140dp"
+        android:background="@drawable/buttonshape"
+        android:enabled="true"
+        android:onClick="searchRestaurantName"
+        android:text="@string/search"
+        android:textColor="#3F51B5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView"
+        tools:text="Search" />
+
+    <Button
+        android:id="@+id/filterRestaurantsButton"
+        android:layout_width="99dp"
+        android:layout_height="51dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
+        android:background="@drawable/buttonshape"
+        android:enabled="true"
+        android:onClick="gotToFilterRestaurantsActivity"
+        android:text="Filter"
+        android:textColor="#3F51B5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -20,14 +53,16 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="Greenfood"
@@ -36,7 +71,7 @@
         app:fontFamily="casual"
         app:layout_constraintBottom_toTopOf="@+id/searchView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -46,6 +81,7 @@
         android:layout_height="52dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:inputType="text"
@@ -57,34 +93,17 @@
 
     </SearchView>
 
-    <Button
-        android:id="@+id/search_restaurant_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/buttonshape"
-        android:enabled="true"
-        android:onClick="searchDishName"
-        android:text="@string/search"
-        android:textColor="#3F51B5"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView"
-        tools:text="Search" />
-
     <ListView
         android:id="@+id/nameSearchList"
         android:layout_width="338dp"
         android:layout_height="380dp"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="88dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintHorizontal_bias="0.26"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/errorLabel" />
 

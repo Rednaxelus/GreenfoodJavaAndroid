@@ -75,7 +75,7 @@
         android:layout_marginBottom="55dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
-        android:onClick="gotToSearchDishesActivity"
+        android:onClick="goToSearchProductActivity"
         android:text="Apply"
         android:textColor="#3F51B5"
         app:layout_constraintBottom_toBottomOf="parent"

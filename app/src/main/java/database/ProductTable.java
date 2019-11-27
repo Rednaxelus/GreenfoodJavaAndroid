@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Ingredient;
+import model.Product;
 
 public class ProductTable extends Table {
 
@@ -66,6 +67,23 @@ public class ProductTable extends Table {
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
         return data;
+    }
+
+    public ArrayList<Product> getProductWithName(String query) {
+        Cursor data = searchByName(query);
+        data.moveToFirst();
+
+        ArrayList<Product> dishes = new ArrayList<>();
+
+        while (!data.isAfterLast()) {
+
+            ArrayList<Ingredient> ingredients = dbProductIngredientTable.getIngredientsOf(data.getInt(data.getColumnIndex(ID)));
+            dishes.add(new Product(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getString(data.getColumnIndex(DESCRIPTION))
+                    , data.getDouble(data.getColumnIndex(PRICE)), data.getInt(data.getColumnIndex(STOCK)), ingredients));
+
+            data.moveToNext();
+        }
+        return dishes;
     }
 }
 

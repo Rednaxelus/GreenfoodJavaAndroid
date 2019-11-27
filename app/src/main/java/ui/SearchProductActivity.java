@@ -15,10 +15,19 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.greenfoodjava.R;
 
+import java.util.ArrayList;
+import java.util.ListIterator;
+
 import database.ProductTable;
+import model.Allergy;
+import model.Diet;
+import model.Product;
 
 public class SearchProductActivity extends Activity {
+
     private static final int GET_FILTER_REQUEST = 0;
+    private ArrayList<Allergy> allergyFilter = null;
+    private Diet dietFilter = Diet.ALL;
 
     public void searchProductName(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -46,13 +55,39 @@ public class SearchProductActivity extends Activity {
             error.setVisibility(View.VISIBLE);
             listView.setAdapter(new RestNameListAdapter(this, R.layout.product_name_template, null, 0, 1));
         } else {
+            ArrayList<Product> products = filterProducts(productTable.getProductWithName(query), allergyFilter, dietFilter);
+
+
             Cursor cursor = productTable.searchByName(query);
             RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.product_name_template, cursor, 0, 1);
             listView.setAdapter(adapter);
         }
     }
 
-    public void gotToFilterProductActivity(View view) {
+    private ArrayList<Product> filterProducts(ArrayList<Product> products, ArrayList<Allergy> allergies, Diet diet) {
+
+        ListIterator litr = products.listIterator();
+
+        while (litr.hasNext()) {
+            Product tempProduct = (Product) litr.next();
+            if (tempProduct.determineDietOfProduct().ordinal() < diet.ordinal()) {
+                litr.remove();
+            }
+            if (allergies != null) {
+                for (Allergy allergy : tempProduct.getAllergiesOfProduct()
+                ) {
+                    if (allergies.contains(allergy)) {
+                        litr.remove();
+                        break;
+                    }
+                }
+            }
+        }
+
+        return products;
+    }
+
+    public void goToFilterProductActivity(View view) {
         startActivityForResult(new Intent(this, FilterProductActivity.class), GET_FILTER_REQUEST);
     }
 

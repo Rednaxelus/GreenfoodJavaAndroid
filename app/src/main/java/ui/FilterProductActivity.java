@@ -35,7 +35,7 @@ public class FilterProductActivity extends Activity {
     }
 
     private Diet getSelectedDiet() {
-        int result = 0;//((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition();
+        int result = ((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition();
         Diet diet;
         if(result == 1) diet = Diet.VEGETARIAN;
         else if( result == 2) diet = Diet.VEGAN;
@@ -44,10 +44,16 @@ public class FilterProductActivity extends Activity {
         return diet;
     }
 
+    public void goToSearchProductActivity(View view) {
+        Intent replyIntent = new Intent(this, SearchProductActivity.class);
+        replyIntent.putExtra("Allergies", getSelectedAllergiesList());
+        replyIntent.putExtra("Diet", getSelectedDiet());
+        setResult(RESULT_OK, replyIntent);
+        finish();
+    }
+
     private ArrayList<Allergy> getSelectedAllergiesList() {
         ArrayList<Allergy> result = new ArrayList<>();
-        /*
-
         if (((CheckBox) findViewById(R.id.checkBoxMilk)).isChecked()) {
             result.add(Allergy.MILK);
         }
@@ -65,7 +71,7 @@ public class FilterProductActivity extends Activity {
         }
         if (((CheckBox) findViewById(R.id.checkBoxWheat)).isChecked()) {
             result.add(Allergy.WHEAT);
-        }*/
+        }
         return result;
     }
 

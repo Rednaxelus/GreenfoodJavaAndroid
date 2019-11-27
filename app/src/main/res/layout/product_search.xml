@@ -13,7 +13,6 @@
     tools:context="ui.SearchProductActivity"
     tools:visibility="visible">
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -90,7 +89,7 @@
         android:layout_marginRight="24dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
-        android:onClick="gotToFilterProductActivity"
+        android:onClick="goToFilterProductActivity"
         android:text="Filter"
         android:textColor="#3F51B5"
         app:layout_constraintEnd_toEndOf="parent"

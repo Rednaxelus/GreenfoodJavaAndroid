@@ -7,10 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import model.Allergy;
-import model.Diet;
 import model.Dish;
 import model.Ingredient;
 
@@ -79,74 +77,28 @@ public class DishTable extends Table {
         return dishes;
     }
 
-    public Cursor searchByName(String name) {
+    private Cursor searchByName(String name) {
         System.out.println(name);
         SQLiteDatabase sqlDB = this.getWritableDatabase();
-        //String query = "SELECT "+ TABLE_NAME + ".*,"+TABLE_NAME+".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + name+"%" + "' AND " + TYPE + " = '" + "Restaurant'";
         String query = "SELECT " + TABLE_NAME + ".*," + TABLE_NAME + ".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + name + "%" + "'";
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
         return data;
     }
 
-    public ArrayList<Dish> searchByNameAndFilter(String name, ArrayList<Allergy> allergies, Diet diet) {
-        ArrayList<String> dishIDs = new ArrayList<>();
-
-        if (allergies != null) {
-
-            Cursor res = searchByName(name);
-            while (!res.isAfterLast()) {
-                ArrayList<Allergy> allergiesRes = getAllergiesOfDish(res.getInt(res.getColumnIndex(ID)));
-                for (Allergy allergy : allergiesRes
-                ) {
-                    if (allergies.contains(allergy)) {
-                        dishIDs.add("" + res.getInt(res.getColumnIndex(ID)));
-                        break;
-                    }
-                }
-                res.moveToNext();
-            }
-        }
-
-        System.out.println("filtered Dishes: " + dishIDs);
-
-        SQLiteDatabase sqlDB = this.getWritableDatabase();
-
-        String args = "(";
-
-        for (String dishID : dishIDs
-        ) {
-            args += dishID;
-            if (dishIDs.get(dishIDs.size() - 1) != dishID) {
-                args += ", ";
-            }
-        }
-        args += ")";
-
-
-        //  Cursor data = sqlDB.query(TABLE_NAME, null, "ID=?", dishIDs.toArray(new String[dishIDs.size()]), null, null, null);
-        String query = "SELECT " + TABLE_NAME + ".*," + TABLE_NAME + ".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + name + "%" + "' AND " + ID + " NOT IN " + args;
-        Cursor data = sqlDB.rawQuery(query, null);
+    public ArrayList<Dish> getDishesWithName(String name) {
+        Cursor data = searchByName(name);
         data.moveToFirst();
 
         ArrayList<Dish> dishes = new ArrayList<>();
 
         while (!data.isAfterLast()) {
 
-            dishes.add(new Dish(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getDouble(data.getColumnIndex(PRICE)), dbPlateIngredient.getIngredientsOf(data.getInt(data.getColumnIndex(ID)))));
+            ArrayList<Ingredient> ingredients = dbPlateIngredient.getIngredientsOf(data.getInt(data.getColumnIndex(ID)));
+            dishes.add(new Dish(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getDouble(data.getColumnIndex(PRICE)), ingredients));
 
             data.moveToNext();
         }
-
-        ListIterator litr = dishes.listIterator();
-
-        while (litr.hasNext()) {
-            Dish tempDish = (Dish) litr.next();
-            if (tempDish.determineDietOfDish().ordinal() < diet.ordinal()) {
-                litr.remove();
-            }
-        }
-
         return dishes;
     }
 

@@ -46,7 +46,7 @@ public class FilterDishesActivity extends Activity {
         finish();
     }
 
-    public Diet getSelectedDiet() {
+    private Diet getSelectedDiet() {
         int result = ((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition();
         switch (result) {
             case 0:
@@ -58,10 +58,9 @@ public class FilterDishesActivity extends Activity {
             default:
                 return Diet.ALL;
         }
-
     }
 
-    public ArrayList<Allergy> getSelectedAllergiesList() {
+    private ArrayList<Allergy> getSelectedAllergiesList() {
         ArrayList<Allergy> result = new ArrayList<>();
         if (((CheckBox) findViewById(R.id.checkBoxMilk)).isChecked()) {
             result.add(Allergy.MILK);

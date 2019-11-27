@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.greenfoodjava.R;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 import database.DishTable;
 import model.Allergy;
@@ -59,7 +60,7 @@ public class SearchDishActivity extends Activity {
             error.setVisibility(View.VISIBLE);
             listView.setAdapter(new RestNameListAdapter(this, R.layout.dish_name_template, null, 0, 1));
         } else {
-            ArrayList<Dish> dishes = dishTable.searchByNameAndFilter(query, allergyFilter, dietFilter);
+            ArrayList<Dish> dishes = filterDishes(dishTable.getDishesWithName(query), allergyFilter, dietFilter);
 
             ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
             for (Dish dish : dishes
@@ -68,6 +69,29 @@ public class SearchDishActivity extends Activity {
             }
             listView.setAdapter(stringArrayAdapter);
         }
+    }
+
+    private ArrayList<Dish> filterDishes(ArrayList<Dish> dishes, ArrayList<Allergy> allergies, Diet diet) {
+
+        ListIterator litr = dishes.listIterator();
+
+        while (litr.hasNext()) {
+            Dish tempDish = (Dish) litr.next();
+            if (tempDish.determineDietOfDish().ordinal() < diet.ordinal()) {
+                litr.remove();
+            }
+            if (allergies != null) {
+                for (Allergy allergy : tempDish.getAllergiesOfDish()
+                ) {
+                    if (allergies.contains(allergy)) {
+                        litr.remove();
+                        break;
+                    }
+                }
+            }
+        }
+
+        return dishes;
     }
 
     public void gotToFilterDishesActivity(View view) {

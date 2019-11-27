@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Dish {
@@ -40,5 +41,25 @@ public class Dish {
         }
 
         return diet;
+    }
+
+    public ArrayList<Allergy> getAllergiesOfDish() {
+
+        ArrayList<Allergy> allergies = new ArrayList<>();
+
+        for (Ingredient ingredient :
+                ingredients) {
+            if (ingredient == null) {
+                System.out.println("no ingredients in dish: " + name);
+                break;
+            }
+            for (Allergy allergy :
+                    ingredient.getAllergies()) {
+                if (!allergies.contains(allergy)) {
+                    allergies.add(allergy);
+                }
+            }
+        }
+        return allergies;
     }
 }

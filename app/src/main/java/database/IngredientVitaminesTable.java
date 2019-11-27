@@ -49,8 +49,8 @@ public class IngredientVitaminesTable extends Table {
         return true;
     }
 
-    public List<Vitamin> getVitaminesOfIngredient(int idIngredient) {
-        List<Vitamin> vitamines = new ArrayList<>();
+    public ArrayList<Vitamin> getVitaminesOfIngredient(int idIngredient) {
+        ArrayList<Vitamin> vitamines = new ArrayList<>();
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_INGREDIENT + " = " + idIngredient;
         Cursor data = sqlDB.rawQuery(query, null);

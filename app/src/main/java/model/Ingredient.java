@@ -1,18 +1,17 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Ingredient {
     private String name;
     private int amount, ID;
     private String energeticValue;
     private double calories, proteins, carbohydrates, fiber, fat;
-    private List<Vitamin> vitamins;
-    private List<Allergy> allergies;
+    private ArrayList<Vitamin> vitamins;
+    private ArrayList<Allergy> allergies;
 
     public Ingredient(String name, int amount, int ID, String energeticValue, double calories,
-                      double proteins, double carbohydrates, double fiber, double fat) {
+                      double proteins, double carbohydrates, double fiber, double fat, ArrayList<Vitamin> vitamins, ArrayList<Allergy> allergies) {
         this.ID = ID;
         this.name = name;
         this.amount = amount;
@@ -22,16 +21,8 @@ public class Ingredient {
         this.carbohydrates = carbohydrates;
         this.fiber = fiber;
         this.fat = fat;
-        vitamins = new ArrayList<>();
-        allergies = new ArrayList<>();
-    }
-
-    public void addVitamin(List<Vitamin> vitamin){
-        vitamins=vitamin;
-    }
-
-    public void addAllergy(List<Allergy> allergy){
-        allergies = allergy;
+        this.vitamins = vitamins;
+        this.allergies = allergies;
     }
 
     public String getName() {
@@ -40,5 +31,9 @@ public class Ingredient {
 
     public int getId() {
         return ID;
+    }
+
+    public ArrayList<Allergy> getAllergies() {
+        return allergies;
     }
 }

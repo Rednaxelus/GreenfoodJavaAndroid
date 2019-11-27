@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import model.Ingredient;
 
@@ -52,8 +51,8 @@ public class DishIngredientTable extends Table {
         return true;
     }
 
-    public List<Ingredient> getIngredientsOf(int dishId) {
-        List<Ingredient> ingredients = new ArrayList<>();
+    public ArrayList<Ingredient> getIngredientsOf(int dishId) {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_DISH + " = " + dishId;
         Cursor data = sqlDB.rawQuery(query, null);

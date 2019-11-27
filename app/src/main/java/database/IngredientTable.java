@@ -99,9 +99,7 @@ public class IngredientTable extends Table {
             Ingredient in = new Ingredient(data.getString(1), data.getInt(2),
                     data.getInt(0), data.getDouble(3)+"",
                     data.getInt(4), data.getInt(5), data.getInt(6),
-                    data.getInt(7), data.getInt(8));
-            in.addVitamin(dbIngredientVitamine.getVitaminesOfIngredient(data.getInt(0)));
-            in.addAllergy(dbIngredientAllergy.getAllergiesOfIngredient(data.getInt(0)));
+                    data.getInt(7), data.getInt(8), dbIngredientVitamine.getVitaminesOfIngredient(data.getInt(0)), dbIngredientAllergy.getAllergiesOfIngredient(data.getInt(0)));
             ingredients.add(in);
         }
         data.close();
@@ -118,7 +116,7 @@ public class IngredientTable extends Table {
             in = new Ingredient(ingredientName, data.getInt(2),
                     data.getInt(0), data.getDouble(3)+"",
                     data.getInt(4), data.getInt(5), data.getInt(6),
-                    data.getInt(7), data.getInt(8));
+                    data.getInt(7), data.getInt(8), dbIngredientVitamine.getVitaminesOfIngredient(data.getInt(0)), dbIngredientAllergy.getAllergiesOfIngredient(data.getInt(0)));
         data.close();
         return in;
     }
@@ -133,7 +131,7 @@ public class IngredientTable extends Table {
             in = new Ingredient(data.getString(1), data.getInt(2),
                     data.getInt(0), data.getDouble(3)+"",
                     data.getInt(4), data.getInt(5), data.getInt(6),
-                    data.getInt(7), data.getInt(8));
+                    data.getInt(7), data.getInt(8), dbIngredientVitamine.getVitaminesOfIngredient(data.getInt(0)), dbIngredientAllergy.getAllergiesOfIngredient(data.getInt(0)));
         data.close();
         return in;
     }

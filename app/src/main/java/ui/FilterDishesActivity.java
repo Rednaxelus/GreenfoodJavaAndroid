@@ -33,7 +33,7 @@ public class FilterDishesActivity extends Activity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
+                goBack(v);
             }
         });
     }
@@ -68,11 +68,25 @@ public class FilterDishesActivity extends Activity {
         if (((CheckBox) findViewById(R.id.checkBoxPeanuts)).isChecked()) {
             result.add(Allergy.PEANUTS);
         }
+        if (((CheckBox) findViewById(R.id.checkBoxEggs)).isChecked()) {
+            result.add(Allergy.EGGS);
+        }
+        if (((CheckBox) findViewById(R.id.checkBoxGluten)).isChecked()) {
+            result.add(Allergy.GLUTEN);
+        }
+        if (((CheckBox) findViewById(R.id.checkBoxSoy)).isChecked()) {
+            result.add(Allergy.SOY);
+        }
+        if (((CheckBox) findViewById(R.id.checkBoxWheat)).isChecked()) {
+            result.add(Allergy.WHEAT);
+        }
         return result;
     }
 
     public void goBack(View view) {
-        startActivity(new Intent(this, EnterpriseHomeActivity.class));
+        Intent replyIntent = new Intent(this, SearchDishActivity.class);
+        setResult(RESULT_CANCELED, replyIntent);
+        finish();
     }
 
 }

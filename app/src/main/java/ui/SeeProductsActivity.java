@@ -7,16 +7,18 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
 import androidx.appcompat.widget.Toolbar;
+
 import com.example.greenfoodjava.R;
+
 import java.util.List;
+
 import database.ProductTable;
-import model.Dish;
 import model.Product;
 
 public class SeeProductsActivity extends Activity {
@@ -34,12 +36,7 @@ public class SeeProductsActivity extends Activity {
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),EnterpriseHomeActivity.class));
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(),EnterpriseHomeActivity.class)));
     }
 
     private void showProducts() {

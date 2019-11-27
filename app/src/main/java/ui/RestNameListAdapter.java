@@ -31,17 +31,7 @@ public class RestNameListAdapter extends ResourceCursorAdapter {
             restaurantName.setText(name);
             restaurantPhone.setText(String.valueOf(phone));
             restaurantAddress.setText(address);
-        } else if (mode == 1) {
-            TextView dishName = view.findViewById(R.id.dish_name);
-            TextView dishPrice = view.findViewById(R.id.dish_price);
-
-            String name = cursor.getString(cursor.getColumnIndex("name"));
-            double price = cursor.getDouble(cursor.getColumnIndex("price"));
-
-
-            dishName.setText(name);
-            dishPrice.setText(String.valueOf(price));
-        } else if (mode == 2) {
+        } else {
             TextView productName = view.findViewById(R.id.product_name);
             TextView productPrice = view.findViewById(R.id.product_price);
             TextView productStock = view.findViewById(R.id.product_stock);

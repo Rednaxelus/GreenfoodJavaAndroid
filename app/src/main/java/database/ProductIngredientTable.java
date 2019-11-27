@@ -2,17 +2,24 @@ package database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import java.util.ArrayList;
+
+import model.Ingredient;
 
 public class ProductIngredientTable extends Table {
     private static final String TABLE_NAME = "product_ingredient";
     private static final String ID = "ID";
     private static final String ID_PRODUCT = "id_product";
     private static final String ID_INGREDIENT = "id_ingredient";
+    private IngredientTable dbIngredient;
 
     public ProductIngredientTable(Context context) {
 
         super(context, TABLE_NAME, null, 1);
+        dbIngredient = new IngredientTable(context);
     }
 
     @Override
@@ -36,6 +43,18 @@ public class ProductIngredientTable extends Table {
             return false;
         }
         return true;
+    }
+
+    public ArrayList<Ingredient> getIngredientsOf(int productId) {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_PRODUCT + " = " + productId;
+        Cursor data = sqlDB.rawQuery(query, null);
+        while (data.moveToNext()) {
+            ingredients.add(dbIngredient.getIngredientByID(data.getInt(data.getColumnIndex(ID_INGREDIENT))));
+        }
+        data.close();
+        return ingredients;
     }
 
 

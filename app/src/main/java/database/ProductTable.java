@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Dish;
 import model.Ingredient;
 import model.Product;
 
@@ -71,6 +72,17 @@ public class ProductTable extends Table {
 
     public List<Product> getProducts(int enterpriseId) {
         List<Product> products = new ArrayList<>();
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_ENTERPRISE + " = " + enterpriseId;
+        Cursor data = sqlDB.rawQuery(query, null);
+        if (data.getCount() == 0) return products;
+        while (data.moveToNext()) {
+            System.out.println(data.getString(3));
+            products.add(new Product(data.getInt(0)+"", data.getString(2),
+                    data.getString(3), data.getDouble(4), data.getInt(5),
+                    dbProductIngredientTable.getIngredientsOf(data.getInt(1))));
+        }
+        data.close();
         return products;
     }
 }

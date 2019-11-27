@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.List;
+=======
+>>>>>>> feature-F0
 
 import model.Ingredient;
 
@@ -45,10 +48,17 @@ public class ProductIngredientTable extends Table {
         return true;
     }
 
+<<<<<<< HEAD
     public ArrayList<Ingredient> getIngredientsOf(int productId) {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_PRODUCT + " = " + productId;
+=======
+    public ArrayList<Ingredient> getIngredientsOf(int productID) {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_PRODUCT + " = " + productID;
+>>>>>>> feature-F0
         Cursor data = sqlDB.rawQuery(query, null);
         while (data.moveToNext()) {
             ingredients.add(dbIngredient.getIngredientByID(data.getInt(data.getColumnIndex(ID_INGREDIENT))));
@@ -56,4 +66,9 @@ public class ProductIngredientTable extends Table {
         data.close();
         return ingredients;
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> feature-F0
 }

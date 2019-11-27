@@ -1,11 +1,23 @@
 package model;
 
+<<<<<<< HEAD
 import java.util.List;
 
 public class Product {
     private String name, description;
     private double price;
     private int ID, stock;
+=======
+import java.util.ArrayList;
+import java.util.List;
+
+public class Product {
+    private int ID;
+    private String name;
+    private String description;
+    private double price;
+    private int stock;
+>>>>>>> feature-F0
     private List<Ingredient> ingredients;
 
     public Product(int ID, String name, String description, double price, int stock, List<Ingredient> ingredients) {
@@ -25,7 +37,48 @@ public class Product {
         return price;
     }
 
+<<<<<<< HEAD
     public int getID() {
         return ID;
     }
+=======
+    public String getDescription() {
+        return description;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public Diet determineDietOfProduct() {
+
+        return DietAnalyzer.determineDiet((ArrayList) ingredients);
+
+    }
+
+    public ArrayList<Allergy> getAllergiesOfProduct() {
+
+        ArrayList<Allergy> allergies = new ArrayList<>();
+
+        for (Ingredient ingredient :
+                ingredients) {
+            if (ingredient == null) {
+                System.out.println("no ingredients in product: " + name);
+                break;
+            }
+            for (Allergy allergy :
+                    ingredient.getAllergies()) {
+                if (!allergies.contains(allergy)) {
+                    allergies.add(allergy);
+                }
+            }
+        }
+        return allergies;
+    }
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+>>>>>>> feature-F0
 }

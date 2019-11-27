@@ -85,6 +85,12 @@ public class ProductTable extends Table {
         data.close();
         return products;
     }
+
+    public void deleteFromDatabase(Product product) {
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "DELETE FROM "+ TABLE_NAME + " WHERE " + ID + " = " + product.getID();
+        sqlDB.execSQL(query);
+    }
 }
 
 

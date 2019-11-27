@@ -71,6 +71,17 @@ public class ProductTable extends Table {
 
     public List<Product> getProducts(int enterpriseId) {
         List<Product> products = new ArrayList<>();
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_ENTERPRISE + " = " + enterpriseId;
+        Cursor data = sqlDB.rawQuery(query, null);
+        if (data.getCount() == 0) return products;
+        while (data.moveToNext()) {
+            /**products.add(new Product(data.getInt(data.getColumnIndex("ID")+1), data.getString(data.getColumnIndex("NAME")+1),
+                    data.getString(data.getColumnIndex("DESCRIPTION")+1), data.getDouble(data.getColumnIndex("PRICE")+1),
+                    data.getInt(data.getColumnIndex("STOCK")+1),
+                    dbProductIngredientTable.getIngredientsOf(data.getInt(data.getColumnIndex("ID")+1))));*/
+        }
+        data.close();
         return products;
     }
 }

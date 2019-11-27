@@ -1,16 +1,20 @@
 package model;
 
-public class Product {
-    private String ID, name, description;
-    private double price;
-    private int stock;
+import java.util.List;
 
-    public Product(String ID, String name, String description, double price, int stock) {
+public class Product {
+    private String name, description;
+    private double price;
+    private int ID, stock;
+    private List<Ingredient> ingredients;
+
+    public Product(int ID, String name, String description, double price, int stock, List<Ingredient> ingredients) {
         this.ID = ID;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
+        this.ingredients = ingredients;
     }
 
     public String getName() {

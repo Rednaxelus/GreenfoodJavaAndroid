@@ -4,20 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.CheckBox;
 
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.greenfoodjava.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import database.DishTable;
-import model.Dish;
+import model.Allergy;
 
 public class FilterDishesActivity extends Activity {
     private DishTable dishTable;
@@ -27,7 +24,6 @@ public class FilterDishesActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dish_filter);
         dishTable = new DishTable(this);
-//        showDishes();
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
@@ -41,28 +37,21 @@ public class FilterDishesActivity extends Activity {
     }
 
     public void gotToSearchDishesActivity(View view) {
-        startActivity(new Intent(this, SearchDishActivity.class));
+        Intent replyIntent = new Intent(this, SearchDishActivity.class);
+        replyIntent.putExtra("Allergies", getSelectedAllergiesList());
+        setResult(RESULT_OK, replyIntent);
+        finish();
     }
 
-    private void setScrollViewElements(List<Dish> dishes) {
-        ScrollView scrollView = findViewById(R.id.scroll);
-        final LinearLayout ll = new LinearLayout(this);
-        ll.setOrientation(LinearLayout.VERTICAL);
-        scrollView.addView(ll);
-
-        if (dishes.size() == 0) {
-            ll.addView(createTextView("You haven't created a dish yet"));
-        } else {
-            for (Dish dish : dishes)
-                ll.addView(createTextView(dish.getName() + " - " + dish.getPrice() + "€"));
+    public ArrayList<Allergy> getSelectedAllergiesList() {
+        ArrayList<Allergy> result = new ArrayList<>();
+        if (((CheckBox) findViewById(R.id.checkBoxMilk)).isChecked()) {
+            result.add(Allergy.MILK);
         }
-    }
-
-    private TextView createTextView(String content) {
-        TextView line = new TextView(this);
-        line.setText(content);
-        line.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-        return line;
+        if (((CheckBox) findViewById(R.id.checkBoxPeanuts)).isChecked()) {
+            result.add(Allergy.PEANUTS);
+        }
+        return result;
     }
 
     public void goBack(View view) {

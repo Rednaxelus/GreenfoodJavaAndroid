@@ -58,7 +58,7 @@ public class DishIngredientTable extends Table {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_DISH + " = " + dishId;
         Cursor data = sqlDB.rawQuery(query, null);
         while (data.moveToNext()) {
-            ingredients.add(dbIngredient.getIngredientByID(data.getInt(1)));
+            ingredients.add(dbIngredient.getIngredientByID(data.getInt(data.getColumnIndex(ID_INGREDIENT))));
         }
         data.close();
         return ingredients;

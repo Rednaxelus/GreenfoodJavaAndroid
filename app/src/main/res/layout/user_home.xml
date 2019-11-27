@@ -84,7 +84,7 @@
             android:layout_marginRight="112dp"
             android:background="@drawable/buttonshape"
             android:enabled="true"
-            android:onClick="searchRestaurantName"
+            android:onClick="searchDishName"
             android:text="Restaurant name"
             android:textColor="#3F51B5"
             app:layout_constraintEnd_toEndOf="parent"

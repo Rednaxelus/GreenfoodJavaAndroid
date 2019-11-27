@@ -29,7 +29,9 @@ public class DishTable extends Table {
 
         temp.add(dbPlateIngredient.getDbIngredient().getIngredient("Pipas"));
 
-        addDish("Pizza Picante", 16, temp, 0);
+        //addDish("Pizza Picante", 16, temp, 0);
+
+        addDish("Pipas guays", 18, temp, 0);
 
     }
 
@@ -87,12 +89,55 @@ public class DishTable extends Table {
         return data;
     }
 
+    public Cursor searchByNameAndFilter(String name, ArrayList<Allergy> allergies) {
+        ArrayList<String> dishIDs = new ArrayList<>();
+
+        Cursor res = searchByName(name);
+        while (!res.isAfterLast()) {
+            ArrayList<Allergy> allergiesRes = getAllergiesOfDish(res.getInt(res.getColumnIndex(ID)));
+            for (Allergy allergy : allergiesRes
+            ) {
+                if (allergies.contains(allergy)) {
+                    dishIDs.add("" + res.getInt(res.getColumnIndex(ID)));
+                    break;
+                }
+            }
+            res.moveToNext();
+        }
+
+        System.out.println("filtered Dishes: " + dishIDs);
+
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+
+        String args = "(";
+
+        for (String dishID : dishIDs
+        ) {
+            args += dishID;
+            if (dishIDs.get(dishIDs.size() - 1) != dishID) {
+                args += ", ";
+            }
+        }
+        args += ")";
+
+
+        //  Cursor data = sqlDB.query(TABLE_NAME, null, "ID=?", dishIDs.toArray(new String[dishIDs.size()]), null, null, null);
+        String query = "SELECT " + TABLE_NAME + ".*," + TABLE_NAME + ".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + name + "%" + "' AND " + ID + " NOT IN " + args;
+        Cursor data = sqlDB.rawQuery(query, null);
+        data.moveToFirst();
+        return data;
+    }
+
     public ArrayList<Allergy> getAllergiesOfDish(int id) {
 
         ArrayList<Allergy> allergies = new ArrayList<>();
 
         for (Ingredient ingredient :
                 dbPlateIngredient.getIngredientsOf(id)) {
+            if (ingredient == null) {
+                System.out.println("no ingredients in dish: " + id);
+                break;
+            }
             ArrayList<Allergy> result = dbPlateIngredient.getDbIngredient().getDbIngredientAllergy().getAllergiesOfIngredient(ingredient.getId());
             for (Allergy allergy :
                     result) {

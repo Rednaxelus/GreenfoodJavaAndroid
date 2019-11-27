@@ -15,16 +15,22 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.greenfoodjava.R;
 
+import java.util.ArrayList;
+
 import database.DishTable;
+import model.Allergy;
 
 public class SearchDishActivity extends Activity {
 
+
+    private static final int GET_FILTER_REQUEST = 0;
+    ArrayList<Allergy> allergyFilter = null;
 
     public void goBack(View view) {
         startActivity(new Intent(this, UserHomeActivity.class));
     }
 
-    public void searchRestaurantName(View view) {
+    public void searchDishName(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         //Find the currently focused view, so we can grab the correct window token from it.
         //If no view currently has focus, create a new one, just so we can grab a window token from it
@@ -50,7 +56,12 @@ public class SearchDishActivity extends Activity {
             error.setVisibility(View.VISIBLE);
             listView.setAdapter(new RestNameListAdapter(this, R.layout.dish_name_template, null, 0, 1));
         } else {
-            Cursor cursor = dishTable.searchByName(query);
+            Cursor cursor;
+            if (allergyFilter == null) {
+                cursor = dishTable.searchByName(query);
+            } else {
+                cursor = dishTable.searchByNameAndFilter(query, allergyFilter);
+            }
             //System.out.println("Allergiesssss" + dishTable.getAllergiesOfDish(cursor.getInt(0)));
             RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.dish_name_template, cursor, 0, 1);
             listView.setAdapter(adapter);
@@ -58,9 +69,18 @@ public class SearchDishActivity extends Activity {
     }
 
     public void gotToFilterDishesActivity(View view) {
-        startActivity(new Intent(this, FilterDishesActivity.class));
+        startActivityForResult(new Intent(this, FilterDishesActivity.class), GET_FILTER_REQUEST);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_FILTER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                allergyFilter = (ArrayList<Allergy>) data.getSerializableExtra("Allergies");
+            }
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

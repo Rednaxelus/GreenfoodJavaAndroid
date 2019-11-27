@@ -92,6 +92,17 @@ public class SearchProductActivity extends Activity {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == GET_FILTER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                allergyFilter = (ArrayList<Allergy>) data.getSerializableExtra("Allergies");
+                dietFilter = (Diet) data.getSerializableExtra("Diet");
+            }
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_search);

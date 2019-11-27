@@ -11,36 +11,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="ui.UserRegistrationActivity"></activity>
+        <activity android:name="ui.loginAndRegistration.UserRegistrationActivity"></activity>
         <activity
-            android:name="ui.SeeProductsActivity"
+            android:name="ui.enterprise.SeeProductsActivity"
             android:label="SeeProducts"></activity>
         <activity
-            android:name="ui.SeeRecipesActivity"
+            android:name="ui.user.SeeRecipesActivity"
             android:label="SeeRecipes"></activity>
         <activity
-            android:name="ui.SeeDishesActivity"
+            android:name="ui.enterprise.SeeDishesActivity"
             android:label="SeeDishes"></activity>
         <activity
-            android:name="ui.CreateDishActivity"
+            android:name="ui.enterprise.CreateDishActivity"
             android:label="CreateDish"></activity>
         <activity
-            android:name="ui.CreateProductActivity"
+            android:name="ui.enterprise.CreateProductActivity"
             android:label="CreateProduct"></activity>
         <activity
-            android:name="ui.EnterpriseRegistrationActivity"
+            android:name="ui.loginAndRegistration.EnterpriseRegistrationActivity"
             android:label="@string/title_activity_enterprise_register"></activity>
         <activity
-            android:name="ui.EnterpriseHomeActivity"
+            android:name="ui.enterprise.EnterpriseHomeActivity"
             android:label="EnterpriseHome"></activity>
         <activity
-            android:name="ui.UserHomeActivity"
+            android:name="ui.user.UserHomeActivity"
             android:label="UserHome"></activity>
         <activity
-            android:name="ui.LoginActivity"
+            android:name="ui.loginAndRegistration.LoginActivity"
             android:label="Login"></activity>
         <activity
-            android:name="ui.RestaurantSearchActivity"
+            android:name="ui.user.RestaurantSearchActivity"
             android:label="RestaurantSearch">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -51,7 +51,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="ui.SearchDishActivity"
+            android:name="ui.user.SearchDishActivity"
             android:label="SearchDish">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -62,7 +62,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="ui.SearchProductActivity"
+            android:name="ui.user.SearchProductActivity"
             android:label="SearchProduct">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -73,7 +73,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="ui.FilterDishesActivity"
+            android:name="ui.user.FilterDishesActivity"
             android:label="FilterDishes">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -84,7 +84,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="ui.FilterRestaurantsActivity"
+            android:name="ui.user.FilterRestaurantsActivity"
             android:label="FilterRestaurants">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -95,7 +95,7 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name="ui.FilterProductActivity"
+            android:name="ui.user.FilterProductActivity"
             android:label="FilterProducts">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -113,7 +113,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ui.CreateRecipeActivity" />
+        <activity android:name="ui.user.CreateRecipeActivity" />
     </application>
 
 </manifest>

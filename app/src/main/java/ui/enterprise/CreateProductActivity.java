@@ -1,8 +1,9 @@
-package ui;
+package ui.enterprise;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -12,32 +13,31 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.greenfoodjava.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.appcompat.widget.Toolbar;
-import database.DishTable;
 import database.IngredientTable;
+import database.ProductTable;
 import model.Ingredient;
-import android.content.SharedPreferences;
+import ui.loginAndRegistration.LoginActivity;
 
-public class CreateDishActivity extends Activity {
+public class CreateProductActivity extends Activity {
     private IngredientTable ingredientTable;
-    private DishTable dishTable;
-    private List<Ingredient> dishIngredients;
+    private ProductTable productTable;
+    private List<Ingredient> productIngredients;
     SharedPreferences sharedpreferences;
-
-    public static final int PICK_IMAGE = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_dish);
+        setContentView(R.layout.create_product);
         ingredientTable = new IngredientTable(this);
-        dishTable = new DishTable(this);
-        dishIngredients = new ArrayList<>();
+        productTable = new ProductTable(this);
+        productIngredients = new ArrayList<>();
         setScrollViewElements();
         sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -47,18 +47,18 @@ public class CreateDishActivity extends Activity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),EnterpriseHomeActivity.class));
+                startActivity(new Intent(getApplicationContext(), EnterpriseHomeActivity.class));
             }
         });
     }
 
     private void setIngredientErrorInvisible(){
-        TextView textView = findViewById(R.id.errorMess);
+        TextView textView = findViewById(R.id.ingredientsErrorLbl);
         textView.setVisibility(TextView.INVISIBLE);
     }
 
     private void setIngredientErrorVisible(){
-        TextView textView = findViewById(R.id.errorMess);
+        TextView textView = findViewById(R.id.ingredientsErrorLbl);
         textView.setVisibility(TextView.VISIBLE);
     }
 
@@ -75,11 +75,11 @@ public class CreateDishActivity extends Activity {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked){
-                        dishIngredients.add(ingredientTable.getIngredient(buttonView.getText().toString()));
+                        productIngredients.add(ingredientTable.getIngredient(buttonView.getText().toString()));
                     }else{
-                        for (Ingredient dishIngredient : dishIngredients){
+                        for (Ingredient dishIngredient : productIngredients){
                             if (dishIngredient.getName().equals(buttonView.getText().toString())){
-                                dishIngredients.remove(dishIngredient);
+                                productIngredients.remove(dishIngredient);
                                 break;
                             }
                         }
@@ -91,11 +91,7 @@ public class CreateDishActivity extends Activity {
         }
     }
 
-    public void goBack(View view) {
-        startActivity(new Intent(this, EnterpriseHomeActivity.class));
-    }
-
-    public void createDish(View view) {
+    public void createProduct(View view) {
         if(allFieldsAreCompleted()){
             createEntryInDB();
             startActivity(new Intent(this, EnterpriseHomeActivity.class));
@@ -103,18 +99,21 @@ public class CreateDishActivity extends Activity {
     }
 
     private void createEntryInDB() {
-        String name = getField(R.id.dishName);
-        double price = Double.parseDouble(getField(R.id.price));
-        if (dishTable.addDish(name, price, dishIngredients,sharedpreferences.getInt("id",-1)))
+        String name = getField(R.id.productName);
+        String description = getField(R.id.productDescription);
+        double price = Double.parseDouble(getField(R.id.productPrice));
+        int stock = Integer.parseInt(getField(R.id.productStock));
+        if (productTable.addProduct(name, description, price, stock, productIngredients, sharedpreferences.getInt("id",-1)))
             System.out.println("SE HA CREADO LOLOLO");
     }
 
     private boolean allFieldsAreCompleted() {
-        return isDishNameCompleted() & isPriceCompleted() & areIngredientsSelected();
+        return isProductNameCompleted() & isProductDescriptionCompleted() &
+                isPriceCompleted() & isStockCompleted() & areIngredientsSelected();
     }
 
     private boolean areIngredientsSelected() {
-        if (dishIngredients.size() == 0){
+        if (productIngredients.size() == 0){
             setIngredientErrorVisible();
             return false;
         }
@@ -123,32 +122,51 @@ public class CreateDishActivity extends Activity {
     }
 
     private boolean isPriceCompleted() {
-        String price = getField(R.id.price);
+        String price = getField(R.id.productPrice);
         if (price.isEmpty()){
-            showErrorFor(R.id.price, "Price is needed");
+            showErrorFor(R.id.productPrice, "Price is needed");
             return false;
         }
         return isNumber(price);
+    }
+
+    private boolean isStockCompleted() {
+        String stock = getField(R.id.productStock);
+        if (stock.isEmpty()){
+            showErrorFor(R.id.productStock, "Stock is needed");
+            return false;
+        }
+        return isNumber(stock);
     }
 
     private boolean isNumber(String price) {
         try{
             Double.parseDouble(price);
         }catch (Exception e){
-            showErrorFor(R.id.price, "Price must be a number");
+            showErrorFor(R.id.productPrice, "Price must be a number");
             return false;
         }
         return true;
     }
 
-    private boolean isDishNameCompleted() {
-        String name = getField(R.id.dishName);
+    private boolean isProductNameCompleted() {
+        String name = getField(R.id.productName);
         if (name.isEmpty()){
-            showErrorFor(R.id.dishName, "Name is needed");
+            showErrorFor(R.id.productName, "Name is needed");
             return false;
         }
         return true;
     }
+
+    private boolean isProductDescriptionCompleted() {
+        String description = getField(R.id.productDescription);
+        if (description.isEmpty()){
+            showErrorFor(R.id.productDescription, "Description is needed");
+            return false;
+        }
+        return true;
+    }
+
 
     private String getField(int id){
         TextView field = findViewById(id);

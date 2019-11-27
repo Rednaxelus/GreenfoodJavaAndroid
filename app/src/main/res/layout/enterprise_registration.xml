@@ -10,7 +10,7 @@ android:paddingLeft="0dp"
 android:paddingTop="0dp"
 android:paddingRight="0dp"
 android:paddingBottom="0dp"
-tools:context="ui.EnterpriseRegistrationActivity">
+    tools:context="ui.loginAndRegistration.EnterpriseRegistrationActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

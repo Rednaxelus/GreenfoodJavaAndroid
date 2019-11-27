@@ -1,4 +1,4 @@
-package ui;
+package ui.user;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,49 +14,38 @@ import com.example.greenfoodjava.R;
 
 import java.util.ArrayList;
 
-import database.DishTable;
 import model.Allergy;
 import model.Diet;
 
-public class FilterDishesActivity extends Activity {
-    private DishTable dishTable;
+public class FilterProductActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dish_filter);
-        dishTable = new DishTable(this);
+        setContentView(R.layout.product_filter);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goBack(v);
-            }
-        });
-    }
-
-    public void gotToSearchDishesActivity(View view) {
-        Intent replyIntent = new Intent(this, SearchDishActivity.class);
-        replyIntent.putExtra("Allergies", getSelectedAllergiesList());
-        replyIntent.putExtra("Diet", getSelectedDiet());
-        setResult(RESULT_OK, replyIntent);
-        finish();
+        toolbar.setNavigationOnClickListener(this::goBack);
     }
 
     private Diet getSelectedDiet() {
         int result = ((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition();
-        switch (result) {
-            case 1:
-                return Diet.VEGETARIAN;
-            case 2:
-                return Diet.VEGAN;
-            case 0:
-            default:
-                return Diet.ALL;
-        }
+        Diet diet;
+        if(result == 1) diet = Diet.VEGETARIAN;
+        else if( result == 2) diet = Diet.VEGAN;
+        else diet = Diet.ALL;
+
+        return diet;
+    }
+
+    public void goToSearchProductActivity(View view) {
+        Intent replyIntent = new Intent(this, SearchProductActivity.class);
+        replyIntent.putExtra("Allergies", getSelectedAllergiesList());
+        replyIntent.putExtra("Diet", getSelectedDiet());
+        setResult(RESULT_OK, replyIntent);
+        finish();
     }
 
     private ArrayList<Allergy> getSelectedAllergiesList() {
@@ -83,9 +72,8 @@ public class FilterDishesActivity extends Activity {
     }
 
     public void goBack(View view) {
-        Intent replyIntent = new Intent(this, SearchDishActivity.class);
+        Intent replyIntent = new Intent(this, SearchProductActivity.class);
         setResult(RESULT_CANCELED, replyIntent);
         finish();
     }
-
 }

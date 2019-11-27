@@ -1,4 +1,4 @@
-package ui;
+package ui.enterprise;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,12 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.greenfoodjava.R;
+
 import java.util.List;
 
-import androidx.appcompat.widget.Toolbar;
 import database.DishTable;
 import model.Dish;
+import ui.loginAndRegistration.LoginActivity;
 
 public class SeeDishesActivity extends Activity {
     private DishTable dishTable;
@@ -32,7 +35,7 @@ public class SeeDishesActivity extends Activity {
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
-        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(),EnterpriseHomeActivity.class)));
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), EnterpriseHomeActivity.class)));
     }
 
     private void showDishes() {

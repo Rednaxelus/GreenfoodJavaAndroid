@@ -1,4 +1,4 @@
-package ui;
+package ui.user;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,12 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.greenfoodjava.R;
+
 import java.util.List;
 
-import androidx.appcompat.widget.Toolbar;
 import database.RecipeTable;
 import model.Recipe;
+import ui.loginAndRegistration.LoginActivity;
 
 public class SeeRecipesActivity extends Activity {
     private RecipeTable recipeTable;
@@ -35,7 +38,7 @@ public class SeeRecipesActivity extends Activity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),UserHomeActivity.class));
+                startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
             }
         });
     }

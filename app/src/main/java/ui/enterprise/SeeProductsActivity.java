@@ -1,4 +1,4 @@
-package ui;
+package ui.enterprise;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,6 +20,7 @@ import java.util.List;
 
 import database.ProductTable;
 import model.Product;
+import ui.loginAndRegistration.LoginActivity;
 
 public class SeeProductsActivity extends Activity {
     private ProductTable productTable;
@@ -36,7 +37,7 @@ public class SeeProductsActivity extends Activity {
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
-        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(),EnterpriseHomeActivity.class)));
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), EnterpriseHomeActivity.class)));
     }
 
     private void showProducts() {

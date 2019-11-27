@@ -1,4 +1,4 @@
-package ui;
+package ui.loginAndRegistration;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,11 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.greenfoodjava.R;
 
-import androidx.appcompat.widget.Toolbar;
 import database.EnterpriseTable;
 import database.UserTable;
+import ui.enterprise.EnterpriseHomeActivity;
+import ui.user.UserHomeActivity;
 
 public class LoginActivity extends Activity {
     private UserTable userTable;
@@ -37,7 +40,7 @@ public class LoginActivity extends Activity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),UserRegistrationActivity.class));
+                startActivity(new Intent(getApplicationContext(), UserRegistrationActivity.class));
             }
         });
     }

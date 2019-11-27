@@ -1,12 +1,15 @@
-package ui;
+package ui.loginAndRegistration;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.greenfoodjava.R;
+
 import database.UserTable;
 
 public class UserRegistrationActivity extends AppCompatActivity {

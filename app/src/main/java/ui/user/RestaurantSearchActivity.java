@@ -1,4 +1,4 @@
-package ui;
+package ui.user;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,6 +22,7 @@ import database.EnterpriseTable;
 import model.Allergy;
 import model.Diet;
 import model.Restaurant;
+import ui.RestNameListAdapter;
 
 public class RestaurantSearchActivity extends Activity {
 

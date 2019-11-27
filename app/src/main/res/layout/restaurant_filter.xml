@@ -10,7 +10,7 @@
     android:paddingTop="0dp"
     android:paddingRight="0dp"
     android:paddingBottom="0dp"
-    tools:context="ui.FilterRestaurantsActivity"
+    tools:context="ui.user.FilterRestaurantsActivity"
     tools:visibility="visible">
 
 

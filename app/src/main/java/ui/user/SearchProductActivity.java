@@ -1,12 +1,12 @@
-package ui;
+package ui.user;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -18,23 +18,19 @@ import com.example.greenfoodjava.R;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-import database.DishTable;
+import database.ProductTable;
 import model.Allergy;
 import model.Diet;
-import model.Dish;
+import model.Product;
+import ui.RestNameListAdapter;
 
-public class SearchDishActivity extends Activity {
-
+public class SearchProductActivity extends Activity {
 
     private static final int GET_FILTER_REQUEST = 0;
     private ArrayList<Allergy> allergyFilter = null;
     private Diet dietFilter = Diet.ALL;
 
-    public void goBack(View view) {
-        startActivity(new Intent(this, UserHomeActivity.class));
-    }
-
-    public void searchDishName(View view) {
+    public void searchProductName(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         //Find the currently focused view, so we can grab the correct window token from it.
         //If no view currently has focus, create a new one, just so we can grab a window token from it
@@ -48,40 +44,38 @@ public class SearchDishActivity extends Activity {
         TextView error = findViewById(R.id.errorLabel);
         error.setVisibility(View.INVISIBLE);
         SearchView searchView = findViewById(R.id.searchView);
-        searchQuery(String.valueOf(searchView.getQuery()));
+        productSearchQuery(String.valueOf(searchView.getQuery()));
     }
 
 
-    private void searchQuery(String query) {
-        DishTable dishTable = new DishTable(this);
+    private void productSearchQuery(String query) {
+        ProductTable productTable = new ProductTable(this);
         ListView listView = findViewById(R.id.nameSearchList);
         if (query.equals("")) {
             TextView error = findViewById(R.id.errorLabel);
             error.setVisibility(View.VISIBLE);
-            listView.setAdapter(new RestNameListAdapter(this, R.layout.dish_name_template, null, 0, 1));
+            listView.setAdapter(new RestNameListAdapter(this, R.layout.product_name_template, null, 0, 1));
         } else {
-            ArrayList<Dish> dishes = filterDishes(dishTable.getDishesWithName(query), allergyFilter, dietFilter);
+            ArrayList<Product> products = filterProducts(productTable.getProductWithName(query), allergyFilter, dietFilter);
 
-            ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-            for (Dish dish : dishes
-            ) {
-                stringArrayAdapter.add(dish.getName() + " " + dish.getPrice() + " ");
-            }
-            listView.setAdapter(stringArrayAdapter);
+
+            Cursor cursor = productTable.searchByName(query);
+            RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.product_name_template, cursor, 0, 1);
+            listView.setAdapter(adapter);
         }
     }
 
-    private ArrayList<Dish> filterDishes(ArrayList<Dish> dishes, ArrayList<Allergy> allergies, Diet diet) {
+    private ArrayList<Product> filterProducts(ArrayList<Product> products, ArrayList<Allergy> allergies, Diet diet) {
 
-        ListIterator litr = dishes.listIterator();
+        ListIterator litr = products.listIterator();
 
         while (litr.hasNext()) {
-            Dish tempDish = (Dish) litr.next();
-            if (tempDish.determineDietOfDish().ordinal() < diet.ordinal()) {
+            Product tempProduct = (Product) litr.next();
+            if (tempProduct.determineDietOfProduct().ordinal() < diet.ordinal()) {
                 litr.remove();
             }
             if (allergies != null) {
-                for (Allergy allergy : tempDish.getAllergiesOfDish()
+                for (Allergy allergy : tempProduct.getAllergiesOfProduct()
                 ) {
                     if (allergies.contains(allergy)) {
                         litr.remove();
@@ -91,11 +85,11 @@ public class SearchDishActivity extends Activity {
             }
         }
 
-        return dishes;
+        return products;
     }
 
-    public void gotToFilterDishesActivity(View view) {
-        startActivityForResult(new Intent(this, FilterDishesActivity.class), GET_FILTER_REQUEST);
+    public void goToFilterProductActivity(View view) {
+        startActivityForResult(new Intent(this, FilterProductActivity.class), GET_FILTER_REQUEST);
     }
 
     @Override
@@ -112,7 +106,7 @@ public class SearchDishActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dish_search);
+        setContentView(R.layout.product_search);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);

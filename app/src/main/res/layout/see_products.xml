@@ -10,7 +10,7 @@
     android:paddingTop="0dp"
     android:paddingRight="0dp"
     android:paddingBottom="0dp"
-    tools:context="ui.SeeProductsActivity">
+    tools:context="ui.enterprise.SeeProductsActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

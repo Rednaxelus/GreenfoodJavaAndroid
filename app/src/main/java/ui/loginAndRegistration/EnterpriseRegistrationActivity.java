@@ -1,4 +1,4 @@
-package ui;
+package ui.loginAndRegistration;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,12 +9,14 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.greenfoodjava.R;
 
-import androidx.appcompat.widget.Toolbar;
-import database.EnterpriseTable;
-
 import java.util.regex.Pattern;
+
+import database.EnterpriseTable;
+import ui.enterprise.EnterpriseHomeActivity;
 
 public class EnterpriseRegistrationActivity extends Activity {
     private boolean isSwitchChecked;

@@ -10,7 +10,7 @@
     android:paddingTop="0dp"
     android:paddingRight="0dp"
     android:paddingBottom="0dp"
-    tools:context="ui.SearchProductActivity"
+    tools:context="ui.user.SearchProductActivity"
     tools:visibility="visible">
 
     <androidx.appcompat.widget.Toolbar

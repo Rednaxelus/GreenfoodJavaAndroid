@@ -10,7 +10,7 @@
     android:paddingTop="0dp"
     android:paddingRight="0dp"
     android:paddingBottom="0dp"
-    tools:context="ui.FilterDishesActivity"
+    tools:context="ui.user.FilterDishesActivity"
     tools:visibility="visible">
 
 

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class Table extends SQLiteOpenHelper {
+public abstract class Table extends SQLiteOpenHelper {
     private final String TABLE_NAME;
 
     public Table(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -28,7 +28,7 @@ public class Table extends SQLiteOpenHelper {
 
     }
 
-    public int count() {
+    protected int count() {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME;
         Cursor data = sqlDB.rawQuery(query, null);

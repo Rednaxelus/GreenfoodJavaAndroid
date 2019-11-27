@@ -49,12 +49,11 @@ public class FilterDishesActivity extends Activity {
     private Diet getSelectedDiet() {
         int result = ((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition();
         switch (result) {
-            case 0:
-                return Diet.ALL;
             case 1:
                 return Diet.VEGETARIAN;
             case 2:
                 return Diet.VEGAN;
+            case 0:
             default:
                 return Diet.ALL;
         }

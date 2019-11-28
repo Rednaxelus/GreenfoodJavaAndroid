@@ -38,12 +38,7 @@ public class LoginActivity extends Activity {
         toolbar.setTitle("Registration");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), UserRegistrationActivity.class));
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), UserRegistrationActivity.class)));
     }
 
     public void goBack(View view) {

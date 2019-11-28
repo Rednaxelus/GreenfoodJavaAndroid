@@ -33,21 +33,16 @@ public class EnterpriseRegistrationActivity extends Activity {
         toolbar.setTitle("GreenFood");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),UserRegistrationActivity.class));
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(),UserRegistrationActivity.class)));
+    }
+
+    public void goBack(View view) {
+        startActivity(new Intent(this, UserRegistrationActivity.class));
     }
 
     private void initSwitchListener() {
         Switch s = findViewById(R.id.switch1);
-        s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                isSwitchChecked = isChecked;
-            }
-        });
+        s.setOnCheckedChangeListener((buttonView, isChecked) -> isSwitchChecked = isChecked);
         isSwitchChecked = false;
     }
 
@@ -177,14 +172,9 @@ public class EnterpriseRegistrationActivity extends Activity {
         String address = text.getText().toString();
 
         if (isSwitchChecked) {
-            dbHelper.addData(email, name,nif,pass,description,phone,address,"Restaurant");
+            dbHelper.addData(email, name, nif, pass, description, phone, address, "Restaurant");
         } else {
-            dbHelper.addData(email, name,nif,pass,description,phone,address,"Enterprise");
+            dbHelper.addData(email, name, nif, pass, description, phone, address, "Enterprise");
         }
     }
-
-    public void goBack(View view) {
-        startActivity(new Intent(this, UserRegistrationActivity.class));
-    }
-
 }

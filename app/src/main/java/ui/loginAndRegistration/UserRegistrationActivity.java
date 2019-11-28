@@ -12,6 +12,7 @@ import com.example.greenfoodjava.R;
 
 import database.DatabaseManager;
 import database.UserTable;
+import ui.user.UserHomeActivity;
 
 public class UserRegistrationActivity extends AppCompatActivity {
 
@@ -21,6 +22,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbHelper = DatabaseManager.getUserTable();
+        getSupportActionBar().hide();
         setContentView(R.layout.user_registration);
     }
 
@@ -32,11 +34,15 @@ public class UserRegistrationActivity extends AppCompatActivity {
         startActivity(new Intent(UserRegistrationActivity.this, LoginActivity.class));
     }
 
+    public void goToHome(View v){
+        startActivity(new Intent(UserRegistrationActivity.this, UserHomeActivity.class));
+    }
+
     public void registerProcess(View v){
         if (allFieldsHaveCorrectFormat()){
             if (!userExist()) {
                 registerUserInUserTable();
-                goToLogin(v);
+                goToHome(v);
             } else {
                 EditText text = findViewById(R.id.email);
                 text.setError("DB error");

@@ -12,6 +12,19 @@
     android:paddingBottom="0dp"
     tools:context="ui.loginAndRegistration.LoginActivity">
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Greenfood"
+        android:textColor="#009688"
+        android:textSize="36sp"
+        app:fontFamily="casual"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -58,14 +71,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="116dp"
-        android:layout_marginRight="116dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
         android:onClick="loginProcess"
         android:text="Login"
         android:textColor="#3F51B5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
         tools:text="Login" />
 
@@ -89,20 +101,15 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="98dp"
-        android:layout_marginLeft="98dp"
-        android:layout_marginTop="103dp"
-        android:layout_marginEnd="130dp"
-        android:layout_marginRight="130dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="31dp"
         android:text="@string/action_login"
         android:textColor="#009688"
-        android:textSize="30sp"
+        android:textSize="25sp"
         app:fontFamily="casual"
         app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

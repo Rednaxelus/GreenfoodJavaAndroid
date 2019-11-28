@@ -16,10 +16,10 @@
 
     <Button
         android:id="@+id/filterDishButton"
-        android:layout_width="99dp"
-        android:layout_height="51dp"
+        android:layout_width="86dp"
+        android:layout_height="38dp"
         android:layout_gravity="start"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="36dp"
         android:layout_marginRight="36dp"
         android:background="@drawable/buttonshape"
@@ -45,14 +45,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="37dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Greenfood-Dish"
+        android:text="Dish Search"
         android:textColor="#009688"
         android:textSize="36sp"
         app:fontFamily="casual"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.366"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -75,18 +72,18 @@
 
     <Button
         android:id="@+id/searchDishButton"
-        android:layout_width="99dp"
-        android:layout_height="51dp"
+        android:layout_width="86dp"
+        android:layout_height="38dp"
         android:layout_gravity="start"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginRight="136dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
         android:onClick="searchDishName"
         android:text="@string/search"
         android:textColor="#3F51B5"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/filterDishButton"
         app:layout_constraintTop_toBottomOf="@+id/searchView"
         tools:text="Search" />
 
@@ -96,26 +93,13 @@
         android:layout_height="380dp"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.26"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/errorLabel" />
-
-    <TextView
-        android:id="@+id/errorLabel"
-        android:layout_width="156dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:text="Dishes not found"
-        android:textColor="#00F50505"
-        android:textSize="16sp"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView" />
+        app:layout_constraintTop_toBottomOf="@+id/searchDishButton" />
 
     <TextView
         android:id="@+id/diet_label"

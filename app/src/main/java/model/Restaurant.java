@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import logic.DietAnalyzer;
+
 public class Restaurant {
     private int ID;
     private String name;

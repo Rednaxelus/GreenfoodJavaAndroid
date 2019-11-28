@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import logic.DietAnalyzer;
+
 public class Product {
     private int ID;
     private String name;

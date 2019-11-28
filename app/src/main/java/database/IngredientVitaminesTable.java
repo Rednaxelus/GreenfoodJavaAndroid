@@ -19,7 +19,7 @@ public class IngredientVitaminesTable extends Table {
 
     public IngredientVitaminesTable(Context context) {
 
-        super(context, TABLE_NAME, null, 1);
+        super(context, TABLE_NAME, null, 2);
         List<String> t = new ArrayList<>();
         t.add("A");
         t.add("B1");

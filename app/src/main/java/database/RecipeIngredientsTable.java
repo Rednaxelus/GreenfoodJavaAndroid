@@ -19,7 +19,7 @@ public class RecipeIngredientsTable extends Table {
     private IngredientTable dbIngredient;
 
     public RecipeIngredientsTable(Context context) {
-        super(context, TABLE_NAME, null, 2);
+        super(context, TABLE_NAME, null, 3);
         dbIngredient = DatabaseManager.getIngredientTable();
     }
 

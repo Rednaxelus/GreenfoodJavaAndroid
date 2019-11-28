@@ -29,7 +29,7 @@ public class EnterpriseTable extends Table {
 
 
     public EnterpriseTable(Context context) {
-        super(context, TABLE_NAME, null, 2);
+        super(context, TABLE_NAME, null, 3);
         dbDishTable = DatabaseManager.getDishTable();
         System.out.println(count());
         if (count() == 0)

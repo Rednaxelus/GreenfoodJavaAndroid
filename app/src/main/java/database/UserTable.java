@@ -20,7 +20,7 @@ public class UserTable extends Table {
     private static final String LAST_NAME = "lastName";
 
     public UserTable(Context context) {
-        super(context, TABLE_NAME, null, 1);
+        super(context, TABLE_NAME, null, 2);
         System.out.println(count());
         if (count() == 0)
             addData("test7@h.com", "jjj","jose","pimm");

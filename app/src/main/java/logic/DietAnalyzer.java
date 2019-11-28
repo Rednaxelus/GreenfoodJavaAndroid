@@ -1,31 +1,37 @@
-package model;
+package logic;
 
 import java.util.ArrayList;
+
+import model.Diet;
+import model.Dish;
+import model.Ingredient;
 
 public class DietAnalyzer {
 
     private final static String[] carnivorous = {"Carne", "Pescado"};
-    private final static String[] vegetarianAnimalProducts = {"Carne", "Pescado"};
+    private final static String[] vegetarianAnimalProducts = {"Milk"};
 
     public static Diet determineDiet(ArrayList<Ingredient> ingredients) {
 
-        for (Ingredient ingredient : ingredients
-        ) {
-
             for (String test :
                     carnivorous) {
-                if (ingredient.getName().contains(test)) {
-                    return Diet.ALL;
+                for (Ingredient ingredient : ingredients
+                ) {
+                    if (ingredient.getName().contains(test)) {
+                        return Diet.ALL;
+                    }
                 }
             }
 
             for (String test :
                     vegetarianAnimalProducts) {
-                if (ingredient.getName().contains(test)) {
-                    return Diet.VEGETARIAN;
+                for (Ingredient ingredient : ingredients
+                ) {
+                    if (ingredient.getName().contains(test)) {
+                        return Diet.VEGETARIAN;
+                    }
                 }
             }
-        }
 
         return Diet.VEGAN;
     }

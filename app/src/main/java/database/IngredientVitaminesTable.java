@@ -20,10 +20,6 @@ public class IngredientVitaminesTable extends Table {
     public IngredientVitaminesTable(Context context) {
 
         super(context, TABLE_NAME, null, 2);
-        List<String> t = new ArrayList<>();
-        t.add("A");
-        t.add("B1");
-        addTuple(4, t);
     }
 
     @Override

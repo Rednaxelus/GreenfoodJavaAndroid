@@ -24,7 +24,7 @@ import model.Diet;
 import model.Restaurant;
 import ui.RestNameListAdapter;
 
-public class RestaurantSearchActivity extends Activity {
+public class SearchRestaurantActivity extends Activity {
 
     private static final int GET_FILTER_REQUEST = 1;
     private ArrayList<Allergy> allergyFilter = null;

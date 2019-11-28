@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -23,7 +22,6 @@ import com.example.greenfoodjava.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.DatabaseManager;
 import database.IngredientTable;
 import database.RecipeTable;
 import model.Ingredient;
@@ -42,7 +40,7 @@ public class CreateRecipeActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_recipe);
-        ingredientTable = DatabaseManager.getIngredientTable();
+        ingredientTable = new IngredientTable(this);
         recipeTable = new RecipeTable(this);
         recipeIngredients = new ArrayList<>();
         setScrollViewElements();

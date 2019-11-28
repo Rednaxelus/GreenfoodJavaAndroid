@@ -27,7 +27,7 @@ public class FilterDishesActivity extends Activity {
         setContentView(R.layout.dish_filter);
         dishTable = new DishTable(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Home");
+        toolbar.setTitle("Dish Filter");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

@@ -20,7 +20,7 @@ public class RecipeIngredientsTable extends Table {
 
     public RecipeIngredientsTable(Context context) {
         super(context, TABLE_NAME, null, 3);
-        dbIngredient = DatabaseManager.getIngredientTable();
+        dbIngredient = new IngredientTable(context);
     }
 
     @Override

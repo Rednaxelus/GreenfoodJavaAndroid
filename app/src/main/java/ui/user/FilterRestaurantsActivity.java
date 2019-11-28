@@ -24,7 +24,7 @@ public class FilterRestaurantsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.restaurant_filter);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Home");
+        toolbar.setTitle("Restaurant Filter");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -81,7 +81,7 @@ public class FilterRestaurantsActivity extends Activity {
     }
 
     public void goBack(View view) {
-        Intent replyIntent = new Intent(this, SearchDishActivity.class);
+        Intent replyIntent = new Intent(this, SearchRestaurantActivity.class);
         setResult(RESULT_CANCELED, replyIntent);
         finish();
     }

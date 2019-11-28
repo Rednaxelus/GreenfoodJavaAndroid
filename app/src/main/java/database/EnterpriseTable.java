@@ -30,7 +30,7 @@ public class EnterpriseTable extends Table {
 
     public EnterpriseTable(Context context) {
         super(context, TABLE_NAME, null, 3);
-        dbDishTable = DatabaseManager.getDishTable();
+        dbDishTable = new DishTable(context);
         System.out.println(count());
         if (count() == 0)
             addData("test6@h.com", "Rest","13518001G","jjj","kjhfsjsdfkj",

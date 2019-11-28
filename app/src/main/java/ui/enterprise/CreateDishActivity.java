@@ -20,7 +20,6 @@ import com.example.greenfoodjava.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.DatabaseManager;
 import database.DishTable;
 import database.IngredientTable;
 import model.Ingredient;
@@ -38,8 +37,8 @@ public class CreateDishActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_dish);
-        ingredientTable = DatabaseManager.getIngredientTable();
-        dishTable = DatabaseManager.getDishTable();
+        ingredientTable = new IngredientTable(this);
+        dishTable = new DishTable(this);
         dishIngredients = new ArrayList<>();
         setScrollViewElements();
         sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);

@@ -10,7 +10,7 @@
     android:paddingTop="0dp"
     android:paddingRight="0dp"
     android:paddingBottom="0dp"
-    tools:context="ui.user.RestaurantSearchActivity"
+    tools:context="ui.user.SearchRestaurantActivity"
     tools:visibility="visible">
 
     <Button

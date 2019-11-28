@@ -13,7 +13,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.greenfoodjava.R;
 
-import database.DatabaseManager;
 import database.EnterpriseTable;
 import database.UserTable;
 import ui.enterprise.EnterpriseHomeActivity;
@@ -30,7 +29,7 @@ public class LoginActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        userTable = DatabaseManager.getUserTable();
+        userTable = new UserTable(this);
         enterpriseTable = new EnterpriseTable(this);
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         this.userId = -1;

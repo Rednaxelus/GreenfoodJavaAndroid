@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import java.util.ListIterator;
 import database.ProductTable;
 import model.Allergy;
 import model.Diet;
+import model.Dish;
 import model.Product;
 import ui.RestNameListAdapter;
 
@@ -52,11 +54,12 @@ public class SearchProductActivity extends Activity {
             listView.setAdapter(new RestNameListAdapter(this, R.layout.product_name_template, null, 0, 1));
         } else {
             ArrayList<Product> products = filterProducts(productTable.getProductWithName(query), allergyFilter, dietFilter);
-
-
-            Cursor cursor = productTable.searchByName(query);
-            RestNameListAdapter adapter = new RestNameListAdapter(this, R.layout.product_name_template, cursor, 0, 1);
-            listView.setAdapter(adapter);
+            ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+            for (Product product : products
+            ) {
+                stringArrayAdapter.add(product.getName() + " " + product.getPrice() + " ");
+            }
+            listView.setAdapter(stringArrayAdapter);
         }
     }
 

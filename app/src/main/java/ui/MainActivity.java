@@ -8,10 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.greenfoodjava.R;
 
-import database.DatabaseManager;
-import database.DishTable;
-import database.IngredientTable;
-import database.UserTable;
 import ui.loginAndRegistration.UserRegistrationActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
-        DatabaseManager.createAllTables(new DishTable(this), new UserTable(this), new IngredientTable(this));
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

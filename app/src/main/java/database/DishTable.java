@@ -62,7 +62,7 @@ public class DishTable extends Table {
         while (data.moveToNext()) {
             System.out.println(data.getString(3));
             dishes.add(new Dish(data.getInt(0), data.getString(2),
-                    data.getDouble(3), dbPlateIngredient.getIngredientsOf(data.getInt(1))));
+                    data.getDouble(3), dbPlateIngredient.getIngredientsOf(data.getInt(0))));
         }
         data.close();
         //dishes.add(new Dish(1, "Macarrones con tomate", 12, null));

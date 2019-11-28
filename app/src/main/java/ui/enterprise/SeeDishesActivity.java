@@ -18,7 +18,6 @@ import com.example.greenfoodjava.R;
 
 import java.util.List;
 
-import database.DatabaseManager;
 import database.DishTable;
 import model.Dish;
 import ui.loginAndRegistration.LoginActivity;
@@ -30,7 +29,7 @@ public class SeeDishesActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.see_dishes);
-        dishTable = DatabaseManager.getDishTable();
+        dishTable = new DishTable(this);
         showDishes();
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Home");

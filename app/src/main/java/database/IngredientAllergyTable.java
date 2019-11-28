@@ -20,10 +20,6 @@ public class IngredientAllergyTable extends Table {
     public IngredientAllergyTable(Context context) {
 
         super(context, TABLE_NAME, null, 3);
-        List<String> t = new ArrayList<>();
-        t.add("A");
-        t.add("B1");
-        addTuple(4, t);
     }
 
     @Override
@@ -38,6 +34,7 @@ public class IngredientAllergyTable extends Table {
 
 
     public boolean addTuple(int idIngredient, List<String> allergies) {
+        System.out.println("Añadiendo Alérgenos");
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         for (String allergy : allergies) {
             System.out.println(allergy);
@@ -57,6 +54,7 @@ public class IngredientAllergyTable extends Table {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_INGREDIENT + " = " + idIngredient;
         Cursor data = sqlDB.rawQuery(query, null);
         while (data.moveToNext()) {
+            System.out.println(data.getString(2));
             allergies.add(Allergy.valueOf(data.getString(2)));
         }
         data.close();

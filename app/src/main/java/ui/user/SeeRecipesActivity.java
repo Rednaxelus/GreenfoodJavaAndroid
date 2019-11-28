@@ -59,7 +59,7 @@ public class SeeRecipesActivity extends Activity {
             ll.addView(createTextView("You haven't created a recipe yet"));
         }else{
             for (Recipe recipe : recipes)
-                ll.addView(createTextView(recipe.getName() + ": " + recipe.getDescription() + " - " + recipe.getDuration()));
+                ll.addView(createTextView(recipe.getName() + ": " + recipe.getDescription() + " - " + recipe.getDuration() + " min"));
         }
     }
 

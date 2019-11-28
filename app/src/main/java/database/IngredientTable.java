@@ -40,17 +40,23 @@ public class IngredientTable extends Table {
         vitamines.add("A");
         vitamines.add("B1");
         vitamines.add("B2");
+        List<String> allergy = getAllergies();
+        addIngredient("Lettuce", 3, 23, 34,
+                23, 23, 12, 3,  vitamines, allergy);
+
+        addIngredient("Tomato", 3, 23, 34,
+                23, 23, 12, 3,  vitamines, allergy);
+
+        addIngredient("Potato", 3, 23, 34,
+                23, 23, 12, 3,  vitamines, allergy);
+
+    }
+
+    private List<String> getAllergies() {
         List<String> allergy = new ArrayList<>();
         allergy.add("PEANUTS");
         allergy.add("GLUTEN");
-        addIngredient("Pipas", 3, 23, 34,
-                23, 23, 12, 3,  vitamines, allergy);
-
-        addIngredient("Carne", 3, 23, 34,
-                23, 23, 12, 3,  vitamines, allergy);
-
-        addIngredient("Pescado", 3, 23, 34,
-                23, 23, 12, 3,  vitamines, allergy);
+        return allergy;
     }
 
 

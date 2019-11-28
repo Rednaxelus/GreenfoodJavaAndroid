@@ -16,7 +16,7 @@ public class UserHomeActivity extends Activity {
     }
 
     public void searchRestaurant(View view) {
-        startActivity(new Intent(this, RestaurantSearchActivity.class));
+        startActivity(new Intent(this, SearchRestaurantActivity.class));
     }
 
     public void gotToCreateRecipeActivity(View view) {

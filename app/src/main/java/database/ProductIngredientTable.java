@@ -18,7 +18,7 @@ public class ProductIngredientTable extends Table {
 
     public ProductIngredientTable(Context context) {
         super(context, TABLE_NAME, null, 2);
-        dbIngredient = DatabaseManager.getIngredientTable();
+        dbIngredient = new IngredientTable(context);
     }
 
     @Override

@@ -40,9 +40,6 @@ public class SearchProductActivity extends Activity {
         if (imm != null) {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
-
-        TextView error = findViewById(R.id.errorLabel);
-        error.setVisibility(View.INVISIBLE);
         SearchView searchView = findViewById(R.id.searchView);
         productSearchQuery(String.valueOf(searchView.getQuery()));
     }
@@ -52,8 +49,6 @@ public class SearchProductActivity extends Activity {
         ProductTable productTable = new ProductTable(this);
         ListView listView = findViewById(R.id.nameSearchList);
         if (query.equals("")) {
-            TextView error = findViewById(R.id.errorLabel);
-            error.setVisibility(View.VISIBLE);
             listView.setAdapter(new RestNameListAdapter(this, R.layout.product_name_template, null, 0, 1));
         } else {
             ArrayList<Product> products = filterProducts(productTable.getProductWithName(query), allergyFilter, dietFilter);

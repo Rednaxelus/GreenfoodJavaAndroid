@@ -45,9 +45,6 @@ public class RestaurantSearchActivity extends Activity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
 
-        TextView error = findViewById(R.id.errorLabel);
-        error.setVisibility(View.INVISIBLE);
-        TextView label = findViewById(R.id.diet_label);
         SearchView searchView = findViewById(R.id.searchView);
         restaurantSearchQuery(String.valueOf(searchView.getQuery()));
     }
@@ -57,8 +54,6 @@ public class RestaurantSearchActivity extends Activity {
         EnterpriseTable enterpriseTable = new EnterpriseTable(this);
         ListView listView = findViewById(R.id.nameSearchList);
         if(query.equals("")){
-            TextView error = findViewById(R.id.errorLabel);
-            error.setVisibility(View.VISIBLE);
             listView.setAdapter(new RestNameListAdapter(this, R.layout.restaurant_name_template, null, 0, 0));
         }else {
 

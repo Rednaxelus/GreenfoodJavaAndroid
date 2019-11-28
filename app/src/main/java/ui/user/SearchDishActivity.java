@@ -46,8 +46,6 @@ public class SearchDishActivity extends Activity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
 
-        TextView error = findViewById(R.id.errorLabel);
-        error.setVisibility(View.INVISIBLE);
         SearchView searchView = findViewById(R.id.searchView);
         searchQuery(String.valueOf(searchView.getQuery()));
     }
@@ -57,8 +55,6 @@ public class SearchDishActivity extends Activity {
         DishTable dishTable = new DishTable(this);
         ListView listView = findViewById(R.id.nameSearchList);
         if (query.equals("")) {
-            TextView error = findViewById(R.id.errorLabel);
-            error.setVisibility(View.VISIBLE);
             listView.setAdapter(new RestNameListAdapter(this, R.layout.dish_name_template, null, 0, 1));
         } else {
             ArrayList<Dish> dishes = filterDishes(dishTable.getDishesWithName(query), allergyFilter, dietFilter);

@@ -51,12 +51,7 @@ public class CreateRecipeActivity extends Activity {
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), UserHomeActivity.class)));
     }
 
 
@@ -69,17 +64,14 @@ public class CreateRecipeActivity extends Activity {
 
         for (Ingredient ingredient : ingredients){
             CheckBox cb = new CheckBox(getApplicationContext());
-            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked){
-                        recipeIngredients.add(ingredientTable.getIngredient(buttonView.getText().toString()));
-                    }else{
-                        for (Ingredient dishIngredient : recipeIngredients){
-                            if (dishIngredient.getName().equals(buttonView.getText().toString())){
-                                recipeIngredients.remove(dishIngredient);
-                                break;
-                            }
+            cb.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked){
+                    recipeIngredients.add(ingredientTable.getIngredient(buttonView.getText().toString()));
+                }else{
+                    for (Ingredient dishIngredient : recipeIngredients){
+                        if (dishIngredient.getName().equals(buttonView.getText().toString())){
+                            recipeIngredients.remove(dishIngredient);
+                            break;
                         }
                     }
                 }

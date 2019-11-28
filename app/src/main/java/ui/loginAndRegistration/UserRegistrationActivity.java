@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.greenfoodjava.R;
 
+import database.DatabaseManager;
 import database.UserTable;
 
 public class UserRegistrationActivity extends AppCompatActivity {
@@ -19,7 +20,7 @@ public class UserRegistrationActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dbHelper = new UserTable(this);
+        dbHelper = DatabaseManager.getUserTable();
         setContentView(R.layout.user_registration);
     }
 

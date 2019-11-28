@@ -23,6 +23,7 @@ import com.example.greenfoodjava.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import database.DatabaseManager;
 import database.IngredientTable;
 import database.RecipeTable;
 import model.Ingredient;
@@ -41,7 +42,7 @@ public class CreateRecipeActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_recipe);
-        ingredientTable = new IngredientTable(this);
+        ingredientTable = DatabaseManager.getIngredientTable();
         recipeTable = new RecipeTable(this);
         recipeIngredients = new ArrayList<>();
         setScrollViewElements();

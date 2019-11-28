@@ -23,13 +23,6 @@ public class DishTable extends Table {
     public DishTable(Context context) {
         super(context, TABLE_NAME, null, 2);
         dbPlateIngredient = new DishIngredientTable(context);
-
-        ArrayList<Ingredient> temp = new ArrayList<>();
-
-        temp.add(dbPlateIngredient.getDbIngredient().getIngredient("Carne"));
-
-        // addDish("Chili con carne", 18, temp, 0);
-        DatabaseManager.setDishTable(this);
     }
 
     @Override

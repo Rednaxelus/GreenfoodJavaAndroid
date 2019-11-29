@@ -19,7 +19,7 @@
         android:layout_width="99dp"
         android:layout_height="51dp"
         android:layout_gravity="start"
-        android:layout_marginBottom="140dp"
+        android:layout_marginBottom="90dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
         android:onClick="gotToSearchDishesActivity"
@@ -53,9 +53,12 @@
         android:layout_marginStart="212dp"
         android:layout_marginLeft="212dp"
         android:layout_marginTop="29dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginRight="144dp"
         android:layout_marginBottom="8dp"
         android:text="Soy"
         app:layout_constraintBottom_toTopOf="@+id/checkBoxWheat"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/allergy_label"
         app:layout_constraintVertical_bias="1.0" />
@@ -67,7 +70,10 @@
         android:layout_marginStart="212dp"
         android:layout_marginLeft="212dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginRight="136dp"
         android:text="Eggs"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxWheat" />
 
@@ -77,9 +83,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="212dp"
         android:layout_marginLeft="212dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="126dp"
+        android:layout_marginRight="126dp"
         android:text="Wheat"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="404dp" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxSoy" />
 
     <CheckBox
         android:id="@+id/checkBoxPeanuts"

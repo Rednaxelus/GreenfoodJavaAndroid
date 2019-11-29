@@ -19,7 +19,7 @@
         android:layout_width="99dp"
         android:layout_height="51dp"
         android:layout_gravity="start"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="90dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
         android:onClick="gotToSearchDishesActivity"
@@ -63,9 +63,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginLeft="64dp"
+        android:layout_marginTop="8dp"
         android:text="Gluten"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="444dp" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxPeanuts" />
 
     <CheckBox
         android:id="@+id/checkBoxSoy"
@@ -98,9 +99,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
+        android:layout_marginTop="8dp"
         android:text="Wheat"
         app:layout_constraintStart_toEndOf="@+id/checkBoxPeanuts"
-        tools:layout_editor_absoluteY="404dp" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxSoy" />
 
     <CheckBox
         android:id="@+id/checkBoxPeanuts"

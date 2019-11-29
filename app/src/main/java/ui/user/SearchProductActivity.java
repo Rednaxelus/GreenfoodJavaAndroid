@@ -49,7 +49,7 @@ public class SearchProductActivity extends Activity {
             ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
             for (Product product : products
             ) {
-                stringArrayAdapter.add(product.getName() + " " + product.getPrice() + " ");
+                stringArrayAdapter.add(product.getName() + "        " + product.getPrice() + "€     " + product.getStock());
             }
             listView.setAdapter(stringArrayAdapter);
 

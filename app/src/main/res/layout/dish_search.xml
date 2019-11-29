@@ -89,15 +89,15 @@
 
     <ListView
         android:id="@+id/nameSearchList"
-        android:layout_width="338dp"
-        android:layout_height="380dp"
+        android:layout_width="378dp"
+        android:layout_height="414dp"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.26"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/searchDishButton" />
 
@@ -105,8 +105,8 @@
         android:id="@+id/diet_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:text=" Name        Price"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/nameSearchList"

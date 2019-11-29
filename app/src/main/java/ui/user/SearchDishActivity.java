@@ -52,13 +52,9 @@ public class SearchDishActivity extends Activity {
     private void searchQuery(String query) {
         DishTable dishTable = new DishTable(this);
 
-        if (query.equals("")) {
-
-        } else {
             ArrayList<Dish> dishes = filterDishes(dishTable.getDishesWithName(query), allergyFilter, dietFilter);
 
             updateListView(dishes);
-        }
     }
 
     private void updateListView(ArrayList<Dish> dishes) {
@@ -125,5 +121,6 @@ public class SearchDishActivity extends Activity {
                 startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
             }
         });
+        searchQuery("");
     }
 }

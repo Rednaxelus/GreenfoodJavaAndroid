@@ -21,7 +21,6 @@ import database.EnterpriseTable;
 import model.Allergy;
 import model.Diet;
 import model.Restaurant;
-import ui.RestNameListAdapter;
 
 public class SearchRestaurantActivity extends Activity {
 
@@ -45,16 +44,13 @@ public class SearchRestaurantActivity extends Activity {
         }
 
         SearchView searchView = findViewById(R.id.searchView);
-        restaurantSearchQuery(String.valueOf(searchView.getQuery()));
+        searchQuery(String.valueOf(searchView.getQuery()));
     }
 
 
-    private void restaurantSearchQuery(String query){
+    private void searchQuery(String query) {
         EnterpriseTable enterpriseTable = new EnterpriseTable(this);
         ListView listView = findViewById(R.id.nameSearchList);
-        if(query.equals("")){
-            listView.setAdapter(new RestNameListAdapter(this, R.layout.restaurant_name_template, null, 0, 0));
-        }else {
 
             ArrayList<Restaurant> restaurants = filterRestaurants(enterpriseTable.getRestaurantsWithName(query), allergyFilter, dietFilter);
 
@@ -64,7 +60,7 @@ public class SearchRestaurantActivity extends Activity {
                 stringArrayAdapter.add(restaurant.getName() + " " + restaurant.getPhoneNumber() + " " + restaurant.getAddress());
             }
             listView.setAdapter(stringArrayAdapter);
-        }
+
     }
 
     public void gotToFilterRestaurantsActivity(View view) {
@@ -79,7 +75,7 @@ public class SearchRestaurantActivity extends Activity {
                 allergyFilter = (ArrayList<Allergy>) data.getSerializableExtra("Allergies");
                 dietFilter = (Diet) data.getSerializableExtra("Diet");
                 SearchView searchView = findViewById(R.id.searchView);
-                restaurantSearchQuery(String.valueOf(searchView.getQuery()));
+                searchQuery(String.valueOf(searchView.getQuery()));
             }
         }
     }
@@ -112,5 +108,6 @@ public class SearchRestaurantActivity extends Activity {
                 startActivity(new Intent(getApplicationContext(),UserHomeActivity.class));
             }
         });
+        searchQuery("");
     }
 }

@@ -21,7 +21,6 @@ import database.ProductTable;
 import model.Allergy;
 import model.Diet;
 import model.Product;
-import ui.RestNameListAdapter;
 
 public class SearchProductActivity extends Activity {
 
@@ -40,16 +39,12 @@ public class SearchProductActivity extends Activity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
         SearchView searchView = findViewById(R.id.searchView);
-        productSearchQuery(String.valueOf(searchView.getQuery()));
+        searchQuery(String.valueOf(searchView.getQuery()));
     }
 
-
-    private void productSearchQuery(String query) {
+    private void searchQuery(String query) {
         ProductTable productTable = new ProductTable(this);
         ListView listView = findViewById(R.id.nameSearchList);
-        if (query.equals("")) {
-            listView.setAdapter(new RestNameListAdapter(this, R.layout.product_name_template, null, 0, 1));
-        } else {
             ArrayList<Product> products = filterProducts(productTable.getProductWithName(query), allergyFilter, dietFilter);
             ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
             for (Product product : products
@@ -57,7 +52,7 @@ public class SearchProductActivity extends Activity {
                 stringArrayAdapter.add(product.getName() + " " + product.getPrice() + " ");
             }
             listView.setAdapter(stringArrayAdapter);
-        }
+
     }
 
     private ArrayList<Product> filterProducts(ArrayList<Product> products, ArrayList<Allergy> allergies, Diet diet) {
@@ -95,7 +90,7 @@ public class SearchProductActivity extends Activity {
                 allergyFilter = (ArrayList<Allergy>) data.getSerializableExtra("Allergies");
                 dietFilter = (Diet) data.getSerializableExtra("Diet");
                 SearchView searchView = findViewById(R.id.searchView);
-                productSearchQuery(String.valueOf(searchView.getQuery()));
+                searchQuery(String.valueOf(searchView.getQuery()));
             }
         }
     }
@@ -114,5 +109,6 @@ public class SearchProductActivity extends Activity {
                 startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
             }
         });
+        searchQuery("");
     }
 }

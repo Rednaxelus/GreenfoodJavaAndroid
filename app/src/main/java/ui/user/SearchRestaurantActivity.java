@@ -9,7 +9,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -79,6 +78,8 @@ public class SearchRestaurantActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 allergyFilter = (ArrayList<Allergy>) data.getSerializableExtra("Allergies");
                 dietFilter = (Diet) data.getSerializableExtra("Diet");
+                SearchView searchView = findViewById(R.id.searchView);
+                restaurantSearchQuery(String.valueOf(searchView.getQuery()));
             }
         }
     }

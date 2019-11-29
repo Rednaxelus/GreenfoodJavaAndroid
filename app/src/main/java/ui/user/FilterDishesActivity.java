@@ -14,18 +14,15 @@ import com.example.greenfoodjava.R;
 
 import java.util.ArrayList;
 
-import database.DishTable;
 import model.Allergy;
 import model.Diet;
 
 public class FilterDishesActivity extends Activity {
-    private DishTable dishTable;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dish_filter);
-        dishTable = new DishTable(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Dish Filter");
         toolbar.setTitleTextColor(Color.WHITE);

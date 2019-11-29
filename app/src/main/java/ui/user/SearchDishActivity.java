@@ -9,7 +9,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -22,7 +21,6 @@ import database.DishTable;
 import model.Allergy;
 import model.Diet;
 import model.Dish;
-import ui.RestNameListAdapter;
 
 public class SearchDishActivity extends Activity {
 
@@ -53,19 +51,24 @@ public class SearchDishActivity extends Activity {
 
     private void searchQuery(String query) {
         DishTable dishTable = new DishTable(this);
-        ListView listView = findViewById(R.id.nameSearchList);
+
         if (query.equals("")) {
-            listView.setAdapter(new RestNameListAdapter(this, R.layout.dish_name_template, null, 0, 1));
+
         } else {
             ArrayList<Dish> dishes = filterDishes(dishTable.getDishesWithName(query), allergyFilter, dietFilter);
 
-            ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-            for (Dish dish : dishes
-            ) {
-                stringArrayAdapter.add(dish.getName() + " " + dish.getPrice() + " ");
-            }
-            listView.setAdapter(stringArrayAdapter);
+            updateListView(dishes);
         }
+    }
+
+    private void updateListView(ArrayList<Dish> dishes) {
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        for (Dish dish : dishes
+        ) {
+            stringArrayAdapter.add(dish.getName() + " " + dish.getPrice() + " ");
+        }
+        ListView listView = findViewById(R.id.nameSearchList);
+        listView.setAdapter(stringArrayAdapter);
     }
 
     private ArrayList<Dish> filterDishes(ArrayList<Dish> dishes, ArrayList<Allergy> allergies, Diet diet) {
@@ -102,6 +105,8 @@ public class SearchDishActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 allergyFilter = (ArrayList<Allergy>) data.getSerializableExtra("Allergies");
                 dietFilter = (Diet) data.getSerializableExtra("Diet");
+                SearchView searchView = findViewById(R.id.searchView);
+                searchQuery(String.valueOf(searchView.getQuery()));
             }
         }
     }

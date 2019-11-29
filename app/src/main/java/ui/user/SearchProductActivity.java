@@ -2,7 +2,6 @@ package ui.user;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +9,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -22,7 +20,6 @@ import java.util.ListIterator;
 import database.ProductTable;
 import model.Allergy;
 import model.Diet;
-import model.Dish;
 import model.Product;
 import ui.RestNameListAdapter;
 
@@ -97,6 +94,8 @@ public class SearchProductActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 allergyFilter = (ArrayList<Allergy>) data.getSerializableExtra("Allergies");
                 dietFilter = (Diet) data.getSerializableExtra("Diet");
+                SearchView searchView = findViewById(R.id.searchView);
+                productSearchQuery(String.valueOf(searchView.getQuery()));
             }
         }
     }

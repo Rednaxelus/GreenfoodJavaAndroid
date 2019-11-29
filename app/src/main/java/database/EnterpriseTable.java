@@ -59,7 +59,7 @@ public class EnterpriseTable extends Table {
      * @param address address
      * @return true//false
      */
-    public boolean addData(String email, String name, String nif, String password, String description,
+    public int addData(String email, String name, String nif, String password, String description,
                     String phoneNumber,String address, String type) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
 
@@ -75,7 +75,7 @@ public class EnterpriseTable extends Table {
 
         long result = sqlDB.insert(TABLE_NAME, null, contentValues);
 
-        return result == -1;
+        return (int) result;
     }
 
     private String getMD5(String password) {
@@ -93,6 +93,16 @@ public class EnterpriseTable extends Table {
     public boolean checkIfEnterpriseExist(String email) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + EMAIL + " = '" + email + "'";
+        Cursor data = sqlDB.rawQuery(query, null);
+        data.moveToFirst();
+        boolean res = data.getCount() > 0;
+        data.close();
+        return res;
+    }
+
+    public boolean isEnterprise(int id) {
+        SQLiteDatabase sqlDB = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + " = '" + id + "' AND " + TYPE + " = 'Enterprise'";
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
         boolean res = data.getCount() > 0;

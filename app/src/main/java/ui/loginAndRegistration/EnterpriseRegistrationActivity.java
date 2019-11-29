@@ -1,13 +1,16 @@
 package ui.loginAndRegistration;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -18,10 +21,13 @@ import java.util.regex.Pattern;
 import database.EnterpriseTable;
 import ui.enterprise.EnterpriseHomeActivity;
 
+import static ui.loginAndRegistration.LoginActivity.MyPREFERENCES;
+
 public class EnterpriseRegistrationActivity extends Activity {
     private boolean isSwitchChecked;
     private boolean fieldError = false;
     private EnterpriseTable dbHelper;
+    private int ID;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,9 +64,25 @@ public class EnterpriseRegistrationActivity extends Activity {
         checkAddressField();
         if (!fieldError) {
             createEnterprise();
-            startActivity(new Intent(this, EnterpriseHomeActivity.class));
+            setCredentials();
+            if(ID != -1)
+                startActivity(new Intent(this, EnterpriseHomeActivity.class));
         }
     }
+
+    private void setCredentials() {
+        SharedPreferences.Editor editor = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE).edit();
+
+        editor.putString("email", getField(R.id.email));
+        editor.putInt("id", this.ID);
+        editor.commit();
+    }
+
+    private String getField(int id){
+        TextView field = findViewById(id);
+        return field.getText().toString();
+    }
+
 
     private void checkNameField() {
         EditText nameText = findViewById(R.id.name);
@@ -172,9 +194,9 @@ public class EnterpriseRegistrationActivity extends Activity {
         String address = text.getText().toString();
 
         if (isSwitchChecked) {
-            dbHelper.addData(email, name, nif, pass, description, phone, address, "Restaurant");
+            this.ID = dbHelper.addData(email, name, nif, pass, description, phone, address, "Restaurant");
         } else {
-            dbHelper.addData(email, name, nif, pass, description, phone, address, "Enterprise");
+            this.ID = dbHelper.addData(email, name, nif, pass, description, phone, address, "Enterprise");
         }
     }
 }

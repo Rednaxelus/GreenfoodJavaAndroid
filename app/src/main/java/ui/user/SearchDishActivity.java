@@ -44,16 +44,18 @@ public class SearchDishActivity extends Activity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
 
-        SearchView searchView = findViewById(R.id.searchView);
-        searchQuery(String.valueOf(searchView.getQuery()));
+        searchQuery(getNameQuery());
     }
 
+    private String getNameQuery() {
+        SearchView searchView = findViewById(R.id.searchView);
+        return String.valueOf(searchView.getQuery());
+    }
 
     private void searchQuery(String query) {
         DishTable dishTable = new DishTable(this);
 
             ArrayList<Dish> dishes = filterDishes(dishTable.getDishesWithName(query), allergyFilter, dietFilter);
-
             updateListView(dishes);
     }
 
@@ -61,7 +63,7 @@ public class SearchDishActivity extends Activity {
         ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         for (Dish dish : dishes
         ) {
-            stringArrayAdapter.add(dish.getName() + " " + dish.getPrice() + " ");
+            stringArrayAdapter.add(dish.getName() + "       " + dish.getPrice() + "€");
         }
         ListView listView = findViewById(R.id.nameSearchList);
         listView.setAdapter(stringArrayAdapter);
@@ -86,7 +88,6 @@ public class SearchDishActivity extends Activity {
                 }
             }
         }
-
         return dishes;
     }
 
@@ -101,8 +102,7 @@ public class SearchDishActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 allergyFilter = (ArrayList<Allergy>) data.getSerializableExtra("Allergies");
                 dietFilter = (Diet) data.getSerializableExtra("Diet");
-                SearchView searchView = findViewById(R.id.searchView);
-                searchQuery(String.valueOf(searchView.getQuery()));
+                searchQuery(getNameQuery());
             }
         }
     }

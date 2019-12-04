@@ -44,6 +44,7 @@ public class Restaurant {
     public boolean hasDishesWithoutTheseAllergies(ArrayList<Allergy> allergiesToTest) {
         boolean includesAllergies;
 
+        if (allergiesToTest == null) return true;
         for (Dish dish :
                 dishes) {
             includesAllergies = false;

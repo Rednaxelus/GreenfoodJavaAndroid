@@ -20,12 +20,19 @@ public class UserTable extends Table {
     private static final String LAST_NAME = "lastName";
 
     public UserTable(Context context) {
-        super(context, TABLE_NAME, null, 2);
+        super(context, TABLE_NAME, null, 3);
         System.out.println(count());
-        if (count() == 0)
-            addData("test7@h.com", "jjj","jose","pimm");
+
+        if (count() == 0) {
+            addFillerEntries();
+        }
+
     }
 
+    private void addFillerEntries() {
+        addData("test7@h.com", "jjj", "jose", "pimm");
+        addData("mike@gmail.com", "GSisSomething+", "Mike", "Pickens");
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {

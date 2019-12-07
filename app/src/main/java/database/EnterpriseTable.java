@@ -29,13 +29,21 @@ public class EnterpriseTable extends Table {
 
 
     public EnterpriseTable(Context context) {
-        super(context, TABLE_NAME, null, 3);
+        super(context, TABLE_NAME, null, 4);
         dbDishTable = new DishTable(context);
         System.out.println(count());
-        if (count() == 0)
-            addData("test6@h.com", "Rest","13518001G","jjj","kjhfsjsdfkj",
-                    "888","C/DD","Restaurant");
 
+        if (count() == 0) {
+            addFillerEntries();
+        }
+
+    }
+
+    private void addFillerEntries() {
+        addData("test6@h.com", "Rest", "13518001G", "jjj", "kjhfsjsdfkj",
+                "888", "C/DD", "Producer");
+        addData("mayo@best.com", "Big Mayos Best", "78318001G", "bmb", "We love it cheesy",
+                "+34 98326789", "Canillejas 31, 28022 Madrid ", "Restaurant");
     }
 
     @Override

@@ -80,7 +80,7 @@
         android:layout_marginRight="5dp"
         android:background="@drawable/buttonshape"
         android:enabled="true"
-        android:onClick="searchDishName"
+        android:onClick="searchName"
         android:text="@string/search"
         android:textColor="#3F51B5"
         app:layout_constraintEnd_toStartOf="@+id/filterDishButton"

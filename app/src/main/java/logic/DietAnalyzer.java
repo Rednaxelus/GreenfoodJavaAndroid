@@ -8,7 +8,7 @@ import model.Ingredient;
 
 public class DietAnalyzer {
 
-    private final static String[] carnivorous = {"Carne", "Pescado"};
+    private final static String[] carnivorous = {"Carne", "Pescado", "Meat"};
     private final static String[] vegetarianAnimalProducts = {"Milk"};
 
     public static Diet determineDiet(ArrayList<Ingredient> ingredients) {

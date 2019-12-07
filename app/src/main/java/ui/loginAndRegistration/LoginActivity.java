@@ -53,8 +53,8 @@ public class LoginActivity extends Activity {
                 setCredentials();
                 startActivity(new Intent(this, EnterpriseHomeActivity.class));
             }else{
-                showErrorFor(R.id.email, "User doesn't exist");
-                showErrorFor(R.id.password, "User doesn't exist");
+                showErrorFor(R.id.email, "User doesn't exist or password wrong");
+                showErrorFor(R.id.password, "User doesn't exist or password wrong");
             }
         }
     }

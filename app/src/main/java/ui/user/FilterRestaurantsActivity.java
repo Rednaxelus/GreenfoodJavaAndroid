@@ -35,8 +35,8 @@ public class FilterRestaurantsActivity extends Activity {
         });
     }
 
-    public void gotToSearchDishesActivity(View view) {
-        Intent replyIntent = new Intent(this, SearchDishActivity.class);
+    public void gotToSearchRestaurantsActivity(View view) {
+        Intent replyIntent = new Intent(this, SearchRestaurantActivity.class);
         replyIntent.putExtra("Allergies", getSelectedAllergiesList());
         replyIntent.putExtra("Diet", getSelectedDiet());
         setResult(RESULT_OK, replyIntent);
@@ -46,12 +46,11 @@ public class FilterRestaurantsActivity extends Activity {
     private Diet getSelectedDiet() {
         int result = ((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition();
         switch (result) {
-            case 0:
-                return Diet.ALL;
             case 1:
                 return Diet.VEGETARIAN;
             case 2:
                 return Diet.VEGAN;
+            case 0:
             default:
                 return Diet.ALL;
         }

@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Allergy;
 import model.Ingredient;
+import model.Vitamin;
 
 public class IngredientTable extends Table {
 
@@ -23,44 +25,31 @@ public class IngredientTable extends Table {
     private static final String FIBER = "fiber";
     private static final String FAT = "fat";
     private IngredientVitaminesTable dbIngredientVitamine;
-    private IngredientAllergyTable dbIngredientAllergy;
+    private AllergyTable dbAllergy;
 
     public IngredientTable(Context context) {
 
-        super(context, TABLE_NAME, null, 3);
+        super(context, TABLE_NAME, null, 7);
 
         dbIngredientVitamine = new IngredientVitaminesTable(context);
-        dbIngredientAllergy = new IngredientAllergyTable(context);
+        dbAllergy = new AllergyTable(context);
         if (count() == 0)
             initDB();
     }
 
     private void initDB() {
-        List<String> vitamines = new ArrayList<>();
-        vitamines.add("A");
-        vitamines.add("B1");
-        vitamines.add("B2");
-        List<String> allergy = getAllergies();
+        List<Vitamin> vitamines = new ArrayList<>();
+
+        List<Allergy> allergies = new ArrayList<>();
         addIngredient("Lettuce", 3, 23, 34,
-                23, 23, 12, 3,  vitamines, allergy);
-
+                23, 23, 12, 3,  vitamines, allergies);
         addIngredient("Tomato", 3, 23, 34,
-                23, 23, 12, 3,  vitamines, allergy);
-
+                23, 23, 12, 3,  vitamines, allergies);
         addIngredient("Potato", 3, 23, 34,
-                23, 23, 12, 3,  vitamines, allergy);
-
-        // ArrayList<String> allergy2 = new ArrayList<>();
-        // allergy2.add("MILK");
-        //addIngredient("Milk", 3, 23, 34,23, 23, 12, 3,  vitamines, allergy2);
-
-    }
-
-    private List<String> getAllergies() {
-        List<String> allergy = new ArrayList<>();
-        allergy.add("PEANUTS");
-        allergy.add("GLUTEN");
-        return allergy;
+                23, 23, 12, 3,  vitamines, allergies);
+        addIngredient("Meat", 32, 23, 34,23, 23, 12, 3,  vitamines, allergies);
+        allergies.add(Allergy.MILK);
+        addIngredient("Milk", 3, 23, 34,23, 23, 12, 3,  vitamines, allergies);
     }
 
 
@@ -79,7 +68,7 @@ public class IngredientTable extends Table {
 
     public boolean addIngredient(String name, int amount, double energeticValue, double calories,
                                  double proteins, double carbohydrates, double fiber, double fat,
-                                 List<String> vitamines, List<String> allergies) {
+                                 List<Vitamin> vitamines, List<Allergy> allergies) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -95,9 +84,8 @@ public class IngredientTable extends Table {
         long result = sqlDB.insert(TABLE_NAME, null, contentValues);
         if (result == -1)
             return false;
-        System.out.println(allergies.toArray()[0]);
         return dbIngredientVitamine.addTuple((int) result,vitamines) &&
-                dbIngredientAllergy.addTuple((int) result,allergies);
+                dbAllergy.addTuple((int) result, allergies);
     }
 
     public List<Ingredient> getIngredients() {
@@ -109,7 +97,7 @@ public class IngredientTable extends Table {
             Ingredient in = new Ingredient(data.getString(1), data.getInt(2),
                     data.getInt(0), data.getDouble(3)+"",
                     data.getInt(4), data.getInt(5), data.getInt(6),
-                    data.getInt(7), data.getInt(8), dbIngredientVitamine.getVitaminesOfIngredient(data.getInt(0)), dbIngredientAllergy.getAllergiesOfIngredient(data.getInt(0)));
+                    data.getInt(7), data.getInt(8), dbIngredientVitamine.getVitaminesOfIngredient(data.getInt(0)), dbAllergy.getAllergiesOfIngredient(data.getInt(0)));
             ingredients.add(in);
         }
         data.close();
@@ -126,7 +114,7 @@ public class IngredientTable extends Table {
             in = new Ingredient(ingredientName, data.getInt(2),
                     data.getInt(0), data.getDouble(3)+"",
                     data.getInt(4), data.getInt(5), data.getInt(6),
-                    data.getInt(7), data.getInt(8), dbIngredientVitamine.getVitaminesOfIngredient(data.getInt(0)), dbIngredientAllergy.getAllergiesOfIngredient(data.getInt(0)));
+                    data.getInt(7), data.getInt(8), dbIngredientVitamine.getVitaminesOfIngredient(data.getInt(0)), dbAllergy.getAllergiesOfIngredient(data.getInt(0)));
         data.close();
         return in;
     }
@@ -141,12 +129,8 @@ public class IngredientTable extends Table {
             in = new Ingredient(data.getString(1), data.getInt(2),
                     data.getInt(0), data.getDouble(3)+"",
                     data.getInt(4), data.getInt(5), data.getInt(6),
-                    data.getInt(7), data.getInt(8), dbIngredientVitamine.getVitaminesOfIngredient(data.getInt(0)), dbIngredientAllergy.getAllergiesOfIngredient(data.getInt(0)));
+                    data.getInt(7), data.getInt(8), dbIngredientVitamine.getVitaminesOfIngredient(data.getInt(0)), dbAllergy.getAllergiesOfIngredient(data.getInt(0)));
         data.close();
         return in;
-    }
-
-    public IngredientAllergyTable getDbIngredientAllergy() {
-        return dbIngredientAllergy;
     }
 }

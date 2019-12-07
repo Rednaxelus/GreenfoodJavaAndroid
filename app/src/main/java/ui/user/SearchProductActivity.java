@@ -45,13 +45,12 @@ public class SearchProductActivity extends Activity {
     private void searchQuery(String query) {
         ProductTable productTable = new ProductTable(this);
         ListView listView = findViewById(R.id.nameSearchList);
-            ArrayList<Product> products = filterProducts(productTable.getProductWithName(query), allergyFilter, dietFilter);
-            ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-            for (Product product : products
-            ) {
-                stringArrayAdapter.add(product.getName() + "        " + product.getPrice() + "€     " + product.getStock());
-            }
-            listView.setAdapter(stringArrayAdapter);
+        ArrayList<Product> products = filterProducts(productTable.getProductWithName(query), allergyFilter, dietFilter);
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        for (Product product : products) {
+            stringArrayAdapter.add(product.getName() + "        " + product.getPrice() + "€     " + product.getStock());
+        }
+        listView.setAdapter(stringArrayAdapter);
 
     }
 

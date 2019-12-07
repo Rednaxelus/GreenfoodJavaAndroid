@@ -23,7 +23,7 @@ public class ProductTable extends Table {
     private ProductIngredientTable dbProductIngredientTable;
 
     public ProductTable(Context context) {
-        super(context, TABLE_NAME, null, 11);
+        super(context, TABLE_NAME, null, 14);
         dbProductIngredientTable = new ProductIngredientTable(context);
 
         if (count() == 0) {
@@ -33,14 +33,15 @@ public class ProductTable extends Table {
     }
 
     private void addFillerEntries() {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(new Ingredient("Meat", 32, 23, "45",23,
+                23, 12, 3, 4, new ArrayList<>(), new ArrayList<>()));
 
-        addProduct("Canned Carne", "very tasty for everyone who lives", 4.49, 213, new ArrayList<Ingredient>(), 1);
+        addProduct("Canned Carne", "very tasty for everyone who lives", 4.49, 213, new ArrayList<>(), 1);
 
-        // ArrayList<Ingredient> milk = new ArrayList<>();
-        //milk.add(dbProductIngredientTable.dbIngredient.getIngredient("Milk"));
-
-        //addProduct("MilkyMilk", "now very new", 1.19, 43, new ArrayList<Ingredient>(), 1);
-
+        ingredients.add(new Ingredient("Milk", 3, 23, "34",23,
+                23, 12, 3, 3, new ArrayList<>(), new ArrayList<>()));
+        addProduct("MilkyMilk", "now very new", 1.19, 43, new ArrayList<>(), 1);
     }
 
     @Override

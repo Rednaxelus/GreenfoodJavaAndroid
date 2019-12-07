@@ -47,20 +47,27 @@ public class SearchRestaurantActivity extends Activity {
         searchQuery(String.valueOf(searchView.getQuery()));
     }
 
+    private String getNameQuery() {
+        SearchView searchView = findViewById(R.id.searchView);
+        return String.valueOf(searchView.getQuery());
+    }
 
     private void searchQuery(String query) {
         EnterpriseTable enterpriseTable = new EnterpriseTable(this);
-        ListView listView = findViewById(R.id.nameSearchList);
 
             ArrayList<Restaurant> restaurants = filterRestaurants(enterpriseTable.getRestaurantsWithName(query), allergyFilter, dietFilter);
 
-            ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-            for (Restaurant restaurant : restaurants
-            ) {
-                stringArrayAdapter.add(restaurant.getName() + " " + restaurant.getPhoneNumber() + " " + restaurant.getAddress());
-            }
-            listView.setAdapter(stringArrayAdapter);
+        updateListView(restaurants);
+    }
 
+    private void updateListView(ArrayList<Restaurant> restaurants) {
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        for (Restaurant restaurant : restaurants
+        ) {
+            stringArrayAdapter.add(restaurant.getName() + " " + restaurant.getPhoneNumber() + " " + restaurant.getAddress());
+        }
+        ListView listView = findViewById(R.id.nameSearchList);
+        listView.setAdapter(stringArrayAdapter);
     }
 
     public void gotToFilterRestaurantsActivity(View view) {
@@ -73,9 +80,7 @@ public class SearchRestaurantActivity extends Activity {
         if (requestCode == GET_FILTER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 allergyFilter = (ArrayList<Allergy>) data.getSerializableExtra("Allergies");
-                dietFilter = (Diet) data.getSerializableExtra("Diet");
-                SearchView searchView = findViewById(R.id.searchView);
-                searchQuery(String.valueOf(searchView.getQuery()));
+                searchQuery(getNameQuery());
             }
         }
     }

@@ -61,6 +61,7 @@ public class SearchProductActivity extends Activity {
             System.out.println(tempProduct.getName() + " - " + tempProduct.determineDietOfProduct().name());
             if (tempProduct.determineDietOfProduct().ordinal() < diet.ordinal()) {
                 litr.remove();
+                continue;
             }
             if (allergies != null) {
                 for (Allergy allergy : tempProduct.getAllergiesOfProduct()) {

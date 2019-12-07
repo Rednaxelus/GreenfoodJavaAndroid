@@ -39,7 +39,6 @@ public class Dish {
         for (Ingredient ingredient :
                 ingredients) {
             if (ingredient == null) {
-                System.out.println("no ingredients in dish: " + name);
                 break;
             }
             for (Allergy allergy :

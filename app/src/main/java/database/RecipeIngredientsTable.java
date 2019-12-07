@@ -46,7 +46,6 @@ public class RecipeIngredientsTable extends Table {
     }
 
     public List<Ingredient> getIngredientsOf(int recipeId) {
-        System.out.println("recipe id = " + recipeId);
         List<Ingredient> ingredients = new ArrayList<>();
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_RECIPE + " = " + recipeId;

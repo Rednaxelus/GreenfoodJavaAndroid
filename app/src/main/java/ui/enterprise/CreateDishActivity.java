@@ -107,8 +107,7 @@ public class CreateDishActivity extends Activity {
     private void createEntryInDB() {
         String name = getField(R.id.dishName);
         double price = Double.parseDouble(getField(R.id.price));
-        if (dishTable.addDish(name, price, dishIngredients,sharedpreferences.getInt("id",-1)))
-            System.out.println("SE HA CREADO LOLOLO");
+        dishTable.addDish(name, price, dishIngredients,sharedpreferences.getInt("id",-1));
     }
 
     private boolean allFieldsAreCompleted() {

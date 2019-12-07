@@ -29,7 +29,7 @@ public class IngredientTable extends Table {
 
     public IngredientTable(Context context) {
 
-        super(context, TABLE_NAME, null, 8);
+        super(context, TABLE_NAME, null, 9);
 
         dbIngredientVitamine = new IngredientVitaminesTable(context);
         dbAllergy = new AllergyTable(context);
@@ -47,9 +47,34 @@ public class IngredientTable extends Table {
                 23, 23, 12, 3,  vitamines, allergies);
         addIngredient("Potato", 3, 23, 34,
                 23, 23, 12, 3,  vitamines, allergies);
-        addIngredient("Meat", 32, 23, 34,23, 23, 12, 3,  vitamines, allergies);
+        addIngredient("Meat", 32, 23, 34,
+                23, 23, 12, 3,  vitamines, allergies);
+
         allergies.add(Allergy.MILK);
-        addIngredient("Milk", 3, 23, 34,23, 23, 12, 3,  vitamines, allergies);
+        addIngredient("Milk", 3, 23, 34,
+                23, 23, 12, 3,  vitamines, allergies);
+
+        allergies.clear();
+        allergies.add(Allergy.WHEAT);
+        allergies.add(Allergy.GLUTEN);
+        addIngredient("Pasta", 3, 23, 34,
+                23, 23, 12, 3,  vitamines, allergies);
+
+        allergies.clear();
+        addIngredient("Egg", 3, 23, 34,
+                23, 23, 12, 3,  vitamines, allergies);
+
+        allergies.add(Allergy.GLUTEN);
+        addIngredient("Flour", 3, 23, 34,
+                23, 23, 12, 3,  vitamines, allergies);
+
+
+        allergies.clear();
+        addIngredient("Water", 3, 23, 34,
+                23, 23, 12, 3,  vitamines, allergies);
+
+        addIngredient("Fish", 3, 23, 34,
+                23, 23, 12, 3,  vitamines, allergies);
     }
 
 

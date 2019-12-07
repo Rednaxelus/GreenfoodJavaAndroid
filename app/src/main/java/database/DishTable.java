@@ -60,7 +60,6 @@ public class DishTable extends Table {
         Cursor data = sqlDB.rawQuery(query, null);
         if (data.getCount() == 0) return dishes;
         while (data.moveToNext()) {
-            System.out.println(data.getString(3));
             dishes.add(new Dish(data.getInt(0), data.getString(2),
                     data.getDouble(3), dbPlateIngredient.getIngredientsOf(data.getInt(0))));
         }
@@ -70,7 +69,6 @@ public class DishTable extends Table {
     }
 
     private Cursor searchByName(String name) {
-        System.out.println(name);
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT " + TABLE_NAME + ".*," + TABLE_NAME + ".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + "%" + name + "%" + "'";
         Cursor data = sqlDB.rawQuery(query, null);

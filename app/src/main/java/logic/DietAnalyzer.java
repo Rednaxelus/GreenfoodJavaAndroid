@@ -10,8 +10,8 @@ import model.Ingredient;
 
 public class DietAnalyzer {
 
-    private final static List<String> carnivorous = Arrays.asList("Meat");
-    private final static List<String> vegetarian = Arrays.asList("Milk");
+    private final static List<String> carnivorous = Arrays.asList("Meat","Fish");
+    private final static List<String> vegetarian = Arrays.asList("Milk","Egg","Pasta");
 
     public static Diet determineDiet(ArrayList<Ingredient> ingredients) {
         for (Ingredient ingredient: ingredients){

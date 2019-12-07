@@ -58,7 +58,6 @@ public class SearchProductActivity extends Activity {
         ListIterator litr = products.listIterator();
         while (litr.hasNext()) {
             Product tempProduct = (Product) litr.next();
-            System.out.println(tempProduct.getName() + " - " + tempProduct.determineDietOfProduct().name());
             if (tempProduct.determineDietOfProduct().ordinal() < diet.ordinal()) {
                 litr.remove();
                 continue;

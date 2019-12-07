@@ -95,8 +95,7 @@ public class CreateProductActivity extends Activity {
         String description = getField(R.id.productDescription);
         double price = Double.parseDouble(getField(R.id.productPrice));
         int stock = Integer.parseInt(getField(R.id.productStock));
-        if (productTable.addProduct(name, description, price, stock, productIngredients, sharedpreferences.getInt("id",-1)))
-            System.out.println("SE HA CREADO EL PRODUCT:" + name + " LOLOLO");
+        productTable.addProduct(name, description, price, stock, productIngredients, sharedpreferences.getInt("id",-1));
     }
 
     private boolean allFieldsAreCompleted() {

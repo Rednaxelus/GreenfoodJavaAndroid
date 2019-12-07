@@ -21,18 +21,6 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <TextView
-        android:id="@+id/errorMess2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:text="An image must be selected"
-        android:textColor="#F44336"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/pickImage"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <EditText
         android:id="@+id/recipeName"
         android:layout_width="328dp"
@@ -51,27 +39,12 @@
         android:id="@+id/createButton"
         android:layout_width="148dp"
         android:layout_height="42dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/buttonshape"
         android:onClick="createRecipe"
         android:text="Create dish"
         android:textColor="#3F51B5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scroll" />
-
-    <Button
-        android:id="@+id/pickImage"
-        android:layout_width="148dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/buttonshape"
-        android:onClick="pickImage"
-        android:text="Pick image"
-        android:textColor="#3F51B5"
-        app:layout_constraintEnd_toStartOf="@+id/createButton"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scroll" />
 
@@ -120,8 +93,8 @@
 
     <ScrollView
         android:id="@+id/scroll"
-        android:layout_width="319dp"
-        android:layout_height="137dp"
+        android:layout_width="328dp"
+        android:layout_height="168dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingredientsLabel" />

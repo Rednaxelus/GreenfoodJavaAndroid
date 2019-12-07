@@ -75,7 +75,6 @@ public class ProductTable extends Table {
     }
 
     public Cursor searchByName(String name) {
-        System.out.println(name);
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT " + TABLE_NAME + ".*," + TABLE_NAME + ".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + "%" + name + "%" + "'";
         Cursor data = sqlDB.rawQuery(query, null);
@@ -90,7 +89,6 @@ public class ProductTable extends Table {
         Cursor data = sqlDB.rawQuery(query, null);
         if (data.getCount() == 0) return products;
         while (data.moveToNext()) {
-            System.out.println(data.getString(3));
             products.add(new Product(data.getInt(0), data.getString(2),
                     data.getString(3), data.getDouble(4), data.getInt(5),
                     dbProductIngredientTable.getIngredientsOf(data.getInt(1))));

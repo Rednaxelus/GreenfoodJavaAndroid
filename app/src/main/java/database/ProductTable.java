@@ -23,8 +23,24 @@ public class ProductTable extends Table {
     private ProductIngredientTable dbProductIngredientTable;
 
     public ProductTable(Context context) {
-        super(context, TABLE_NAME, null, 3);
+        super(context, TABLE_NAME, null, 11);
         dbProductIngredientTable = new ProductIngredientTable(context);
+
+        if (count() == 0) {
+            addFillerEntries();
+        }
+
+    }
+
+    private void addFillerEntries() {
+
+        addProduct("Canned Carne", "very tasty for everyone who lives", 4.49, 213, new ArrayList<Ingredient>(), 1);
+
+        // ArrayList<Ingredient> milk = new ArrayList<>();
+        //milk.add(dbProductIngredientTable.dbIngredient.getIngredient("Milk"));
+
+        //addProduct("MilkyMilk", "now very new", 1.19, 43, new ArrayList<Ingredient>(), 1);
+
     }
 
     @Override

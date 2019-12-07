@@ -50,6 +50,10 @@ public class IngredientTable extends Table {
         addIngredient("Potato", 3, 23, 34,
                 23, 23, 12, 3,  vitamines, allergy);
 
+        // ArrayList<String> allergy2 = new ArrayList<>();
+        // allergy2.add("MILK");
+        //addIngredient("Milk", 3, 23, 34,23, 23, 12, 3,  vitamines, allergy2);
+
     }
 
     private List<String> getAllergies() {

@@ -21,7 +21,6 @@ public class UserTable extends Table {
 
     public UserTable(Context context) {
         super(context, TABLE_NAME, null, 3);
-        System.out.println(count());
 
         if (count() == 0) {
             addFillerEntries();

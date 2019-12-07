@@ -45,28 +45,26 @@ public class SearchProductActivity extends Activity {
     private void searchQuery(String query) {
         ProductTable productTable = new ProductTable(this);
         ListView listView = findViewById(R.id.nameSearchList);
-            ArrayList<Product> products = filterProducts(productTable.getProductWithName(query), allergyFilter, dietFilter);
-            ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-            for (Product product : products
-            ) {
-                stringArrayAdapter.add(product.getName() + "        " + product.getPrice() + "€     " + product.getStock());
-            }
-            listView.setAdapter(stringArrayAdapter);
+        ArrayList<Product> products = filterProducts(productTable.getProductWithName(query), allergyFilter, dietFilter);
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        for (Product product : products) {
+            stringArrayAdapter.add(product.getName() + "        " + product.getPrice() + "€     " + product.getStock());
+        }
+        listView.setAdapter(stringArrayAdapter);
 
     }
 
     private ArrayList<Product> filterProducts(ArrayList<Product> products, ArrayList<Allergy> allergies, Diet diet) {
-
         ListIterator litr = products.listIterator();
-
         while (litr.hasNext()) {
             Product tempProduct = (Product) litr.next();
+            System.out.println(tempProduct.getName() + " - " + tempProduct.determineDietOfProduct().name());
             if (tempProduct.determineDietOfProduct().ordinal() < diet.ordinal()) {
                 litr.remove();
+                continue;
             }
             if (allergies != null) {
-                for (Allergy allergy : tempProduct.getAllergiesOfProduct()
-                ) {
+                for (Allergy allergy : tempProduct.getAllergiesOfProduct()) {
                     if (allergies.contains(allergy)) {
                         litr.remove();
                         break;
@@ -74,7 +72,6 @@ public class SearchProductActivity extends Activity {
                 }
             }
         }
-
         return products;
     }
 

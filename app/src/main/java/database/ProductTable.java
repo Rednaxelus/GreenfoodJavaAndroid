@@ -21,26 +21,25 @@ public class ProductTable extends Table {
     private static final String PRICE = "price";
     private static final String STOCK = "stock";
     private ProductIngredientTable dbProductIngredientTable;
+    private IngredientTable ingredientTable;
 
     public ProductTable(Context context) {
-        super(context, TABLE_NAME, null, 11);
+        super(context, TABLE_NAME, null, 16);
         dbProductIngredientTable = new ProductIngredientTable(context);
+        ingredientTable = new IngredientTable(context);
 
-        if (count() == 0) {
-            addFillerEntries();
-        }
-
+        if (count() == 0) addFillerEntries();
     }
 
     private void addFillerEntries() {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(ingredientTable.getIngredient("Meat"));
 
-        addProduct("Canned Carne", "very tasty for everyone who lives", 4.49, 213, new ArrayList<Ingredient>(), 1);
+        addProduct("Canned Carne", "very tasty for everyone who lives", 4.49, 213, ingredients, 1);
 
-        // ArrayList<Ingredient> milk = new ArrayList<>();
-        //milk.add(dbProductIngredientTable.dbIngredient.getIngredient("Milk"));
-
-        //addProduct("MilkyMilk", "now very new", 1.19, 43, new ArrayList<Ingredient>(), 1);
-
+        ingredients.clear();
+        ingredients.add(ingredientTable.getIngredient("Milk"));
+        addProduct("MilkyMilk", "now very new", 1.19, 43, ingredients, 1);
     }
 
     @Override
@@ -69,7 +68,6 @@ public class ProductTable extends Table {
         if (result == -1)
             return false;
         for (Ingredient ingredient : ingredients) {
-            System.out.println((int)result);
             if (!dbProductIngredientTable.addTuple((int) result, ingredient.getId()))
                 return false;
         }
@@ -111,17 +109,17 @@ public class ProductTable extends Table {
         Cursor data = searchByName(query);
         data.moveToFirst();
 
-        ArrayList<Product> dishes = new ArrayList<>();
+        ArrayList<Product> products = new ArrayList<>();
 
         while (!data.isAfterLast()) {
 
             ArrayList<Ingredient> ingredients = dbProductIngredientTable.getIngredientsOf(data.getInt(data.getColumnIndex(ID)));
-            dishes.add(new Product(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getString(data.getColumnIndex(DESCRIPTION))
+            products.add(new Product(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getString(data.getColumnIndex(DESCRIPTION))
                     , data.getDouble(data.getColumnIndex(PRICE)), data.getInt(data.getColumnIndex(STOCK)), ingredients));
 
             data.moveToNext();
         }
-        return dishes;
+        return products;
     }
 }
 

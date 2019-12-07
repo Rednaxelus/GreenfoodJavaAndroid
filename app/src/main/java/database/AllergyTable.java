@@ -10,14 +10,14 @@ import java.util.List;
 
 import model.Allergy;
 
-public class IngredientAllergyTable extends Table {
+public class AllergyTable extends Table {
 
     private static final String TABLE_NAME = "ingredient_allergy";
     private static final String ID = "ID";
     private static final String ID_INGREDIENT = "id_ingredient";
     private static final String ALLERGY = "allergy";
 
-    public IngredientAllergyTable(Context context) {
+    public AllergyTable(Context context) {
 
         super(context, TABLE_NAME, null, 3);
     }
@@ -33,14 +33,14 @@ public class IngredientAllergyTable extends Table {
     }
 
 
-    public boolean addTuple(int idIngredient, List<String> allergies) {
+    public boolean addTuple(int idIngredient, List<Allergy> allergies) {
         System.out.println("Añadiendo Alérgenos");
         SQLiteDatabase sqlDB = this.getWritableDatabase();
-        for (String allergy : allergies) {
+        for (Allergy allergy : allergies) {
             System.out.println(allergy);
             ContentValues contentValues = new ContentValues();
             contentValues.put(ID_INGREDIENT, idIngredient);
-            contentValues.put(ALLERGY, allergy);
+            contentValues.put(ALLERGY, allergy.name());
             if (sqlDB.insert(TABLE_NAME, null, contentValues) == -1) {
                 return false;
             }

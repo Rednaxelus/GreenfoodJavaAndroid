@@ -30,6 +30,14 @@ public class FilterProductActivity extends Activity {
         toolbar.setNavigationOnClickListener(this::goBack);
     }
 
+    public void goToSearchProductActivity(View view) {
+        Intent replyIntent = new Intent(this, SearchProductActivity.class);
+        replyIntent.putExtra("Allergies", getSelectedAllergiesList());
+        replyIntent.putExtra("Diet", getSelectedDiet());
+        setResult(RESULT_OK, replyIntent);
+        finish();
+    }
+
     private Diet getSelectedDiet() {
         int result = ((Spinner) findViewById(R.id.spinner)).getSelectedItemPosition();
         Diet diet;
@@ -38,14 +46,6 @@ public class FilterProductActivity extends Activity {
         else diet = Diet.ALL;
 
         return diet;
-    }
-
-    public void goToSearchProductActivity(View view) {
-        Intent replyIntent = new Intent(this, SearchProductActivity.class);
-        replyIntent.putExtra("Allergies", getSelectedAllergiesList());
-        replyIntent.putExtra("Diet", getSelectedDiet());
-        setResult(RESULT_OK, replyIntent);
-        finish();
     }
 
     private ArrayList<Allergy> getSelectedAllergiesList() {

@@ -77,6 +77,7 @@ public class SearchDishActivity extends Activity {
             Dish tempDish = (Dish) litr.next();
             if (tempDish.determineDietOfDish().ordinal() < diet.ordinal()) {
                 litr.remove();
+                continue;
             }
             if (allergies != null) {
                 for (Allergy allergy : tempDish.getAllergiesOfDish()

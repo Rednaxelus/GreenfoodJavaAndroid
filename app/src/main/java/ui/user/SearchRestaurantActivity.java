@@ -43,8 +43,7 @@ public class SearchRestaurantActivity extends Activity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
 
-        SearchView searchView = findViewById(R.id.searchView);
-        searchQuery(String.valueOf(searchView.getQuery()));
+        searchQuery(getNameQuery());
     }
 
     private String getNameQuery() {
@@ -80,6 +79,7 @@ public class SearchRestaurantActivity extends Activity {
         if (requestCode == GET_FILTER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 allergyFilter = (ArrayList<Allergy>) data.getSerializableExtra("Allergies");
+                dietFilter = (Diet) data.getSerializableExtra("Diet");
                 searchQuery(getNameQuery());
             }
         }
@@ -91,7 +91,7 @@ public class SearchRestaurantActivity extends Activity {
 
         while (litr.hasNext()) {
             Restaurant temp = (Restaurant) litr.next();
-            if (temp.hasDishesWithoutTheseAllergies(allergies) || temp.determineDietOfRestaurant().ordinal() < diet.ordinal()) {
+            if (!temp.hasDishesWithoutTheseAllergies(allergies) || temp.determineDietOfRestaurant().ordinal() < diet.ordinal()) {
                 litr.remove();
             }
         }

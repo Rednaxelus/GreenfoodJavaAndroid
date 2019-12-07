@@ -78,7 +78,6 @@ public class ProductTable extends Table {
         System.out.println(name);
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT " + TABLE_NAME + ".*," + TABLE_NAME + ".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + "%" + name + "%" + "'";
-        System.out.println(query);
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
         return data;

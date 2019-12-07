@@ -80,8 +80,7 @@ public class SearchDishActivity extends Activity {
                 continue;
             }
             if (allergies != null) {
-                for (Allergy allergy : tempDish.getAllergiesOfDish()
-                ) {
+                for (Allergy allergy : tempDish.getAllergiesOfDish()) {
                     if (allergies.contains(allergy)) {
                         litr.remove();
                         break;

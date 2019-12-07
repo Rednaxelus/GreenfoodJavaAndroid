@@ -29,7 +29,7 @@ public class IngredientTable extends Table {
 
     public IngredientTable(Context context) {
 
-        super(context, TABLE_NAME, null, 9);
+        super(context, TABLE_NAME, null, 11);
 
         dbIngredientVitamine = new IngredientVitaminesTable(context);
         dbAllergy = new AllergyTable(context);
@@ -61,7 +61,7 @@ public class IngredientTable extends Table {
                 23, 23, 12, 3,  vitamines, allergies);
 
         allergies.clear();
-        addIngredient("Egg", 3, 23, 34,
+        addIngredient("Eggs", 3, 23, 34,
                 23, 23, 12, 3,  vitamines, allergies);
 
         allergies.add(Allergy.GLUTEN);

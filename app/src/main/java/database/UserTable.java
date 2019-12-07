@@ -20,7 +20,7 @@ public class UserTable extends Table {
     private static final String LAST_NAME = "lastName";
 
     public UserTable(Context context) {
-        super(context, TABLE_NAME, null, 3);
+        super(context, TABLE_NAME, null, 4);
 
         if (count() == 0) {
             addFillerEntries();
@@ -30,7 +30,7 @@ public class UserTable extends Table {
 
     private void addFillerEntries() {
         addData("test7@h.com", "jjj", "jose", "pimm");
-        addData("mike@gmail.com", "GSisSomething+", "Mike", "Pickens");
+        addData("mike@gmail.com", "ggg", "Mike", "Pickens");
     }
 
     @Override

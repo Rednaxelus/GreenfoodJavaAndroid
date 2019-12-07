@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -58,7 +57,7 @@ public class EnterpriseRegistrationActivity extends Activity {
 
         checkNameField();
         checkPassField();
-        checkNifField();
+        checkCifField();
         checkDescriptionField();
         checkPhoneField();
         checkAddressField();
@@ -122,14 +121,14 @@ public class EnterpriseRegistrationActivity extends Activity {
         }
     }
 
-    private void checkNifField() {
-        EditText nifText = findViewById(R.id.nif);
-        String nif = nifText.getText().toString();
-        if (nif.length() != 9) {
-            nifText.setError("Wrong nif");
+    private void checkCifField() {
+        EditText cifText = findViewById(R.id.cif);
+        String cif = cifText.getText().toString();
+        if (cif.length() != 9) {
+            cifText.setError("Wrong cif");
             fieldError = true;
-        } else if (!Pattern.matches("(\\d{8}[TRWAGMYFPDXBNJZSQVHLCKEtrwagmyfpdxbnjzsqvhlcke])", nif)) {
-            nifText.setError("Wrong nif");
+        } else if (!Pattern.matches("([TRWAGMYFPDXBNJZSQVHLCKEtrwagmyfpdxbnjzsqvhlcke]\\d{8})", cif)) {
+            cifText.setError("Wrong cif");
             fieldError = true;
         }
     }
@@ -181,8 +180,8 @@ public class EnterpriseRegistrationActivity extends Activity {
         text = findViewById(R.id.password);
         String pass = text.getText().toString();
 
-        text = findViewById(R.id.nif);
-        String nif = text.getText().toString();
+        text = findViewById(R.id.cif);
+        String cif = text.getText().toString();
 
         text = findViewById(R.id.description);
         String description = text.getText().toString();
@@ -194,9 +193,9 @@ public class EnterpriseRegistrationActivity extends Activity {
         String address = text.getText().toString();
 
         if (isSwitchChecked) {
-            this.ID = dbHelper.addData(email, name, nif, pass, description, phone, address, "Restaurant");
+            this.ID = dbHelper.addData(email, name, cif, pass, description, phone, address, "Restaurant");
         } else {
-            this.ID = dbHelper.addData(email, name, nif, pass, description, phone, address, "Enterprise");
+            this.ID = dbHelper.addData(email, name, cif, pass, description, phone, address, "Enterprise");
         }
     }
 }

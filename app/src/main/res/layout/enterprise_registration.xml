@@ -69,7 +69,7 @@ android:paddingBottom="0dp"
         tools:text="Register" />
 
     <EditText
-        android:id="@+id/nif"
+        android:id="@+id/cif"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -115,7 +115,7 @@ android:paddingBottom="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nif" />
+        app:layout_constraintTop_toBottomOf="@+id/cif" />
 
     <Switch
         android:id="@+id/switch1"

@@ -19,7 +19,7 @@ public class EnterpriseTable extends Table {
     private static final String ID = "ID";
     private static final String EMAIL = "email";
     private static final String NAME = "name";
-    private static final String NIF = "nif";
+    private static final String CIF = "cif";
     private static final String PASSWORD = "password";
     private static final String DESCRIPTION = "description";
     private static final String PHONE_NUMBER = "phoneNumber";
@@ -29,7 +29,7 @@ public class EnterpriseTable extends Table {
 
 
     public EnterpriseTable(Context context) {
-        super(context, TABLE_NAME, null, 6);
+        super(context, TABLE_NAME, null, 8);
         dbDishTable = new DishTable(context);
 
         if (count() == 0) {
@@ -51,7 +51,7 @@ public class EnterpriseTable extends Table {
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME
                 + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + EMAIL + " TEXT DEFAULT ' '," + NAME + " TEXT DEFAULT ' ',"
-                + PASSWORD + " TEXT DEFAULT ' ', " + NIF + " TEXT DEFAULT ' ', "
+                + PASSWORD + " TEXT DEFAULT ' ', " + CIF + " TEXT DEFAULT ' ', "
                 + DESCRIPTION + " TEXT DEFAULT ' ', " + PHONE_NUMBER + " TEXT DEFAULT ' ', "
                 + ADDRESS + " TEXT DEFAULT ' ', " +  TYPE + " TEXT DEFAULT ' ')";
         db.execSQL(createTable);
@@ -61,14 +61,14 @@ public class EnterpriseTable extends Table {
     /**
      * New entry in user table.
      * @param name name
-     * @param nif nif
+     * @param cif cif
      * @param password password
      * @param description description
      * @param phoneNumber phoneNumber
      * @param address address
      * @return true//false
      */
-    public int addData(String email, String name, String nif, String password, String description,
+    public int addData(String email, String name, String cif, String password, String description,
                     String phoneNumber,String address, String type) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
 
@@ -76,7 +76,7 @@ public class EnterpriseTable extends Table {
         contentValues.put(EMAIL, email);
         contentValues.put(NAME, name);
         contentValues.put(PASSWORD, getMD5(password));
-        contentValues.put(NIF, nif);
+        contentValues.put(CIF, cif);
         contentValues.put(DESCRIPTION, description);
         contentValues.put(PHONE_NUMBER, phoneNumber);
         contentValues.put(ADDRESS, address);
@@ -152,7 +152,7 @@ public class EnterpriseTable extends Table {
             if (dbDishTable != null) {
                 dishes = (ArrayList) dbDishTable.getDishes(data.getInt(data.getColumnIndex(ID)));
             }
-            Restaurant restaurant = new Restaurant(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getString(data.getColumnIndex(EMAIL)), data.getString(data.getColumnIndex(NIF)), data.getString(data.getColumnIndex(DESCRIPTION)), data.getString(data.getColumnIndex(PHONE_NUMBER)), data.getString(data.getColumnIndex(ADDRESS)), dishes);
+            Restaurant restaurant = new Restaurant(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getString(data.getColumnIndex(EMAIL)), data.getString(data.getColumnIndex(CIF)), data.getString(data.getColumnIndex(DESCRIPTION)), data.getString(data.getColumnIndex(PHONE_NUMBER)), data.getString(data.getColumnIndex(ADDRESS)), dishes);
 
             restaurants.add(restaurant);
 

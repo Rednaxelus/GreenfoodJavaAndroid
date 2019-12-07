@@ -11,7 +11,7 @@ import model.Ingredient;
 public class DietAnalyzer {
 
     private final static List<String> carnivorous = Arrays.asList("Meat","Fish");
-    private final static List<String> vegetarian = Arrays.asList("Milk","Egg","Pasta");
+    private final static List<String> vegetarian = Arrays.asList("Milk","Eggs","Pasta");
 
     public static Diet determineDiet(ArrayList<Ingredient> ingredients) {
         for (Ingredient ingredient: ingredients){
@@ -26,11 +26,9 @@ public class DietAnalyzer {
     }
 
     public static Diet determineIncludedDietInDishes(ArrayList<Dish> dishes) {
-
         Diet result = Diet.ALL;
 
-        for (Dish dish : dishes
-        ) {
+        for (Dish dish : dishes) {
             Diet temp = determineDiet((ArrayList) dish.getIngredients());
             if (temp.ordinal() > result.ordinal()) {
                 result = temp;

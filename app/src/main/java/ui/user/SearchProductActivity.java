@@ -55,19 +55,17 @@ public class SearchProductActivity extends Activity {
     }
 
     private ArrayList<Product> filterProducts(ArrayList<Product> products, ArrayList<Allergy> allergies, Diet diet) {
-
         ListIterator litr = products.listIterator();
-
         while (litr.hasNext()) {
             Product tempProduct = (Product) litr.next();
+            System.out.println(tempProduct.getName() + " - " + tempProduct.determineDietOfProduct().name());
             if (tempProduct.determineDietOfProduct().ordinal() < diet.ordinal()) {
-                litr.remove();
+                products.remove(tempProduct);
             }
             if (allergies != null) {
-                for (Allergy allergy : tempProduct.getAllergiesOfProduct()
-                ) {
+                for (Allergy allergy : tempProduct.getAllergiesOfProduct()) {
                     if (allergies.contains(allergy)) {
-                        litr.remove();
+                        products.remove(products);
                         break;
                     }
                 }

@@ -29,7 +29,7 @@ public class IngredientTable extends Table {
 
     public IngredientTable(Context context) {
 
-        super(context, TABLE_NAME, null, 7);
+        super(context, TABLE_NAME, null, 8);
 
         dbIngredientVitamine = new IngredientVitaminesTable(context);
         dbAllergy = new AllergyTable(context);

@@ -21,27 +21,25 @@ public class ProductTable extends Table {
     private static final String PRICE = "price";
     private static final String STOCK = "stock";
     private ProductIngredientTable dbProductIngredientTable;
+    private IngredientTable ingredientTable;
 
     public ProductTable(Context context) {
-        super(context, TABLE_NAME, null, 14);
+        super(context, TABLE_NAME, null, 16);
         dbProductIngredientTable = new ProductIngredientTable(context);
+        ingredientTable = new IngredientTable(context);
 
-        if (count() == 0) {
-            addFillerEntries();
-        }
-
+        if (count() == 0) addFillerEntries();
     }
 
     private void addFillerEntries() {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
-        ingredients.add(new Ingredient("Meat", 32, 23, "45",23,
-                23, 12, 3, 4, new ArrayList<>(), new ArrayList<>()));
+        ingredients.add(ingredientTable.getIngredient("Meat"));
 
-        addProduct("Canned Carne", "very tasty for everyone who lives", 4.49, 213, new ArrayList<>(), 1);
+        addProduct("Canned Carne", "very tasty for everyone who lives", 4.49, 213, ingredients, 1);
 
-        ingredients.add(new Ingredient("Milk", 3, 23, "34",23,
-                23, 12, 3, 3, new ArrayList<>(), new ArrayList<>()));
-        addProduct("MilkyMilk", "now very new", 1.19, 43, new ArrayList<>(), 1);
+        ingredients.clear();
+        ingredients.add(ingredientTable.getIngredient("Milk"));
+        addProduct("MilkyMilk", "now very new", 1.19, 43, ingredients, 1);
     }
 
     @Override
@@ -70,7 +68,6 @@ public class ProductTable extends Table {
         if (result == -1)
             return false;
         for (Ingredient ingredient : ingredients) {
-            System.out.println((int)result);
             if (!dbProductIngredientTable.addTuple((int) result, ingredient.getId()))
                 return false;
         }
@@ -81,6 +78,7 @@ public class ProductTable extends Table {
         System.out.println(name);
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT " + TABLE_NAME + ".*," + TABLE_NAME + ".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + "%" + name + "%" + "'";
+        System.out.println(query);
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
         return data;
@@ -112,17 +110,17 @@ public class ProductTable extends Table {
         Cursor data = searchByName(query);
         data.moveToFirst();
 
-        ArrayList<Product> dishes = new ArrayList<>();
+        ArrayList<Product> products = new ArrayList<>();
 
         while (!data.isAfterLast()) {
 
             ArrayList<Ingredient> ingredients = dbProductIngredientTable.getIngredientsOf(data.getInt(data.getColumnIndex(ID)));
-            dishes.add(new Product(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getString(data.getColumnIndex(DESCRIPTION))
+            products.add(new Product(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getString(data.getColumnIndex(DESCRIPTION))
                     , data.getDouble(data.getColumnIndex(PRICE)), data.getInt(data.getColumnIndex(STOCK)), ingredients));
 
             data.moveToNext();
         }
-        return dishes;
+        return products;
     }
 }
 

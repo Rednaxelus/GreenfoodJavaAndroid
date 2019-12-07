@@ -43,7 +43,7 @@ public class Product {
     }
 
     public Diet determineDietOfProduct() {
-        return DietAnalyzer.determineDiet(ingredients);
+        return DietAnalyzer.determineDiet((ArrayList) ingredients);
 
     }
 

@@ -63,7 +63,7 @@ public class SearchRestaurantActivity extends Activity {
         ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
         for (Restaurant restaurant : restaurants
         ) {
-            stringArrayAdapter.add(restaurant.getName() + " " + restaurant.getPhoneNumber() + " " + restaurant.getAddress());
+            stringArrayAdapter.add(restaurant.getName() + "\n" + restaurant.getPhoneNumber() + "\n" + restaurant.getAddress());
         }
         ListView listView = findViewById(R.id.nameSearchList);
         listView.setAdapter(stringArrayAdapter);

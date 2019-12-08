@@ -21,7 +21,7 @@ public class DishTable extends Table {
     private DishIngredientTable dbDishIngredient;
 
     public DishTable(Context context) {
-        super(context, TABLE_NAME, null, 22);
+        super(context, TABLE_NAME, null, 24);
         dbDishIngredient = new DishIngredientTable(context);
 
         if (count() == 0) {
@@ -34,14 +34,20 @@ public class DishTable extends Table {
         ArrayList<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(dbDishIngredient.getDbIngredient().getIngredient("Tomato"));
 
-        addDish("Creme de Tomaté", 3.50, ingredients, 2);
+        addDish("Creme de Tomaté", 3.50, ingredients, 3);
 
         ingredients.clear();
 
         ingredients.add(dbDishIngredient.getDbIngredient().getIngredient("Peanuts"));
 
-        addDish("Pumpkin stew with peanuts", 6.99, ingredients, 2);
+        addDish("Pumpkin stew with peanuts", 6.99, ingredients, 3);
 
+        ingredients.clear();
+
+        ingredients.add(dbDishIngredient.getDbIngredient().getIngredient("Meat"));
+        ingredients.add(dbDishIngredient.getDbIngredient().getIngredient("Bread"));
+        ingredients.add(dbDishIngredient.getDbIngredient().getIngredient("Lettuce"));
+        addDish("Beefy pan", 8.99, ingredients, 2);
         ingredients.clear();
     }
 

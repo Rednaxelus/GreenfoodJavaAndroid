@@ -30,7 +30,7 @@ public class IngredientTable extends Table {
 
     public IngredientTable(Context context) {
 
-        super(context, TABLE_NAME, null, 22);
+        super(context, TABLE_NAME, null, 23);
 
         dbIngredientVitamine = new IngredientVitaminesTable(context);
         dbAllergy = new AllergyTable(context);
@@ -61,6 +61,8 @@ public class IngredientTable extends Table {
         addIngredientWithAllergies("Fish");
 
         addIngredientWithAllergies("Peanuts", Allergy.PEANUTS);
+
+        addIngredientWithAllergies("Bread", Allergy.GLUTEN, Allergy.WHEAT);
     }
 
     private void addIngredientWithAllergies(String name, Allergy... allergies) {

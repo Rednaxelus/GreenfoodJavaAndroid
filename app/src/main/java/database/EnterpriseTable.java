@@ -35,7 +35,6 @@ public class EnterpriseTable extends Table {
         if (count() == 0) {
             addFillerEntries();
         }
-
     }
 
     private void addFillerEntries() {

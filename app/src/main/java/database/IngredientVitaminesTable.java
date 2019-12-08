@@ -19,7 +19,7 @@ public class IngredientVitaminesTable extends Table {
 
     public IngredientVitaminesTable(Context context) {
 
-        super(context, TABLE_NAME, null, 2);
+        super(context, TABLE_NAME, null, 20);
     }
 
     @Override
@@ -32,12 +32,12 @@ public class IngredientVitaminesTable extends Table {
 
     }
 
-    public boolean addTuple(int idIngredient, List<String> vitamines) {
+    public boolean addTuple(int idIngredient, List<Vitamin> vitamines) {
         SQLiteDatabase sqlDB = this.getWritableDatabase();
-        for (String vit : vitamines) {
+        for (Vitamin vit : vitamines) {
             ContentValues contentValues = new ContentValues();
             contentValues.put(ID_INGREDIENT, idIngredient);
-            contentValues.put(VITAMINE, vit);
+            contentValues.put(VITAMINE, vit.name());
             if (sqlDB.insert(TABLE_NAME, null, contentValues) == -1) {
                 return false;
             }

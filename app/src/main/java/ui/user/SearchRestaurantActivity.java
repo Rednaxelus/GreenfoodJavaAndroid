@@ -43,24 +43,30 @@ public class SearchRestaurantActivity extends Activity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
 
-        SearchView searchView = findViewById(R.id.searchView);
-        searchQuery(String.valueOf(searchView.getQuery()));
+        searchQuery(getNameQuery());
     }
 
+    private String getNameQuery() {
+        SearchView searchView = findViewById(R.id.searchView);
+        return String.valueOf(searchView.getQuery());
+    }
 
     private void searchQuery(String query) {
         EnterpriseTable enterpriseTable = new EnterpriseTable(this);
-        ListView listView = findViewById(R.id.nameSearchList);
 
             ArrayList<Restaurant> restaurants = filterRestaurants(enterpriseTable.getRestaurantsWithName(query), allergyFilter, dietFilter);
 
-            ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
-            for (Restaurant restaurant : restaurants
-            ) {
-                stringArrayAdapter.add(restaurant.getName() + " " + restaurant.getPhoneNumber() + " " + restaurant.getAddress());
-            }
-            listView.setAdapter(stringArrayAdapter);
+        updateListView(restaurants);
+    }
 
+    private void updateListView(ArrayList<Restaurant> restaurants) {
+        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1);
+        for (Restaurant restaurant : restaurants
+        ) {
+            stringArrayAdapter.add(restaurant.getName() + "\n" + restaurant.getPhoneNumber() + "\n" + restaurant.getAddress());
+        }
+        ListView listView = findViewById(R.id.nameSearchList);
+        listView.setAdapter(stringArrayAdapter);
     }
 
     public void gotToFilterRestaurantsActivity(View view) {
@@ -74,8 +80,7 @@ public class SearchRestaurantActivity extends Activity {
             if (resultCode == RESULT_OK) {
                 allergyFilter = (ArrayList<Allergy>) data.getSerializableExtra("Allergies");
                 dietFilter = (Diet) data.getSerializableExtra("Diet");
-                SearchView searchView = findViewById(R.id.searchView);
-                searchQuery(String.valueOf(searchView.getQuery()));
+                searchQuery(getNameQuery());
             }
         }
     }
@@ -86,7 +91,7 @@ public class SearchRestaurantActivity extends Activity {
 
         while (litr.hasNext()) {
             Restaurant temp = (Restaurant) litr.next();
-            if (temp.hasDishesWithoutTheseAllergies(allergies) || temp.determineDietOfRestaurant().ordinal() < diet.ordinal()) {
+            if (!temp.hasDishesWithoutTheseAllergies(allergies) || temp.determineDietOfRestaurant().ordinal() < diet.ordinal()) {
                 litr.remove();
             }
         }

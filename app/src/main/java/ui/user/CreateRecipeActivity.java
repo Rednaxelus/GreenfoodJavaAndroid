@@ -87,15 +87,14 @@ public class CreateRecipeActivity extends Activity {
     }
 
     private void createEntryInDB() {
-        if (recipeTable.addRecipe(sharedpreferences.getInt("id",-1),
+        recipeTable.addRecipe(sharedpreferences.getInt("id",-1),
                 getField(R.id.recipeName),getField(R.id.description),Integer.parseInt(getField(R.id.durationText)),
-                getField(R.id.steps),imgPath,recipeIngredients))
-            System.out.println("SE HA CREADO LOLOLO");
+                getField(R.id.steps),imgPath,recipeIngredients);
     }
 
     private boolean allFieldsAreCompleted() {
         return  recipeNameTyped() & descriptionTyped() & durationTyped() &
-                stepsAreTyped() & imageIsPicked() & areIngredientsSelected();
+                stepsAreTyped()  & areIngredientsSelected();
     }
 
     private boolean stepsAreTyped() {
@@ -145,15 +144,6 @@ public class CreateRecipeActivity extends Activity {
             showErrorFor(R.id.recipeName, "Name is needed");
             return false;
         }
-        return true;
-    }
-
-    private boolean imageIsPicked() {
-        if (recipeIngredients.size() == 0){
-            setErrorVisible(R.id.errorMess2);
-            return false;
-        }
-        setErrorInvisible(R.id.errorMess2);
         return true;
     }
 

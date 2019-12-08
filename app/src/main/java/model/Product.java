@@ -43,7 +43,6 @@ public class Product {
     }
 
     public Diet determineDietOfProduct() {
-
         return DietAnalyzer.determineDiet((ArrayList) ingredients);
 
     }
@@ -55,7 +54,6 @@ public class Product {
         for (Ingredient ingredient :
                 ingredients) {
             if (ingredient == null) {
-                System.out.println("no ingredients in product: " + name);
                 break;
             }
             for (Allergy allergy :

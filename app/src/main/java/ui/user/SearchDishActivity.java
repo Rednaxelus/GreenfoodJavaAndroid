@@ -33,7 +33,7 @@ public class SearchDishActivity extends Activity {
         startActivity(new Intent(this, UserHomeActivity.class));
     }
 
-    public void searchDishName(View view) {
+    public void searchName(View view) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
         //Find the currently focused view, so we can grab the correct window token from it.
         //If no view currently has focus, create a new one, just so we can grab a window token from it
@@ -77,10 +77,10 @@ public class SearchDishActivity extends Activity {
             Dish tempDish = (Dish) litr.next();
             if (tempDish.determineDietOfDish().ordinal() < diet.ordinal()) {
                 litr.remove();
+                continue;
             }
             if (allergies != null) {
-                for (Allergy allergy : tempDish.getAllergiesOfDish()
-                ) {
+                for (Allergy allergy : tempDish.getAllergiesOfDish()) {
                     if (allergies.contains(allergy)) {
                         litr.remove();
                         break;
@@ -115,12 +115,7 @@ public class SearchDishActivity extends Activity {
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), UserHomeActivity.class)));
         searchQuery("");
     }
 }

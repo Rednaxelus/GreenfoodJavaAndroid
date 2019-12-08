@@ -58,7 +58,6 @@ public class SeeProductsActivity extends Activity {
     }
 
     private void loadScrollView(ScrollView scrollView, final LinearLayout ll){
-        System.out.println("Loading...");
         SharedPreferences sharedpreferences = getSharedPreferences(LoginActivity.MyPREFERENCES, Context.MODE_PRIVATE);
         List<Product> products = getDishesForEnterprise(sharedpreferences.getInt("id",-1));
         ll.removeAllViews();

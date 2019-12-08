@@ -21,10 +21,25 @@ public class ProductTable extends Table {
     private static final String PRICE = "price";
     private static final String STOCK = "stock";
     private ProductIngredientTable dbProductIngredientTable;
+    private IngredientTable ingredientTable;
 
     public ProductTable(Context context) {
-        super(context, TABLE_NAME, null, 3);
+        super(context, TABLE_NAME, null, 20);
         dbProductIngredientTable = new ProductIngredientTable(context);
+        ingredientTable = new IngredientTable(context);
+
+        if (count() == 0) addFillerEntries();
+    }
+
+    private void addFillerEntries() {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(ingredientTable.getIngredient("Meat"));
+
+        addProduct("Canned Carne", "very tasty for everyone who lives", 4.49, 213, ingredients, 1);
+
+        ingredients.clear();
+        ingredients.add(ingredientTable.getIngredient("Milk"));
+        addProduct("MilkyMilk", "now very new", 1.19, 43, ingredients, 1);
     }
 
     @Override
@@ -53,7 +68,6 @@ public class ProductTable extends Table {
         if (result == -1)
             return false;
         for (Ingredient ingredient : ingredients) {
-            System.out.println((int)result);
             if (!dbProductIngredientTable.addTuple((int) result, ingredient.getId()))
                 return false;
         }
@@ -61,7 +75,6 @@ public class ProductTable extends Table {
     }
 
     public Cursor searchByName(String name) {
-        System.out.println(name);
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT " + TABLE_NAME + ".*," + TABLE_NAME + ".id as _id FROM " + TABLE_NAME + " WHERE " + NAME + " LIKE '" + "%" + name + "%" + "'";
         Cursor data = sqlDB.rawQuery(query, null);
@@ -76,7 +89,6 @@ public class ProductTable extends Table {
         Cursor data = sqlDB.rawQuery(query, null);
         if (data.getCount() == 0) return products;
         while (data.moveToNext()) {
-            System.out.println(data.getString(3));
             products.add(new Product(data.getInt(0), data.getString(2),
                     data.getString(3), data.getDouble(4), data.getInt(5),
                     dbProductIngredientTable.getIngredientsOf(data.getInt(1))));
@@ -95,17 +107,17 @@ public class ProductTable extends Table {
         Cursor data = searchByName(query);
         data.moveToFirst();
 
-        ArrayList<Product> dishes = new ArrayList<>();
+        ArrayList<Product> products = new ArrayList<>();
 
         while (!data.isAfterLast()) {
 
             ArrayList<Ingredient> ingredients = dbProductIngredientTable.getIngredientsOf(data.getInt(data.getColumnIndex(ID)));
-            dishes.add(new Product(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getString(data.getColumnIndex(DESCRIPTION))
+            products.add(new Product(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getString(data.getColumnIndex(DESCRIPTION))
                     , data.getDouble(data.getColumnIndex(PRICE)), data.getInt(data.getColumnIndex(STOCK)), ingredients));
 
             data.moveToNext();
         }
-        return dishes;
+        return products;
     }
 }
 

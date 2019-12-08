@@ -45,7 +45,6 @@ public class SeeRecipesActivity extends Activity {
     }
 
     private List<Recipe> getRecipiesForUser(int userId) {
-        System.out.println("user id = " + userId);
         return recipeTable.getRecipes(userId);
     }
 

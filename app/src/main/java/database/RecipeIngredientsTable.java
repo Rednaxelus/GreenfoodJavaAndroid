@@ -19,7 +19,7 @@ public class RecipeIngredientsTable extends Table {
     private IngredientTable dbIngredient;
 
     public RecipeIngredientsTable(Context context) {
-        super(context, TABLE_NAME, null, 3);
+        super(context, TABLE_NAME, null, 20);
         dbIngredient = new IngredientTable(context);
     }
 
@@ -46,7 +46,6 @@ public class RecipeIngredientsTable extends Table {
     }
 
     public List<Ingredient> getIngredientsOf(int recipeId) {
-        System.out.println("recipe id = " + recipeId);
         List<Ingredient> ingredients = new ArrayList<>();
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_RECIPE + " = " + recipeId;

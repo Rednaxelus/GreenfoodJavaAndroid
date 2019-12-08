@@ -5,7 +5,7 @@
     <string name="prompt_name">Username</string>
     <string name="prompt_enter_name">Name</string>
     <string name="prompt_password">Password</string>
-    <string name="prompt_nif">Nif</string>
+    <string name="prompt_nif">Cif</string>
     <string name="prompt_description">Description</string>
     <string name="prompt_phone">Phone Number</string>
     <string name="prompt_address">Address</string>

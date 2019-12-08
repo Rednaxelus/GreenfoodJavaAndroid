@@ -8,17 +8,17 @@ public class Restaurant {
     private int ID;
     private String name;
     private String email;
-    private String nif;
+    private String cif;
     private String description;
     private String phoneNumber;
     private String address;
     private ArrayList<Dish> dishes;
 
-    public Restaurant(int ID, String name, String email, String nif, String description, String phoneNumber, String address, ArrayList<Dish> dishes) {
+    public Restaurant(int ID, String name, String email, String cif, String description, String phoneNumber, String address, ArrayList<Dish> dishes) {
         this.ID = ID;
         this.name = name;
         this.email = email;
-        this.nif = nif;
+        this.cif = cif;
         this.description = description;
         this.phoneNumber = phoneNumber;
         this.address = address;
@@ -42,7 +42,7 @@ public class Restaurant {
     }
 
     public boolean hasDishesWithoutTheseAllergies(ArrayList<Allergy> allergiesToTest) {
-        boolean includesAllergies;
+        boolean includesAllergies = true;
 
         if (allergiesToTest == null) return true;
         for (Dish dish :
@@ -60,7 +60,7 @@ public class Restaurant {
             }
         }
 
-        return false;
+        return includesAllergies;
 
     }
 

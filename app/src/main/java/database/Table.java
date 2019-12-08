@@ -33,7 +33,6 @@ public abstract class Table extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_NAME;
         Cursor data = sqlDB.rawQuery(query, null);
         data.moveToFirst();
-        System.out.println(data.getCount());
         int res = data.getCount();
         data.close();
         return res;

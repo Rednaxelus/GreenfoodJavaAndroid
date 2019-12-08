@@ -44,12 +44,7 @@ public class CreateProductActivity extends Activity {
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.ic_menu_back_button);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), EnterpriseHomeActivity.class));
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> startActivity(new Intent(getApplicationContext(), EnterpriseHomeActivity.class)));
     }
 
     private void setIngredientErrorInvisible(){
@@ -71,17 +66,14 @@ public class CreateProductActivity extends Activity {
 
         for (Ingredient ingredient : ingredients){
             CheckBox cb = new CheckBox(getApplicationContext());
-            cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (isChecked){
-                        productIngredients.add(ingredientTable.getIngredient(buttonView.getText().toString()));
-                    }else{
-                        for (Ingredient dishIngredient : productIngredients){
-                            if (dishIngredient.getName().equals(buttonView.getText().toString())){
-                                productIngredients.remove(dishIngredient);
-                                break;
-                            }
+            cb.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked){
+                    productIngredients.add(ingredientTable.getIngredient(buttonView.getText().toString()));
+                }else{
+                    for (Ingredient dishIngredient : productIngredients){
+                        if (dishIngredient.getName().equals(buttonView.getText().toString())){
+                            productIngredients.remove(dishIngredient);
+                            break;
                         }
                     }
                 }
@@ -103,8 +95,7 @@ public class CreateProductActivity extends Activity {
         String description = getField(R.id.productDescription);
         double price = Double.parseDouble(getField(R.id.productPrice));
         int stock = Integer.parseInt(getField(R.id.productStock));
-        if (productTable.addProduct(name, description, price, stock, productIngredients, sharedpreferences.getInt("id",-1)))
-            System.out.println("SE HA CREADO LOLOLO");
+        productTable.addProduct(name, description, price, stock, productIngredients, sharedpreferences.getInt("id",-1));
     }
 
     private boolean allFieldsAreCompleted() {

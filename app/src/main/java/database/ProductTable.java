@@ -24,7 +24,7 @@ public class ProductTable extends Table {
     private IngredientTable ingredientTable;
 
     public ProductTable(Context context) {
-        super(context, TABLE_NAME, null, 20);
+        super(context, TABLE_NAME, null, 21);
         dbProductIngredientTable = new ProductIngredientTable(context);
         ingredientTable = new IngredientTable(context);
 
@@ -36,10 +36,16 @@ public class ProductTable extends Table {
         ingredients.add(ingredientTable.getIngredient("Meat"));
 
         addProduct("Canned Carne", "very tasty for everyone who lives", 4.49, 213, ingredients, 1);
-
         ingredients.clear();
+
         ingredients.add(ingredientTable.getIngredient("Milk"));
         addProduct("MilkyMilk", "now very new", 1.19, 43, ingredients, 1);
+        ingredients.clear();
+
+        ingredients.add(ingredientTable.getIngredient("Bread"));
+        addProduct("Great Bread", "mmh", 2.39, 6, ingredients, 1);
+        ingredients.clear();
+
     }
 
     @Override

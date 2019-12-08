@@ -19,7 +19,7 @@ public class DishIngredientTable extends Table {
 
     public DishIngredientTable(Context context) {
 
-        super(context, TABLE_NAME, null, 3);
+        super(context, TABLE_NAME, null, 20);
         dbIngredient = new IngredientTable(context);
     }
 

@@ -29,7 +29,7 @@ public class EnterpriseTable extends Table {
 
 
     public EnterpriseTable(Context context) {
-        super(context, TABLE_NAME, null, 8);
+        super(context, TABLE_NAME, null, 20);
         dbDishTable = new DishTable(context);
 
         if (count() == 0) {
@@ -40,7 +40,7 @@ public class EnterpriseTable extends Table {
 
     private void addFillerEntries() {
         addData("greendelivery@gmail.com", "GreenDelivey", "13518001G", "jjj", "We deliver the best food",
-                "928674321", "Las Palmas de Gran Canaria, 34", "Enterprise");
+                "928674321", "Calle Forte 34, Las Palmas de Gran Canaria", "Enterprise");
         addData("mayo@best.com", "Big Mayos Best", "78318001G", "bmb", "We love it cheesy",
                 "98326789", "Canillejas 31, Madrid ", "Restaurant");
         addData("carrot@best.com", "LivingCarrot", "78518001G", "lc", "The best vegan food in town",

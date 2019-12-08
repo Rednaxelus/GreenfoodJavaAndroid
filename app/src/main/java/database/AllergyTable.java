@@ -19,7 +19,7 @@ public class AllergyTable extends Table {
 
     public AllergyTable(Context context) {
 
-        super(context, TABLE_NAME, null, 3);
+        super(context, TABLE_NAME, null, 4);
     }
 
     @Override

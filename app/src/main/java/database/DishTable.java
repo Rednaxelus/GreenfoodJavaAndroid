@@ -18,11 +18,31 @@ public class DishTable extends Table {
     private static final String ID_ENTERPRISE = "id_enterprise";
     private static final String NAME = "name";
     private static final String PRICE = "price";
-    private DishIngredientTable dbPlateIngredient;
+    private DishIngredientTable dbDishIngredient;
 
     public DishTable(Context context) {
-        super(context, TABLE_NAME, null, 5);
-        dbPlateIngredient = new DishIngredientTable(context);
+        super(context, TABLE_NAME, null, 22);
+        dbDishIngredient = new DishIngredientTable(context);
+
+        if (count() == 0) {
+            addFillerEntries();
+        }
+
+    }
+
+    private void addFillerEntries() {
+        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(dbDishIngredient.getDbIngredient().getIngredient("Tomato"));
+
+        addDish("Creme de Tomaté", 3.50, ingredients, 2);
+
+        ingredients.clear();
+
+        ingredients.add(dbDishIngredient.getDbIngredient().getIngredient("Peanuts"));
+
+        addDish("Pumpkin stew with peanuts", 6.99, ingredients, 2);
+
+        ingredients.clear();
     }
 
     @Override
@@ -47,7 +67,7 @@ public class DishTable extends Table {
         if (result == -1)
             return false;
         for (Ingredient ingredient : ingredients) {
-            if (!dbPlateIngredient.addTuple((int) result, ingredient.getId()))
+            if (!dbDishIngredient.addTuple((int) result, ingredient.getId()))
                 return false;
         }
         return true;
@@ -61,7 +81,7 @@ public class DishTable extends Table {
         if (data.getCount() == 0) return dishes;
         while (data.moveToNext()) {
             dishes.add(new Dish(data.getInt(0), data.getString(2),
-                    data.getDouble(3), dbPlateIngredient.getIngredientsOf(data.getInt(0))));
+                    data.getDouble(3), dbDishIngredient.getIngredientsOf(data.getInt(0))));
         }
         data.close();
         //dishes.add(new Dish(1, "Macarrones con tomate", 12, null));
@@ -84,7 +104,7 @@ public class DishTable extends Table {
 
         while (!data.isAfterLast()) {
 
-            ArrayList<Ingredient> ingredients = dbPlateIngredient.getIngredientsOf(data.getInt(data.getColumnIndex(ID)));
+            ArrayList<Ingredient> ingredients = dbDishIngredient.getIngredientsOf(data.getInt(data.getColumnIndex(ID)));
             dishes.add(new Dish(data.getInt(data.getColumnIndex(ID)), data.getString(data.getColumnIndex(NAME)), data.getDouble(data.getColumnIndex(PRICE)), ingredients));
 
             data.moveToNext();

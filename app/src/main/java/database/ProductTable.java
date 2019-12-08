@@ -24,7 +24,7 @@ public class ProductTable extends Table {
     private IngredientTable ingredientTable;
 
     public ProductTable(Context context) {
-        super(context, TABLE_NAME, null, 16);
+        super(context, TABLE_NAME, null, 20);
         dbProductIngredientTable = new ProductIngredientTable(context);
         ingredientTable = new IngredientTable(context);
 

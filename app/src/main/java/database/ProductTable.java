@@ -22,13 +22,17 @@ public class ProductTable extends Table {
     private static final String STOCK = "stock";
     private ProductIngredientTable dbProductIngredientTable;
     private IngredientTable ingredientTable;
+    private static boolean initialized = false;
 
     public ProductTable(Context context) {
-        super(context, TABLE_NAME, null, 21);
+        super(context, TABLE_NAME, null, 40);
         dbProductIngredientTable = new ProductIngredientTable(context);
         ingredientTable = new IngredientTable(context);
 
-        if (count() == 0) addFillerEntries();
+        if (count() == 0 && !initialized) {
+            addFillerEntries();
+            initialized = true;
+        }
     }
 
     private void addFillerEntries() {

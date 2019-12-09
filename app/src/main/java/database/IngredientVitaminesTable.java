@@ -19,7 +19,7 @@ public class IngredientVitaminesTable extends Table {
 
     public IngredientVitaminesTable(Context context) {
 
-        super(context, TABLE_NAME, null, 20);
+        super(context, TABLE_NAME, null, 40);
     }
 
     @Override

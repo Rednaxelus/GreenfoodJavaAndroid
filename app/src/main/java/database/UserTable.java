@@ -20,7 +20,7 @@ public class UserTable extends Table {
     private static final String LAST_NAME = "lastName";
 
     public UserTable(Context context) {
-        super(context, TABLE_NAME, null, 20);
+        super(context, TABLE_NAME, null, 40);
 
         if (count() == 0) {
             addFillerEntries();

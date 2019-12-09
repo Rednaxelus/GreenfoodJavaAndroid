@@ -26,14 +26,16 @@ public class EnterpriseTable extends Table {
     private static final String ADDRESS = "address";
     private static final String TYPE = "type";
     private DishTable dbDishTable;
+    private static boolean initialized = false;
 
 
     public EnterpriseTable(Context context) {
-        super(context, TABLE_NAME, null, 20);
+        super(context, TABLE_NAME, null, 40);
         dbDishTable = new DishTable(context);
 
-        if (count() == 0) {
+        if (count() == 0 && !initialized) {
             addFillerEntries();
+            initialized = true;
         }
     }
 
@@ -42,8 +44,10 @@ public class EnterpriseTable extends Table {
                 "928674321", "Calle Forte 34, Las Palmas de Gran Canaria", "Enterprise");
         addData("mayo@best.com", "Big Mayos Best", "78318001G", "bmb", "We love it cheesy",
                 "98326789", "Canillejas 31, Madrid ", "Restaurant");
-        addData("carrot@best.com", "LivingCarrot", "78518001G", "lc", "The best vegan food in town",
+        addData("carrot@best.com", "Living Carrot", "78518001G", "lc", "The best vegan food in town",
                 "65666294", "Calle Camero 2, Barcelona ", "Restaurant");
+        addData("piza@best.com", "Paparía Pizza", "78618001G", "pp", "Pizza pa todos",
+                "83945172", "Maseto 3, Alicante ", "Restaurant");
     }
 
     @Override
